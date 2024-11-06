@@ -1,6 +1,6 @@
-source("preprocessing.R")
-source("time_management.R")
-source("SQL_queries.R")
+source("R/preprocessing.R")
+source("R/time_management.R")
+source("R/SQL_queries.R")
 # Record the start time
 start_time <- Sys.time()
 
