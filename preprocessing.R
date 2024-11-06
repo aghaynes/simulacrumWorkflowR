@@ -9,10 +9,9 @@
 #'
 #' @examples
 #' table_sample(sim_av_patients)
+
 table_sample <- function(df) {
-  if (nrow(df) > 1000) {
-    return(df[sample(nrow(df), 1000), ])
-  } else {
-    return(df)
-  }
+head(df, 1000)
 }
+
+
