@@ -1,0 +1,4 @@
+15-11-2024 
+
+Make a fully automated setup for the sql query testing. The user should only be asked to provided the dir of the files, 
+then the automatic setup should take care of the rest. 
