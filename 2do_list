@@ -2,3 +2,15 @@
 
 Make a fully automated setup for the sql query testing. The user should only be asked to provided the dir of the files, 
 then the automatic setup should take care of the rest. 
+
+Update the import function to custome import 
+
+Update the query constructor function to have limit 
+
+Update the query constructor to automate the patientid join
+
+update query constructor to have a component for joins (INNER, OUTER, LEFT, RIGHT)
+
+Build the wrapper for SQLite2Oracle 
+
+Build a function which recodnize the system used for the analysis 

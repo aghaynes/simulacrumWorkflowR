@@ -3,49 +3,6 @@ source("R/preprocessing.R")
 library(sqldf)
 library(tcltk)
 
-dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
-
-read_all_csv <- function(dir)
-{
-  print("Please wait. It can take a couple of minutes to upload all files ")
-  sim_av_patient <- read.csv(paste0(dir, "sim_av_patient.csv"))
-  print("sim_av_patient is uploaded")
-  sim_av_tumour <- read.csv(paste0(dir, "sim_av_tumour.csv"))
-  print("sim_av_tumours is uploaded")
-  sim_av_gene <- read.csv(paste0(dir, "sim_av_gene.csv"))
-  print("sim_av_gene is uploaded")
-  sim_rtds_combined <- read.csv(paste0(dir, "sim_rtds_combined.csv"))
-  print("sim_rtds_combined is uploaded")
-  sim_sact_outcome <- read.csv(paste0(dir, "sim_sact_outcome.csv"))
-  print("sim_sact_outcome is uploaded")
-  sim_sact_regimen <- read.csv(paste0(dir, "sim_sact_regimen.csv"))
-  print("sim_sact_regimen is uploaded")
-  sim_sact_cycle <- read.csv(paste0(dir, "sim_sact_cycle.csv"))
-  print("sim_sact_cycle is uploaded")
-  sim_sact_drug_detail <- read.csv(paste0(dir, "sim_sact_drug_detail.csv"))
-  print("sim_sact_drug_detail is uploaded")
-  print("All CSV files is succesfully uploaded!")
-  
-}
-
-read_all_csv("C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/")
-
-
-
-sql_sim_av_patient <- table_sample(sim_av_patient)
-sql_sim_av_tumour <- table_sample(sim_av_tumour)
-sql_sim_av_gene <- table_sample(sim_av_gene)
-
-
-sql_sim_sact_outcome <- table_sample(sim_sact_outcome)
-sql_sim_sact_cycle <- table_sample(sim_sact_cycle)
-sql_sim_sact_regimen <- table_sample(sim_sact_regimen)
-sql_sim_sact_drug_detail <- table_sample(sim_sact_drug_detail)
-
-sql_sim_rtds_combined <- table_sample(sim_rtds_combined)
-
-sql_sim_av_patient
-sql_sim_av_tumour
 
 
 ########## sql_test setup ###########
@@ -53,27 +10,47 @@ sql_test <- function(query) {
   sqldf(query, stringsAsFactors = FALSE)
 }
 
-sql_test("SELECT PATIENTID, GENDER, AGE 
- FROM sql_sim_av_tumour 
-  
- WHERE age > 50")
+#sql_test("SELECT PATIENTID, GENDER, AGE 
+# FROM sim_av_tumour 
+# WHERE age > 50")
 
-sql_test("SELECT sql_sim_av_tumour.PATIENTID, sql_sim_av_patient.ETHNICITY 
- FROM sql_sim_av_tumour 
- INNER JOIN sql_sim_av_patient ON sql_sim_av_tumour.PATIENTID = sql_sim_av_patient.PATIENTID")
+#sql_test("SELECT PATIENTID, GENDER, AGE 
+# FROM sim_av_tumour")
+
+
+#sql_test("SELECT PATIENTID, GENDER, AGE 
+# FROM sql_sim_av_tumour 
+  
+# WHERE age > 50
+# limit 50")
+
+#sql_test("SELECT sql_sim_av_tumour.PATIENTID, sql_sim_av_patient.ETHNICITY 
+# FROM sql_sim_av_tumour 
+# INNER JOIN sql_sim_av_patient ON sql_sim_av_tumour.PATIENTID = sql_sim_av_patient.PATIENTID")
 
 
 ###### Test sql builder #######
-query_constructor <- function(tables, vars = "*", filters = NULL, joins = NULL) {
+query_constructor <- function(tables, vars = "*", filters = NULL, join_method = NULL, joins_tables = NULL, limit = NULL) {
   # SELECT
   select_query <- paste("SELECT", paste(vars, collapse = ", "))
   
   # FROM
   from_query <- paste("FROM", tables)
   
+  join_method <- if (!is.null(join_method)){
+    methods <- c("INNER JOIN", "OUTER JOIN", "LEFT JOIN", "RIGHT JOIN")
+    
+    if (!join_method%in%methods) {
+      stop(paste("Invalid join method provided. Please use the following methods instead:",
+                 paste(methods, collapse = ", ")
+      ))
+    }
+    return(join_method)
+  }
+  
   # JOIN
-  join_query <- if (!is.null(joins)) {
-    paste(joins, collapse = " ")
+  join_query <- if (!is.null(joins_table)) {
+    paste(join_method, joins_tables, collapse = " ")  ##### Find a system for assisting joins across the tables
   } else {
     ""
   }
@@ -85,28 +62,37 @@ query_constructor <- function(tables, vars = "*", filters = NULL, joins = NULL) 
     ""
   }
   
+  limit_query <- if (!is.null(limit)) {
+    paste("LIMIT", limit)
+  } else {
+    
+  }
+  
   # Combine all clauses
-  query <- paste(select_query, '\n',
+  query_space <- paste(select_query, '\n',
                  from_query, '\n',
                  join_query, '\n',
-                 where_query) 
+                 where_query, '\n',
+                 limit_query) 
   
-  # Print the formatted query
-  writeLines(query)
+
+  query <- print(query_space)
+  
+  return(query)
 }
 
 
-query1 <- query_constructor(tables = "sql_sim_av_tumour", 
-                            vars = c("PATIENTID", "GENDER", "AGE"), 
-                            filters = c("age > 50"))
+#query1 <- query_constructor(tables = "sql_sim_av_tumour", 
+  #                          vars = c("PATIENTID", "GENDER", "AGE"), 
+    #                        filters = c("age > 50"))
 
 
-query2 <- query_constructor(
-  table = "sql_sim_av_tumour",
-  vars = c("sql_sim_av_tumour.PATIENTID", "sql_sim_av_patient.ETHNICITY"),
-  joins = c("INNER JOIN sql_sim_av_patient ON sql_sim_av_tumour.PATIENTID = sql_sim_av_patient.PATIENTID"),
-  
-)
+#query2 <- query_constructor(
+#  table = "sql_sim_av_tumour",
+#  vars = c("sql_sim_av_tumour.PATIENTID", "sql_sim_av_patient.ETHNICITY"),
+#  joins = c("INNER JOIN sql_sim_av_patient ON sql_sim_av_tumour.PATIENTID = sql_sim_av_patient.PATIENTID"),
+#  
+#)
 
 
 
@@ -230,61 +216,6 @@ INNER JOIN sim_sact_drug_detail ON sim_sact_cycle.merged_cycle_id = sim_sact_dru
 INNER JOIN sim_rtds_combined ON sim_av_patient.patientid = sim_rtds_combined.patientid;
 ')
 }
-
-
-
-###### Test sql builder #######
-query_constructor <- function(tables, vars = "*", filters = NULL, joins = NULL) {
-  # SELECT
-  select_query <- paste("SELECT", paste(vars, collapse = ", "))
-  
-  # FROM
-  from_query <- paste("FROM", tables)
-  
-  # JOIN
-  join_query <- if (!is.null(joins)) {
-    paste(joins, collapse = " ")
-  } else {
-    ""
-  }
-  
-  # FILTERS
-  where_query <- if (!is.null(filters)) {
-    paste("WHERE", paste(filters, collapse = " AND "))
-  } else {
-    ""
-  }
-  
-  # Combine all clauses
-  query <- paste(select_query, '\n',
-                 from_query, '\n',
-                 join_query, '\n',
-                 where_query) 
-  
-  # Print the formatted query
-  writeLines(query)
-}
-
-
-query1 <- query_constructor(tables = "sql_sim_av_tumour", 
-                            vars = c("PATIENTID", "GENDER", "AGE"), 
-                            filters = c("age > 50"))
-
-
-query2 <- query_constructor(
-  table = "sql_sim_av_tumour",
-  vars = c("sql_sim_av_tumour.PATIENTID", "sql_sim_av_patient.ETHNICITY"),
-  joins = c("INNER JOIN sql_sim_av_patient ON sql_sim_av_tumour.PATIENTID = sql_sim_av_patient.PATIENTID"),
-
-)
-
-
-
-
-############ Setup a database function to run queries in R ################
-# Just make the sqldf function up as a function with the sql query builder 
-
-
 
 
 
