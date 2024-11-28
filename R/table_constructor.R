@@ -13,7 +13,7 @@
 #' @example 
 #' html_table(model)
 
-html_table <- function(model, 
+html_table_model <- function(model, 
                        file = "results/",
                        file_name = "model_results",
                        title = NULL,
@@ -62,14 +62,48 @@ html_table <- function(model,
 }
 
 
+#' Creating a Dir if there is None
+#' 
+#' @param dir the direction to the folder 
+#' 
+#' @return folder 
+#' 
+#' @export
+#' 
+#' @example 
+#' ...
+
 create_dir_if_none <- function(dir) {
   if (!dir.exists(dir)) {
     dir.create(dir, recursive = TRUE)
   }
 }
 
-#fit logistic regression model
-model <- glm(am ~ disp + hp, data=mtcars, family=binomial)
-summary(model)
 
-html_table(model)
+
+#' Save Patient Charecteristics as HTML tabel
+#' 
+#' @param model Statistical model object
+#' @param file Directory path for saving
+#' @param file_name Name of the output file
+#' @param title Title for the table with current date 
+#' @param create_dir Logical, whether to create directory if missing
+#' 
+#' @return Invisible path to saved file
+#' 
+#' @export
+#' 
+#' @example 
+#' html_table(model)
+
+html_table_patient <- function(extended_summary, 
+                                file = "results/",
+                                file_name = "model_results",
+                                title = NULL,
+                                create_dir = TRUE)  {}
+
+
+
+
+
+

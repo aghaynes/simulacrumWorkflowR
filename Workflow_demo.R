@@ -1,52 +1,59 @@
-# Record the start time
-start_time <- Sys.time()
-
 source("R/preprocessing.R")
-source("R/SQL_queries.R")
+source("R/data_col2.R")
+source("R/sql_queries.R")
+source("R/query_constructor.R")
 source("R/time_management.R")
-
-
+source("R/sqldf.R")
+source("R/sqlite2oracle.R")
+start <- start_time()
 
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
-data_frames <- read_all_csv(dir) 
+# Automated data loading 
+data_frames <- read_csv(dir) 
 
-
+#dfs
 sim_av_patient <- data_frames$sim_av_patient
 sim_av_tumour <- data_frames$sim_av_tumour
-sim_av_gene <- data_frames$sim_av_gene
+sim_av_tumour
+#Preprocessing
+df <- cancer_grouping(sim_av_tumour)
+df <- group_age(df) 
+df <- group_ethnicity(sim_av_patient)
 
 
-query <- query_constructor(tables = "sim_av_tumour", 
-                          vars = c("patientid", "gender", "AGE"), 
-                        filters = c("age > 50"),
-                        limit = c("50"))
-
-query
-
-df <- sql_test(query)
-
+# See list of queries for merging
 table_query_list()
 
-
+# Query Constructor for merge
 query1 <- query_constructor(
   tables = "sim_av_patient",
   join_method = "INNER JOIN",
   join_id = "patientid",
   joins_tables = list(
-    list("sim_av_patient", "sim_av_tumour")
+    "sim_av_patient", "sim_av_tumour")
   )
-)
+
 query1
+
+# Run query on SQLite database
 df1 <- sql_test(query1)
-df1
+
+# Additional preprocessing
+df2 <- survival_days(df1)
+
+# ... run analysis
+
+# Save results as a html table 
+#html_table(model)
+
+query2 <- "select *
+from sim_av_patient
+where age > 50
+limit 500;"
+
+sqlite2oracle(query2)
 
 
-
-query2 <- "select patientid, gender, AGE \n from sim_av_tumour \n  \n where age > 50 \n LIMIT 50"
-
-query3 <- sqlite2oracle(query2)
-
-query3
-
-end_time <- Sys.time()
-compute_time_limit(execution_time)
+# End timer and calculate execution time 
+end <- end_time()
+compute_time_limit(start, end)

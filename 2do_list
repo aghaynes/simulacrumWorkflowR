@@ -6,3 +6,47 @@ then the automatic setup should take care of the rest.
 Update the import function to custome import 
 
 Build a function which recodnize the system used for the analysis 
+
+Add more to the proprocessing 
+
+
+25-11 
+
+Plan for the rest of the package. 
+# Make the documentation for preprocessiong, sqldf and table_constructor (26-11)
+# Make the documentation for data_col, sql_queries, sqlite2oracle, time_management (27-11) 
+# Finish the query constructor, make documentation and finish the package (28-11)
+# Finish all the formalities of the package (29-11)
+
+
+
+
+
+# Make a html table for patient charecteristics
+
+# Add Principle components
+
+# Build documentation the same ways as Lars: https://github.com/CLINDA-AAU/ccostr/blob/master/R/ccmean.R
+
+
+# Use roxygen2 to create manuel: 
+roxygen2::roxygenise()
+
+
+
+# Try the queries in this documentation: https://simulacrum.healthdatainsight.org.uk/wp/wp-content/uploads/2018/11/SQL-Query-Guide.pdf
+
+
+
+# Make a function which removes the \n between the last word of the query in the query constructor and the ; 
+
+
+
+# Fix the sqlite2oracle function. Outputs weird stuff and does not have ; at the end. 
+
+
+# Investigate VignetteBuilder
+
+
+
+# Delete all the stuff which are not need or move it to external files. Make sure to update the all "git add ."

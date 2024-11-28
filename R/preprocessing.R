@@ -1,11 +1,36 @@
-library(dplyr)
+#' Random Sample of a Data Frame
+#'
+#' @description
+#' Takes a random sample of rows from a data frame.
+#'
+#' @param df A data frame to sample from.
+#' @param n The number of rows to sample. Default is 1000.
+#'
+#' @return A data frame containing the sampled rows.
+#' @export
+#' 
+#' @example 
+#' sample_df <- table_sample(sim_av_patient, 500)
 
 table_sample <- function(df, n = 1000) {
   df[sample(nrow(df), size = n, replace = FALSE), ]
 }
 
 
+#' Group Cancer Diagnoses by cancer ICD-10 codes 
+#'
+#' @description
+#' Groups cancer diagnoses into broader categories based on ICD-10 codes.
+#'
+#' @param df A data frame with a column `SITE_ICD10_O2_3CHAR` containing ICD-10 codes.
+#'
+#' @return A data frame with an added column `diag_group` for the cancer category.
+#' @export
+#' 
+#' @example 
+#' sim_av_tummour <- cancer_grouping(sim_av_tumour)
 
+library(dplyr)
 cancer_grouping <- function(df) {
   df %>%
     mutate(
@@ -30,7 +55,23 @@ cancer_grouping <- function(df) {
     select(-ip)  # Remove the temporary 'ip' column
 }
 
-group_by_age <- function(df, age = "AGE") {
+
+
+#' Group Ages into five intervals
+#'
+#' @description
+#' Groups ages into ranges.
+#'
+#' @param df A data frame containing an age column.
+#' @param age The name of the age column. Default is `"AGE"`.
+#'
+#' @return A data frame with an added column `Grouped_Age`.
+#' @export
+#' 
+#' @example 
+#' sim_av_patient <- group_age(sim_av_patient)
+
+group_age <- function(df, age = "AGE") {
   if (age %in% names(df)) {
     df$Grouped_Age <- dplyr::case_when(
       dplyr::between(df[[age]], 18, 44)  ~ "18-44",
@@ -45,6 +86,18 @@ group_by_age <- function(df, age = "AGE") {
   return(df)
 }
 
+#' Group Ethnicity Categories
+#'
+#' @description
+#' Maps ethnicity codes to broader categories.
+#'
+#' @param df A data frame containing an `ETHNICITY` column with ethnicity codes.
+#'
+#' @return A data frame with an added column `Grouped_Ethinicity`.
+#' @export
+#' 
+#' @example 
+#' sim_av_patient <- group_ethnicity(sim_av_patient)
 
 group_ethnicity <- function(df) {
   ethnicity_mapping <- c(
@@ -126,6 +179,18 @@ group_ethnicity <- function(df) {
 
 
 
+#' Generate an Extended Summary of a Data Frame
+#'
+#' @description
+#' Creates a summary of a data frame, including the number of missing values, unique values, and class of each column.
+#'
+#' @param df A data frame to summarize.
+#'
+#' @return A data frame with the summary statistics.
+#' @export
+#' 
+#' @example 
+#' extended_summary(df)
 
 extended_summary <- function(df) {
   df_sum <- data.frame(
@@ -149,10 +214,10 @@ extended_summary <- function(df) {
 #' @return The input data frame with an additional column 'date_diff', 
 #' representing the number of days between 'DIAGNOSISDATEBEST' and 'VITALSTATUSDATE'.
 #' @export
-#'
-#' @examples
-#' # Assuming you have a merged dataset `merged_data`
-#' survival_days(merged_data)
+#' 
+#' @example 
+#' add_survival_merged_df <- survival_days(merged_df)
+
 survival_days <- function(df) {
   message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'")
   

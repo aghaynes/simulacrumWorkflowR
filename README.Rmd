@@ -1,0 +1,118 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+library(knitr)
+```
+
+simulacrumR is a package which have been developed to assist the users of The Simulacrum dataset, to be better equipped for using the Simulacrum to get access to the real patient data at the Cancer Administration System (CAS). 
+
+The simulacrum data is a synthetic version of the real patient data at CAS, which are made fully public and can be used to create and test a analysis in R or STATA before getting it executed on the real data. However, the setup to use Simulacrum demands a process of creating your own locale Oracle database, import the data and create a ODBC connection to the database. To ease the usage of Simulacrum, can the simulacrumR package be usage for automatic setup of a database within R. Multiple assistance function for preprocessing, query generatin, and query testing. 
+
+## Installation
+simulacrumR may be installed using the following command
+```{r, eval = FALSE}
+devtools::install_github("CLINDA-AAU/simulacrumR") 
+# Or including a vignette that demonstrates the bias and coverage of the estimators
+devtools::install_github("CLINDA-AAU/simulacrumR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual")) ???????
+```
+
+# Overview
+The main functions of simulacrumR is: 
+
+- Integrated SQL Environment: Leverages the SQLdf package (ref) to make the user able to write queries within R.
+- Query helper functions: Providing users with premade queries for joining tables, query constructor for assisting the user in building queries, SQLite to Oracle query transleter 
+- Time management: logging the time for completing the full workflow or to smaller parts of the script. 
+- Preprocessing: Multiple functions custom built to The Simulacrum dataset, which are considered as common operations when working with Cancer data and for the nature of the studies, like survival analysis. 
+
+
+## Explanation of the workflow
+The workflow is built around the SQLdf package where the user are able to setup a invisible database in the span of seconds and fully automated. Before the database is intialised, the user is required to download the latest version of the Simulacrum (v2.1.0) data: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/ .
+Please note, the latest version of Simulacrum have the same formats as the real data at CAS. 
+When the data is downloaded and saved, the 'read_csv()' function can automatically setup the csv files as dataframes in R. When the dataframes are created. You can start write your queries. It is recommended to keep the queries as simple as possible and do the data management in R. As inspiration, use the function 'table_query_list' which will produce a list of function which prints queries for joining tables. If a merge of the three av tables 'sim_av_patient', 'sim_av_tumour' and, 'sim_av_gene, the function 'sql_full_av' will print: 
+
+```{r echo=TRUE}
+"SELECT *
+FROM sim_av_patient
+FULL JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid
+FULL JOIN sim_av_gene ON sim_av_tumour.patientid = sim_av_gene.patientid;"
+```
+
+Additionally does the package also offer a custom query constructor which can guide the user in writing a simple query: 
+
+```{r echo=TRUE}
+query <- query_constructor(
+  tables = "sim_av_patient",
+  join_method = "INNER JOIN",
+  join_id = "patientid",
+  joins_tables = list(
+    "sim_av_patient", "sim_av_tumour")
+  )
+# "SELECT *\nFROM sim_av_patient\nINNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;"
+```
+
+This query can be feed directly into the 'sql_test()' function which creates the database based on the csv files and executes the queries: 
+
+```{r echo=TRUE}
+query <- query_constructor(
+  tables = "sim_av_patient",
+  join_method = "INNER JOIN",
+  join_id = "patientid",
+  joins_tables = list(
+    "sim_av_patient", "sim_av_tumour")
+  )
+# "SELECT *\nFROM sim_av_patient\nINNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;"
+```
+
+As the NHS have their data stored on Oracle servers and due to the queries used for Oracle and SQLite differs in some aspects, the simulacrumR package offers a simple function 'sqlite2oracle' which translate the queries to be compatible with the Oracle standard:
+```{r}
+query2 <- "select *
+from sim_av_patient
+where age > 50
+limit 500;"
+
+sqlite2oracle(query2)
+# [1] "SELECT * \nFROM sim_av_patient \nWHERE age > 50 \nWHERE ROWNUM <= 500;"
+
+```
+
+Note, the query translator are desgined for common and simple queries.
+
+When the appropriate merges have been made and the user have the desired dataset. There are a few preprocessing functions which can be used to get started on the dataset: 
+
+- 'table_sample()'
+- 'cancer_grouping'()
+- 'group_age()'
+- 'group_ethnicity()'
+- 'extended_summart()'
+- 'survival_days()'
+
+These can be used to easily get started with the data analysis. 
+
+A finale requirement of using the Simulacrum is that researchers are asked to save the results of the analysis locally, as when the script is executed on the NHS servers, they just take the saved aggregated tables and return them by mail. The package does also assist with that as there is a function for models and for patient charecteristics: 
+
+```{r}
+model <- glm(y ~ ...)
+html_table_model(model)
+
+patient_sum <- patient_sum(sim_av_patient)
+html_table_patient(patient_sum)
+```
+
+
+
+## References
+
+1. Simulacrum ... 
+
+2. ... 
+
+3. ...
