@@ -19,12 +19,11 @@ Plan for the rest of the package.
 # Finish all the formalities of the package (29-11)
 
 
-
+# Add custom ranges for age under preprecessing
 
 
 # Make a html table for patient charecteristics
 
-# Add Principle components
 
 # Build documentation the same ways as Lars: https://github.com/CLINDA-AAU/ccostr/blob/master/R/ccmean.R
 
@@ -41,8 +40,6 @@ roxygen2::roxygenise()
 # Make a function which removes the \n between the last word of the query in the query constructor and the ; 
 
 
-
-# Fix the sqlite2oracle function. Outputs weird stuff and does not have ; at the end. 
 
 
 # Investigate VignetteBuilder

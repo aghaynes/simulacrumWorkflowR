@@ -21,6 +21,13 @@ table_sample <- function(df, n = 1000) {
 #'
 #' @description
 #' Groups cancer diagnoses into broader categories based on ICD-10 codes.
+#' 
+#' @details
+#' This function is a common method used for analysis of cancer datasets. As there are many cancer codes to cover most aspect of subcancer types, it can be hard to make any useful analysis of the data. 
+#' This function groups the cancer codes of the ICD10 codes into some aggregated categories. 
+#' For the Simulacrum dataset, most of the cancers can be found within some ranges, with some exceptions. Alternatively can these ranges be mapped. 
+#' Source for cancer codes: https://digital.nhs.uk/ndrs/data/data-outputs/cancer-data-hub/cancer-prevalence
+#' 
 #'
 #' @param df A data frame with a column `SITE_ICD10_O2_3CHAR` containing ICD-10 codes.
 #'
@@ -61,9 +68,14 @@ cancer_grouping <- function(df) {
 #'
 #' @description
 #' Groups ages into ranges.
+#' 
+#' @details
+#' This function is a common grouping method to make age categories. This is also to decrease the complexity of the analysis compared to using the full age column. 
+#' ###### Additionally can the parameter `NN` be used to decide the ranges of the users.
 #'
 #' @param df A data frame containing an age column.
-#' @param age The name of the age column. Default is `"AGE"`.
+#' @param age The name of the age column. Default is `AGE`.
+#' @param ranges Add customisable ranges. 
 #'
 #' @return A data frame with an added column `Grouped_Age`.
 #' @export
@@ -71,7 +83,7 @@ cancer_grouping <- function(df) {
 #' @example 
 #' sim_av_patient <- group_age(sim_av_patient)
 
-group_age <- function(df, age = "AGE") {
+group_age <- function(df, age = "AGE") { # Add a parameter to change the ranges. 
   if (age %in% names(df)) {
     df$Grouped_Age <- dplyr::case_when(
       dplyr::between(df[[age]], 18, 44)  ~ "18-44",
@@ -90,7 +102,11 @@ group_age <- function(df, age = "AGE") {
 #'
 #' @description
 #' Maps ethnicity codes to broader categories.
-#'
+#' 
+#' @details
+#' A function which can be used to map the 24 ethnicity code into 5 categories. The mapping for is based on the guide from NHS which is also the dataholders of the CAS database.
+#' The source for the mapping can be found on this link: https://digital.nhs.uk/data-and-information/data-collections-and-data-sets/data-sets/mental-health-services-data-set/submit-data/data-quality-of-protected-characteristics-and-other-vulnerable-groups/ethnicity
+#' 
 #' @param df A data frame containing an `ETHNICITY` column with ethnicity codes.
 #'
 #' @return A data frame with an added column `Grouped_Ethinicity`.
@@ -99,7 +115,7 @@ group_age <- function(df, age = "AGE") {
 #' @example 
 #' sim_av_patient <- group_ethnicity(sim_av_patient)
 
-group_ethnicity <- function(df) {
+group_ethnicity <- function(df) { # Optimze code with ranges and a argument pointing to the ethnicity column
   ethnicity_mapping <- c(
     "A" = "White", 
     "B" = "White", 
@@ -183,6 +199,12 @@ group_ethnicity <- function(df) {
 #'
 #' @description
 #' Creates a summary of a data frame, including the number of missing values, unique values, and class of each column.
+#' 
+#' @details
+#' This function helps by providing a dataframe of information about the chosen dataframe. The function provides an overview of: 
+#' - 1) The amount of the missing for each column of the columns in the dataframe 
+#' - 2) The amount of unique values of the columns in the dataframe  
+#' - 3) The classes of each of the columns in the dataframe 
 #'
 #' @param df A data frame to summarize.
 #'
@@ -192,7 +214,7 @@ group_ethnicity <- function(df) {
 #' @example 
 #' extended_summary(df)
 
-extended_summary <- function(df) {
+extended_summary <- function(df) { # Optimize function
   df_sum <- data.frame(
     Columns = colnames(df),
     Missings_val = sapply(df, function(x) sum(is.na(x))),
@@ -205,14 +227,22 @@ extended_summary <- function(df) {
 
 #' Calculate Survival Days
 #'
+#'@description
 #' This function calculates the number of days between the diagnosis date 
 #' and the vital status date for each row in the data frame. 
+#'
+#'@details
+#' This function helps the researchers who wants to survival analysis, by offering a fast a custombuilt function to compute the survial days between diagnosis day and day of death
+#' The functions does ask the user to merge the two dataframe `sim_av_patient` and `sim_av_tumour` before the function can be used as the variables needed for the operations are split in between the two tables. 
+#' 
 #'
 #' @param df A data frame containing the necessary columns: 'DIAGNOSISDATEBEST', 
 #' 'VITALSTATUSDATE', and 'VITALSTATUS'.
 #'
-#' @return The input data frame with an additional column 'date_diff', 
-#' representing the number of days between 'DIAGNOSISDATEBEST' and 'VITALSTATUSDATE'.
+#' @return The input data frame with an additional column `date_diff`, 
+#' representing the number of days between `DIAGNOSISDATEBEST` and `VITALSTATUSDATE`.
+#' Also, a column called `date_to_death` which is the same column as `date_diff` but where the column `VITALSTATUS` is set to be equal to `D` which means death. 
+#'   
 #' @export
 #' 
 #' @example 

@@ -1,9 +1,8 @@
 
-# Datamanagement ----------------------------------------------------------
+# Libraries ----------------------------------------------------------
 
 library(tidyverse)
 library(lubridate)
-library(forestmodel)
 library(broom)
 library(knitr)
 library(DBI)
@@ -13,19 +12,18 @@ library(odbc)
 # ODBC --------------------------------------------------------------------
 
 my_oracle <- dbConnect(odbc::odbc(),
-                       Driver = "Oracle in instantclient_21_12",
+                       Driver = "",
                        DBQ = "", 
-                       UID = "system",
+                       UID = "",
                        PWD = "",
                        trusted_connection = TRUE)
 
 query1 <- "... query to retrieve data..."
 
-query2 <- " ... query to retrieve more data ..."
 
 
-sact_regimen <- dbGetQuery(my_oracle, query1)
-av_tumour <- dbGetQuery(my_oracle, query2)
+data <- dbGetQuery(my_oracle, query1)
+
 
 # Datamanagement ----------------------------------------------------------
 
