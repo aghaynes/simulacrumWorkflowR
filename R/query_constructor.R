@@ -62,12 +62,9 @@ query_constructor <- function(tables, vars = "*", filters = NULL, join_method = 
     join_query, 
     where_query, 
     limit_query, 
-    sep = "\n"
   )
   
   query <- paste0(query, ";")
-  
-  #query <- writeLines(query)
   
   return(query)
 }

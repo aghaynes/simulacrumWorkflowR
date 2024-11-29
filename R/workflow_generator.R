@@ -1,3 +1,19 @@
+#' Transform code into a workflow.R file. 
+#'
+#' @description 
+#' Generate a .R file based on chunks of code where all sections of a analysis is united into a full workflow file. 
+#' 
+#' @details
+#' 
+#' @param 
+#'
+#' @return 
+#' @export
+#'
+#' @examples
+#' 
+
+
 ####### Add ToString function. 
 
 

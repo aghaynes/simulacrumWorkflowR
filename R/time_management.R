@@ -1,28 +1,36 @@
 #' Compute and Check Execution Time Against a Limit
 #'
 #' @description
-#' Calculates the execution time between a given start and end time and checks if it exceeds a 3-hour limit. 
+#' Calculates the execution time between given start and end times and checks if it exceeds a 3-hour limit.
 #' Returns a message indicating whether the execution time was within the limit or exceeded it.
-#' 
+#'
 #' @details
-#' This time calculation function is implemented in the package as there is a 3 hours time limit for running a analysis on the NHS servers. 
-#' To assist the user in getting an idea of the runtime for an analysis, this function can be applied in the code. 
-#' 
-#' To use this function, the user will have to place two time variable functions `start_time` and `end_time` which are `POSIXct` objects.
-#' The start and end point are recommended to set in the beginning and end of the script. 
-#' 
+#' This time calculation function is implemented in the package because there is a 3-hour time limit for running analyses on NHS servers.
+#' To help users estimate the runtime of their analyses, this function can be incorporated into their code.
+#'
+#' To use this function, place two time variable functions, `start_time()` and `end_time()`, which are `POSIXct` objects, 
+#' at the beginning and end of your script, respectively. You can also use these functions to 
+#' test the runtime of specific sections of your script. This function uses the `lubridate` package 
+#' to calculate the time difference.
+#'
+#' The function provides messages to inform the user whether the 3-hour runtime has been exceeded.
+#'
+#' A warning message reminds users that analysis times on local machines and NHS servers are likely different.
+#' However, even with potential time differences, the function provides a guide for time management and a reminder of the limitations of using NHS servers.
+#'
 #' @param start_time A `POSIXct` object representing the start time.
 #' @param end_time A `POSIXct` object representing the end time.
 #'
-#' @return A character string containing the total execution time and the result (success or rejection).
-#' If the time exceeds 3 hours, a warning is issued.
+#' @return A character string containing the total execution time and the result (accepted or rejected).
+#'         If the time exceeds 3 hours, a warning is issued.
 #' @export
 #'
 #' @examples
-#' start_time()
-#' ...
-#' end_time()
-#' compute_time_limit(start_time, end_time)
+#' start <- start_time()
+#' # ... your code ...
+#' end <- end_time()
+#' compute_time_limit(start, end)
+
 if (!requireNamespace("lubridate", quietly = TRUE)) {
   install.packages("lubridate")
 }
