@@ -96,29 +96,57 @@ create_dir_if_none <- function(dir) {
 
 
 
-#' Save Patient Charecteristics as HTML tabel
-#' 
-#' @param model Statistical model object
+#' Save Patient Characteristics as HTML table
+#'
+#' @param df Dataframe with patient characteristics
 #' @param file Directory path for saving
 #' @param file_name Name of the output file
 #' @param title Title for the table with current date 
 #' @param create_dir Logical, whether to create directory if missing
-#' 
+#'
 #' @return Invisible path to saved file
-#' 
+#'
 #' @export
-#' 
+#' @importFrom sjPlot tab_df
+#'
 #' @example 
-#' html_table(model)
+#' html_table_patient(df)
 
-html_table_patient <- function(extended_summary, 
-                                file = "results/",
-                                file_name = "model_results",
-                                title = NULL,
-                                create_dir = TRUE)  {}
-
-
-
-
-
-
+html_table_patient <- function(df, 
+                               file = "results/",
+                               file_name = "patient_characteristics",
+                               title = NULL,
+                               create_dir = TRUE) {
+  
+  if (!requireNamespace("sjPlot", quietly = TRUE)) {
+    install.packages("sjPlot")
+  }
+  
+  if (create_dir) {
+    create_dir_if_none(file)
+  }
+  
+  if (!endsWith(file, "/")) {
+    file <- paste0(file, "/")
+  }
+  
+  current_datetime <- format(Sys.time(), "%Y-%m-%d %H:%M")
+  
+  file_name <- paste0(file_name, ".html")
+  
+  full_path <- paste0(file, file_name)
+  
+  date_title <- if (is.null(title)) {
+    sprintf("Patient Characteristics %s", current_datetime)
+  } else {
+    sprintf("%s %s", title, current_datetime)
+  }
+  
+  html_table <- tab_df(df, 
+                       file = full_path, 
+                       title = date_title)
+  
+  message(sprintf("Results saved to: %s", full_path))
+  
+  return(html_table)
+}
