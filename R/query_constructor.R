@@ -15,7 +15,7 @@
 
 query_constructor <- function(tables, vars = "*", filters = NULL, join_method = NULL, joins_tables = NULL, join_id = NULL, limit = NULL) {
   # Validate inputs
-  if (!is.character(tables) || length(tables) != 1) {
+  if (!is.character(tables)) {
     stop("`tables` must be a single string representing the table name.")
   }
   

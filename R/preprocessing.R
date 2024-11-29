@@ -98,8 +98,24 @@ cancer_grouping <- function(df) {
 #'                            range2 = c(19, 64), 
 #'                            range3 = c(65, 130))
 
+################# Add error codes ########################
 group_age <- function(df, age = "AGE", range1 = c(18, 44), range2 = c(45, 64), range3 = c(65, 74), range4 = c(75, 130)) {
-  if (age %in% names(df)) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data frame.")
+  }
+  if (!is.numeric(range1)) {
+    stop("range1 must be numeric")
+  }
+  if (!is.numeric(range2)) {
+    stop("range2 must be numeric")
+  }
+  if (!is.numeric(range3)) {
+    stop("range3 must be numeric")
+  }
+  if (!is.numeric(range4)) {
+    stop("range4 must be numeric")
+  }
+    if (age %in% names(df)) {
     df$Grouped_Age <- dplyr::case_when(
       dplyr::between(df[[age]], range1[1], range1[2]) ~ paste0(toString(range1[1]), "-", toString(range1[2])),
       dplyr::between(df[[age]], range2[1], range2[2]) ~ paste0(toString(range2[1]), "-", toString(range2[2])),
