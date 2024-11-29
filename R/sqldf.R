@@ -2,7 +2,16 @@
 #'
 #' @description
 #' This function allows you to execute SQL queries directly on data frames using the `sqldf` package.
-#'
+#' 
+#' @details
+#' The `sqldf` package provides a convenient interface for running SQL queries on R data frames. 
+#' Behind the scenes, `sqldf` creates a temporary SQLite database, loads the specified data frames into it, 
+#' executes the SQL query, retrieves the results as an R data frame, and then deletes the database. 
+#' The process enables the user test SQL without having to setup database or connection between R and the database..
+#' 
+#' This function is particularly usefull for people who wants to use Simulacrum to access the CAS data. 
+#' As the only setup needed is to install the package in R.  
+#' 
 #' @param query A character string containing the SQL query to execute.
 #'
 #' @return A data frame resulting from the SQL query.
@@ -10,6 +19,7 @@
 #' @export
 #' 
 #' @example 
+#' @importFrom sqldf sqldf
 #' df <- sqldf('SELECT * FROM sim_av_patient') 
 
 if (!requireNamespace("sqldf", quietly = TRUE)) {

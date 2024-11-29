@@ -3,6 +3,12 @@
 #' @description
 #' Calculates the execution time between a given start and end time and checks if it exceeds a 3-hour limit. 
 #' Returns a message indicating whether the execution time was within the limit or exceeded it.
+#' 
+#' @details
+#' This time calculation function is implemented in the package as there is a 3 hours time limit for running a analysis on the NHS servers. 
+#' This i due to the service being free at this moment in time. 
+#' This function uses 
+#' 
 #'
 #' @param start_time A `POSIXct` object representing the start time.
 #' @param end_time A `POSIXct` object representing the end time.
@@ -19,12 +25,9 @@
 if (!requireNamespace("lubridate", quietly = TRUE)) {
   install.packages("lubridate")
 }
-if (!requireNamespace("tibble", quietly = TRUE)) {
-  install.packages("tibble")
-}
+
 
 library(lubridate)
-library(tibble)
 
 compute_time_limit <- function(start_time, end_time) {
   if (!inherits(start_time, "POSIXct") || !inherits(end_time, "POSIXct")) {

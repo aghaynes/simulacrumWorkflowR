@@ -1,5 +1,19 @@
 #' Save model results as HTML table
 #' 
+#' @description
+#' A function for saving model summary as a locale HTML file 
+#' 
+#' @details
+#' A requirement from the NHS when executing a analysis on the real CAS data it the output should be saved as a locale file.
+#' The reason is that the staff at the database should just be able to run the analysis, copy the result table and send it back to the user by mail. 
+#' 
+#' This function uses `tab_model` a powerful package which designes tables for model summary. 
+#' The package is fast and flexible, which allows it to be customised for the simulacrumR package.
+#' 
+#' As a extension of using this package, there is added some design modifications like added date and a default results. 
+#' The function also sets a directory and helps create a folder for the results of the model. 
+#' To make sure there is no overwritting are the local table name dynamic, meaning that the user will have to make sure to clean the folder after usages.
+#' 
 #' @param model Statistical model object
 #' @param file Directory path for saving
 #' @param file_name Name of the output file
@@ -9,11 +23,12 @@
 #' @return Invisible path to saved file
 #' 
 #' @export
+#' @imprtFrom sjPlot, sjmisc, sjlabelled
 #' 
 #' @example 
 #' html_table(model)
 
-html_table_model <- function(model, 
+html_table_model <- function(model, ######### Make the model name dynamic to help against overwritting 
                        file = "results/",
                        file_name = "model_results",
                        title = NULL,

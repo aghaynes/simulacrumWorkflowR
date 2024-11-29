@@ -4,12 +4,12 @@
 #' Takes a random sample of rows from a data frame.
 #'
 #' @param df A data frame to sample from.
-#' @param n The number of rows to sample. Default is 1000.
+#' @param n An integer specifying the number of rows to sample. Default is 1000.
 #'
 #' @return A data frame containing the sampled rows.
 #' @export
 #' 
-#' @example 
+#' @examples 
 #' sample_df <- table_sample(sim_av_patient, 500)
 
 table_sample <- function(df, n = 1000) {
@@ -17,27 +17,28 @@ table_sample <- function(df, n = 1000) {
 }
 
 
-#' Group Cancer Diagnoses by cancer ICD-10 codes 
+
+#' Group Cancer Diagnoses by ICD-10 Codes
 #'
 #' @description
 #' Groups cancer diagnoses into broader categories based on ICD-10 codes.
-#' 
-#' @details
-#' This function is a common method used for analysis of cancer datasets. As there are many cancer codes to cover most aspect of subcancer types, it can be hard to make any useful analysis of the data. 
-#' This function groups the cancer codes of the ICD10 codes into some aggregated categories. 
-#' For the Simulacrum dataset, most of the cancers can be found within some ranges, with some exceptions. Alternatively can these ranges be mapped. 
-#' Source for cancer codes: https://digital.nhs.uk/ndrs/data/data-outputs/cancer-data-hub/cancer-prevalence
-#' 
 #'
-#' @param df A data frame with a column `SITE_ICD10_O2_3CHAR` containing ICD-10 codes.
+#' @details
+#' This function aggregates ICD-10 cancer codes into groups 
+#' to simplify analyses. It covers common cancer groups and provides a default 
+#' "Ill-defined and unspecified" category for unmatched codes.
+#'
+#' The ICD-10 ranges are derived from NHS guidelines. See the source for details:
+#' <https://digital.nhs.uk/ndrs/data/data-outputs/cancer-data-hub/cancer-prevalence>.
+#'
+#' @param df A data frame containing a column `SITE_ICD10_O2_3CHAR` with ICD-10 codes.
 #'
 #' @return A data frame with an added column `diag_group` for the cancer category.
 #' @export
 #' 
-#' @example 
-#' sim_av_tummour <- cancer_grouping(sim_av_tumour)
+#' @examples 
+#' sim_av_tumour <- cancer_grouping(sim_av_tumour)
 
-library(dplyr)
 cancer_grouping <- function(df) {
   df %>%
     mutate(
@@ -198,32 +199,30 @@ group_ethnicity <- function(df) { # Optimze code with ranges and a argument poin
 #' Generate an Extended Summary of a Data Frame
 #'
 #' @description
-#' Creates a summary of a data frame, including the number of missing values, unique values, and class of each column.
-#' 
-#' @details
-#' This function helps by providing a dataframe of information about the chosen dataframe. The function provides an overview of: 
-#' - 1) The amount of the missing for each column of the columns in the dataframe 
-#' - 2) The amount of unique values of the columns in the dataframe  
-#' - 3) The classes of each of the columns in the dataframe 
+#' Summarizes a data frame, including missing values, unique values, and column classes.
 #'
 #' @param df A data frame to summarize.
 #'
-#' @return A data frame with the summary statistics.
+#' @return A data frame summarizing:
+#' - Column names
+#' - Number of missing values
+#' - Number of unique values
+#' - Data class of each column
 #' @export
 #' 
-#' @example 
-#' extended_summary(df)
+#' @examples 
+#' summary_df <- extended_summary(sim_av_patient)
 
-extended_summary <- function(df) { # Optimize function
-  df_sum <- data.frame(
+extended_summary <- function(df) {
+  df_summary <- data.frame(
     Columns = colnames(df),
-    Missings_val = sapply(df, function(x) sum(is.na(x))),
-    Unique_val = sapply(df, function(x) length(unique(x))),
-    Class_val = sapply(df, class)
+    Missing_Values = sapply(df, function(x) sum(is.na(x))),
+    Unique_Values = sapply(df, function(x) length(unique(x))),
+    Class = sapply(df, class)
   )
-  print(df_sum)
-  return(df_sum)
+  return(df_summary)
 }
+
 
 #' Calculate Survival Days
 #'

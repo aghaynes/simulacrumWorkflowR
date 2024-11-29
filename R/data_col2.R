@@ -3,35 +3,35 @@
 #' @description
 #' This function reads multiple CSV files from a specified directory. It validates the presence of required files, allows optional selection of specific files to load, and tracks progress during the loading process.
 #'
-#'@details The functions takes a string as input which is the directory to to where the csv files downloaded from Simulacrum is located. 
-#' the function checks if the files are csv files and if all the correct csv files are located in the directory, by comparing the list of files int the directory with a internal list `required_files`. 
-#' However, as a argument in the function, it is possible to to select certain csv to import, which can be decided in the argument `selected_files`. 
+#' @details
+#' The function takes a directory path as input, where the CSV files downloaded from Simulacrum are located. 
+#' It checks if the files are valid CSVs and verifies that all required CSV files are present in the directory by comparing the list of files in the directory with an internal list (`required_files`).
+#' Optionally, users can specify certain CSV files to load using the `selected_files` argument.
 #' 
-#' When the csv files have been chosen, the files will be imported into a dataframe where the user can assign the dataframes by taking the dataframe is the dataframe and assign the to a new varible. 
-#' It is highly recommended to give the dataframes the same name as the original csv files. 
+#' Once the files are selected, they are imported into a list of data frames. Each data frame corresponds to a CSV file, and users can assign these data frames to variables as needed. 
+#' It is recommended to name the data frames after their corresponding CSV files for clarity.
 #' 
-#' To show the progress and the time it takes to import the csv files, the package `pbapply` adds a timer and a progress bar showing each imported csv file, the time it takes to import and a bar providing a cumulative progression visually
+#' To enhance user experience, the function uses the `pbapply` package to display a progress bar and track the time taken to import each file.
 #'
 #' @param dir A character string specifying the directory containing the CSV files.
 #' @param selected_files A character vector of file names (without extensions) to load. If `NULL`, all required files are loaded. Default is `NULL`.
 #'
-#'
 #' @return A named list where each element is a data frame corresponding to a loaded CSV file. The names of the list elements are the file names without extensions.
-#' 
-#' @example 
-#' data_frames <- read_csv(dir) 
+#'
+#' @examples
+#' # Load all required files
+#' data_frames <- read_csv("directory/to/csv")
 #' sim_av_patient <- data_frames$sim_av_patient
-#' 
+#'
+#' # Load specific files
+#' data_frames <- read_csv("directory/to/csv"), selected_files = c("sim_av_patient", "sim_av_tumour"))
+#'
 #' @export
-#' @importFrom pbapply 
-
-
-
+#' @importFrom pbapply pblapply
 read_csv <- function(dir, selected_files = NULL) {
-    if (!requireNamespace("pbapply", quietly = TRUE)) {
-      install.packages("pbapply")
-    }
-
+  if (!requireNamespace("pbapply", quietly = TRUE)) {
+    install.packages("pbapply")
+  }
   
   required_files <- c(
     "sim_av_gene.csv",
@@ -47,8 +47,7 @@ read_csv <- function(dir, selected_files = NULL) {
     "sim_sact_regimen.csv"
   )
   
-  
-  if (!is.character(dir)) stop("Please make sure input dir is a string.")
+  if (!is.character(dir)) stop("Please make sure the input `dir` is a string.")
   if (!dir.exists(dir)) stop("Directory does not exist. Please check the path.")
   
   all_csv_files <- list.files(dir, pattern = "\\.csv$", full.names = TRUE)
