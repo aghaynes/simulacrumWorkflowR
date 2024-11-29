@@ -43,17 +43,5 @@ data <- dbGetQuery(my_oracle, query1)
 
 {model_results}
 "
-  workflow_content <- workflow_template %>%
-    gsub("\\{libraries\\}", libraries, .) %>%
-    gsub("\\{query\\}", query, .) %>%
-    gsub("\\{data_management\\}", data_management, .) %>%
-    gsub("\\{analysis\\}", analysis, .) %>%
-    gsub("\\{model_results\\}", model_results, .)
-  
-  # Write the workflow content to the specified file
-  writeLines(workflow_content, file_path)
-  
-  message("Workflow script created at: ", file_path)
-}
 
 

@@ -6,10 +6,11 @@
 #' 
 #' @details
 #' This time calculation function is implemented in the package as there is a 3 hours time limit for running a analysis on the NHS servers. 
-#' This i due to the service being free at this moment in time. 
-#' This function uses 
+#' To assist the user in getting an idea of the runtime for an analysis, this function can be applied in the code. 
 #' 
-#'
+#' To use this function, the user will have to place two time variable functions `start_time` and `end_time` which are `POSIXct` objects.
+#' The start and end point are recommended to set in the beginning and end of the script. 
+#' 
 #' @param start_time A `POSIXct` object representing the start time.
 #' @param end_time A `POSIXct` object representing the end time.
 #'
