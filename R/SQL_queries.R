@@ -3,6 +3,11 @@
 #' @description
 #' Provides a list of SQL query-generating functions available in this package, each designed to print a query for a certain table or for joining a series of tables.
 #'
+#'@details
+#' It is recommended to use SQL for either importing of the data of for merging some of the tables and importing.
+#' To assist the user with little or no SQL query experience, these helping functions can provide with inspiration to either test the setup 
+#' or to get started with data management. 
+#'
 #' @return A message listing the available SQL-generating functions.
 #' @export
 #'

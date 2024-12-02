@@ -40,29 +40,33 @@ table_sample <- function(df, n = 1000) {
 #' sim_av_tumour <- cancer_grouping(sim_av_tumour)
 
 cancer_grouping <- function(df) {
-  df %>%
-    mutate(
-      ip = as.numeric(substr(SITE_ICD10_O2_3CHAR, 2, 3)),
-      diag_group = case_when(
-        ip %in% c(47, 69:72) ~ "Eye, brain and CNS",
-        ip %in% c(50) ~ "Breast",
-        ip %in% c(51:58) ~ "Gynaecological",
-        ip %in% c(0:14, 30:32) ~ "Head and Neck",
-        ip %in% c(18:21) ~ "Lower gastrointestinal",
-        ip %in% c(33:34, 37:39, 45) ~ "Lung and bronchus",
-        ip %in% c(15:17, 22:25) ~ "Upper gastrointestinal",
-        ip %in% c(60:68) ~ "Urology",
-        ip %in% c(43:44) ~ "Skin",
-        ip %in% c(81:86, 90:96) ~ "Haematologic",
-        TRUE ~ "Ill-defined and unspecified"
-      ),
-      diag_group = ifelse(substr(SITE_ICD10_O2_3CHAR, 1, 1) == "C", 
-                          diag_group, 
-                          "Other")
-    ) %>%
-    select(-ip)  # Remove the temporary 'ip' column
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    install.packages("dplyr") 
+  }
+  df <- dplyr::mutate(df,
+                      ip = as.numeric(substr(SITE_ICD10_O2_3CHAR, 2, 3)),
+                      diag_group = dplyr::case_when(
+                        ip %in% c(47, 69:72) ~ "Eye, brain and CNS",
+                        ip %in% c(50) ~ "Breast",
+                        ip %in% c(51:58) ~ "Gynaecological",
+                        ip %in% c(0:14, 30:32) ~ "Head and Neck",
+                        ip %in% c(18:21) ~ "Lower gastrointestinal",
+                        ip %in% c(33:34, 37:39, 45) ~ "Lung and bronchus",
+                        ip %in% c(15:17, 22:25) ~ "Upper gastrointestinal",
+                        ip %in% c(60:68) ~ "Urology",
+                        ip %in% c(43:44) ~ "Skin",
+                        ip %in% c(81:86, 90:96) ~ "Haematologic",
+                        TRUE ~ "Ill-defined and unspecified"
+                      ),
+                      diag_group = ifelse(substr(SITE_ICD10_O2_3CHAR, 1, 1) == "C", 
+                                          diag_group, 
+                                          "Other")
+  )
+  
+  df <- dplyr::select(df, -ip)  
+  
+  return(df)
 }
-
 #' Group Ages into Intervals
 #'
 #' @description
