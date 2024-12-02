@@ -19,8 +19,8 @@
 #' @export
 #' 
 #' @example 
-#' @importFrom sqldf sqldf
 #' df <- sqldf('SELECT * FROM sim_av_patient') 
+#' @importFrom sqldf sqldf
 
 if (!requireNamespace("sqldf", quietly = TRUE)) {
   install.packages("sqldf")

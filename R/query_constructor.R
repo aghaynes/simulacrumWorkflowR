@@ -39,9 +39,8 @@ query_constructor <- function(
     join_method = NULL,
     joins_tables = NULL,
     join_id = NULL,
-    limit = NULL,
-    format = TRUE
-) {
+    limit = NULL
+    ) {
   # Validate inputs
   if (!is.character(tables) || length(tables) != 1) {
     stop("`tables` must be a single string representing the main table name.")
@@ -60,13 +59,10 @@ query_constructor <- function(
     }
   }
   
-  # Construct SELECT clause
   select_query <- paste("SELECT", paste(vars, collapse = ", "))
   
-  # Construct FROM clause
   from_query <- paste("FROM", tables)
   
-  # Construct JOIN clause
   join_query <- if (!is.null(join_method)) {
     paste(
       join_method, joins_tables[2],
@@ -76,21 +72,18 @@ query_constructor <- function(
     ""
   }
   
-  # Construct WHERE clause
   where_query <- if (!is.null(filters)) {
     paste("WHERE", paste(filters, collapse = " AND "))
   } else {
     ""
   }
   
-  # Construct LIMIT clause
   limit_query <- if (!is.null(limit)) {
     paste("LIMIT", limit)
   } else {
     ""
   }
   
-  # Combine all query parts
   query <- paste(
     select_query,
     from_query,
@@ -100,14 +93,12 @@ query_constructor <- function(
     sep = "\n"
   )
   
-  # Remove extra spaces and format query
   query <- trimws(query)
   query <- gsub("\n+", "\n", query) 
   query <- gsub(" +", " ", query)  
   
-  if (format) {
-    query <- paste0(query, ";") 
-  }
-  
+
+  query <- paste0(query, ";") 
+
   return(query)
 }
