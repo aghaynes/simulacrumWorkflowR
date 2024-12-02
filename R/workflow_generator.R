@@ -27,15 +27,14 @@ create_workflow_script <- function(file_path = "workflow.R",
   
   # Default workflow template
   workflow_template <- "
+start <- start_time()
 # Libraries ----------------------------------------------------------
-
 library(knitr)
 library(DBI)
 library(odbc)
 {libraries}
 
 # ODBC --------------------------------------------------------------------
-
 my_oracle <- dbConnect(odbc::odbc(),
                        Driver = \"\",
                        DBQ = \"\", 
@@ -44,20 +43,28 @@ my_oracle <- dbConnect(odbc::odbc(),
                        trusted_connection = TRUE)
 
 query1 <- \"{query}\"
-
 data <- dbGetQuery(my_oracle, query1)
 
 # Datamanagement ----------------------------------------------------------
-
 {data_management}
 
 # Analysis ---------------------------------------------------------------
-
 {analysis}
 
 # Model Results ----------------------------------------------------------
-
 {model_results}
-"
 
+end <- end_time()
+compute_time_limit(start, end)
+  "
+  
+  workflow_content <- gsub("\\{libraries\\}", toString(libraries), 
+                      gsub("\\{query\\}", toString(query),
+                      gsub("\\{data_management\\}", toString(data_management),
+                      gsub("\\{analysis\\}", toString(analysis),
+                      gsub("\\{model_results\\}", toString(model_results), 
+                      workflow_template)))))
+  
+  writeLines(workflow_content, file_path)
 
+}
