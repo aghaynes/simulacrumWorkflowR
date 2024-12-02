@@ -31,5 +31,7 @@ if (!requireNamespace("tcltk", quietly = TRUE)) {
 library(sqldf)
 library(tcltk)
 sql_test <- function(query) {
+  if(!is.character(query))
+    stop("The function must contain a string")
   sqldf(query, stringsAsFactors = FALSE)
 }

@@ -41,9 +41,26 @@ query_constructor <- function(
     join_id = NULL,
     limit = NULL
     ) {
-  # Validate inputs
   if (!is.character(tables) || length(tables) != 1) {
     stop("`tables` must be a single string representing the main table name.")
+  }
+  if (!is.character(vars) || length(tables) != 1) {
+    stop("`vars` must be a single string representing the main table name.")
+  }
+  if (!is.character(filters) || length(tables) != 1) {
+    stop("`filters` must be a single string representing the main table name.")
+  }
+  if (!is.character(join_method) || length(tables) != 1) {
+    stop("`join_method` must be a single string representing the main table name.")
+  }
+  if (!is.character(joins_tables) || length(tables) != 1) {
+    stop("`joins_tables` must be a single string representing the main table name.")
+  }
+  if (!is.character(join_id) || length(tables) != 1) {
+    stop("`join_id` must be a single string representing the main table name.")
+  }
+  if (!is.character(limit) || length(tables) != 1) {
+    stop("`limit` must be a single string representing the main table name.")
   }
   
   if (!is.null(join_method)) {
@@ -96,7 +113,6 @@ query_constructor <- function(
   query <- trimws(query)
   query <- gsub("\n+", "\n", query) 
   query <- gsub(" +", " ", query)  
-  
 
   query <- paste0(query, ";") 
 

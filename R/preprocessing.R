@@ -40,6 +40,9 @@ table_sample <- function(df, n = 1000) {
 #' sim_av_tumour <- cancer_grouping(sim_av_tumour)
 
 cancer_grouping <- function(df) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data frame.")
+  }
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     install.packages("dplyr") 
   }
@@ -149,7 +152,10 @@ group_age <- function(df, age = "AGE", range1 = c(18, 44), range2 = c(45, 64), r
 #' @example 
 #' sim_av_patient <- group_ethnicity(sim_av_patient)
 
-group_ethnicity <- function(df) { 
+group_ethnicity <- function(df) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data frame.")
+  }
   ethnicity_mapping <- c(
     "A" = "White", 
     "B" = "White", 
@@ -246,7 +252,10 @@ group_ethnicity <- function(df) {
 #' @examples 
 #' summary_df <- extended_summary(sim_av_patient)
 
-extended_summary <- function(df) {
+extended_summary <- function(df) { ######### Optimize -  add more to the columns 
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data frame.")
+  }
   df_summary <- data.frame(
     Columns = colnames(df),
     Missing_Values = sapply(df, function(x) sum(is.na(x))),
@@ -281,6 +290,9 @@ extended_summary <- function(df) {
 #' add_survival_merged_df <- survival_days(merged_df)
 
 survival_days <- function(df) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data frame.")
+  }
   message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'")
   
   required_columns <- c("DIAGNOSISDATEBEST", "VITALSTATUSDATE", "VITALSTATUS")

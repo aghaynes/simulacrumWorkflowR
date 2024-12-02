@@ -5,6 +5,7 @@ source("R/query_constructor.R")
 source("R/time_management.R")
 source("R/sqldf.R")
 source("R/sqlite2oracle.R")
+source("R/workflow_generator.R")
 start <- start_time()
 
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
@@ -53,6 +54,22 @@ limit 500;"
 
 sqlite2oracle(query2)
 
+      create_workflow_script(file_path = "workflow.R",
+                             libraries = "
+                                                            library(dplyr)",
+                             query = "select * 
+                             from sim_av_patient
+                             where age > 50
+                             limit 500;",
+                             data_management = "
+                             # Run query on SQLite database
+                              df1 <- sql_test(query1)
+
+                              # Additional preprocessing
+                              df2 <- survival_days(df1)",
+                             analysis = "
+                             model = glm(x ~ x1 + x2 + x3, data=data)",
+                             model_results = "html_table_model(model)")
 
 # End timer and calculate execution time 
 end <- end_time()

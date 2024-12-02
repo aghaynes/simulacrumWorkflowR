@@ -14,7 +14,11 @@
 #' 
 
 
-####### Add ToString function. 
+####### Add ToString function. So you just save a chunk of code into a variable like libraries = "library(...)
+                                                                                                 library(..)
+
+############ Make sure to trimws to remove the whitespace between the first letter. The rest have to stay fixed
+
 
 
 # Function to generate a workflow script
@@ -32,7 +36,7 @@ start <- start_time()
 library(knitr)
 library(DBI)
 library(odbc)
-{libraries}
+{trimws{libraries}}
 
 # ODBC --------------------------------------------------------------------
 my_oracle <- dbConnect(odbc::odbc(),
