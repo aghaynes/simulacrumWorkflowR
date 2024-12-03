@@ -33,6 +33,20 @@ The main functions of simulacrumR is:
 - Time management: logging the time for completing the full workflow or to smaller parts of the script. 
 - Preprocessing: Multiple functions custom built to The Simulacrum dataset, which are considered as common operations when working with Cancer data and for the nature of the studies, like survival analysis. 
 
+# The process 
+The process of using this package for getting access to the data at CAS through Simulacrum is as following: 
+
+1) Download the latest version of Simulacrum at: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/
+
+2) Copy the direction to the location of Simulacrum at your locale machien
+
+3) Incert the dir string into the data loader function in the package 
+
+4) Do the data management and analysis in R 
+
+5) save the complete workflow with the workflow generator function 
+
+6) Send the Workflow to NHS and wait for the results
 
 ## Explanation of the workflow
 The workflow is built around the SQLdf package where the user are able to setup a invisible database in the span of seconds and fully automated. Before the database is intialised, the user is required to download the latest version of the Simulacrum (v2.1.0) data: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/ .
