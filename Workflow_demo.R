@@ -54,7 +54,7 @@ limit 500;"
 
 sqlite2oracle(query2)
 
-create_workflow_script(
+create_workflow(
                              libraries = "
                                                                                   library(dplyr)",
                              query = "select * 

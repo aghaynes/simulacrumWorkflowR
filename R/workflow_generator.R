@@ -1,4 +1,37 @@
-create_workflow_script <- function(
+#' Workflow Generator
+#'
+#' @description
+#' Generate a full workflow in R by feeding chunks of code into the `create_workflow`
+#'
+#' @details
+#' This time calculation function is implemented in the package because there is a 3-hour time limit for running analyses on NHS servers.
+#' To help users estimate the runtime of their analyses, this function can be incorporated into their code.
+#'
+#' To use this function, place two time variable functions, `start_time()` and `end_time()`, which are `POSIXct` objects, 
+#' at the beginning and end of your script, respectively. You can also use these functions to 
+#' test the runtime of specific sections of your script. This function uses the `lubridate` package 
+#' to calculate the time difference.
+#'
+#' The function provides messages to inform the user whether the 3-hour runtime has been exceeded.
+#'
+#' A warning message reminds users that analysis times on local machines and NHS servers are likely different.
+#' However, even with potential time differences, the function provides a guide for time management and a reminder of the limitations of using NHS servers.
+#'
+#' @param start_time A `POSIXct` object representing the start time.
+#' @param end_time A `POSIXct` object representing the end time.
+#'
+#' @return A character string containing the total execution time and the result (accepted or rejected).
+#'         If the time exceeds 3 hours, a warning is issued.
+#' @export
+#'
+#' @examples
+#' start <- start_time()
+#' # ... your code ...
+#' end <- end_time()
+#' compute_time_limit(start, end)
+
+
+create_workflow <- function(
     file_path = paste0("workflow_", format(Sys.time(), "%Y%m%d_%H%M"), ".R"),
     libraries = NULL,
     query = "",
