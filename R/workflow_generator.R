@@ -1,41 +1,22 @@
-#' Transform code into a workflow.R file. 
-#'
-#' @description 
-#' Generate a .R file based on chunks of code where all sections of a analysis is united into a full workflow file. 
-#' 
-#' @details
-#' 
-#' @param 
-#'
-#' @return 
-#' @export
-#'
-#' @examples
-#' 
-
-
-####### Add ToString function. So you just save a chunk of code into a variable like libraries = "library(...)
-                                                                                                 
-
-######### Make sure to trimws to remove the whitespace between the first letter. The rest have to stay fixed
-                                                                                                 
-
-
-current_datetime <- format(Sys.time(), "%Y%m%d_%H%M")
 create_workflow_script <- function(
-    file_path = paste0("workflow_", current_datetime, ".R"),
+    file_path = paste0("workflow_", format(Sys.time(), "%Y%m%d_%H%M"), ".R"),
     libraries = NULL,
     query = "",
     data_management = NULL,
     analysis = NULL,
-    model_results = 
+    model_results = NULL
 ) {
+ 
   clean_chunk <- function(chunk) {
-    if (is.null(chunk) || chunk == "") 
+    if (is.null(chunk)) 
       return("")
+    
+    if (is.expression(chunk)) {
+      chunk <- toString(chunk) # Convert code into string
+    }
+    
     cleaned_lines <- trimws(strsplit(chunk, "\n")[[1]])
     cleaned_lines <- cleaned_lines[cleaned_lines != ""]
-    
     paste(cleaned_lines, collapse = "\n")
   }
   
@@ -46,7 +27,7 @@ create_workflow_script <- function(
   model_results <- clean_chunk(model_results)
   
   workflow_template <- "
-start <- start_time()
+start <- Sys.time()
 
 # Libraries ----------------------------------------------------------
 library(knitr)
@@ -75,7 +56,7 @@ data <- dbGetQuery(my_oracle, query1)
 # Model Results ----------------------------------------------------------
 {MODEL_RESULTS}
 
-end <- end_time()
+end <- Sys.time()
 compute_time_limit(start, end)
 "
   
@@ -89,4 +70,5 @@ compute_time_limit(start, end)
   workflow_content <- gsub("\\n{3,}", "\n\n", workflow_content)
   
   writeLines(workflow_content, file_path)
+  message("Workflow script created at: ", file_path)
 }

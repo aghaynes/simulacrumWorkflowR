@@ -105,7 +105,6 @@ cancer_grouping <- function(df) {
 #'                            range2 = c(19, 64), 
 #'                            range3 = c(65, 130))
 
-################# Add error codes ########################
 group_age <- function(df, age = "AGE", range1 = c(18, 44), range2 = c(45, 64), range3 = c(65, 74), range4 = c(75, 130)) {
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")

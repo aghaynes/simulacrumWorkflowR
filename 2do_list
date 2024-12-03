@@ -21,3 +21,19 @@ roxygen2::roxygenise()
 
 # Investigate VignetteBuilder
 
+
+# Optimize extended summary 
+
+
+# optimize
+
+# Make sure the sqlite2Oracle functions covers more
+
+
+################ Test queries and setup on the local sql database on the machine at home. 
+
+# Test and refine the table constructors
+
+# Save the logs of the time management function 
+
+# 

@@ -45,7 +45,7 @@ sqlite2oracle <- function(query) {
     query <- gsub("LIMIT\\s+(\\d+)", "WHERE ROWNUM <= \\1", query, ignore.case = TRUE)
   }
   
-  query <- trimws(query) # Remove leading/trailing spaces
+  query <- trimws(query)
   if (!grepl(";$", query)) {
     query <- paste0(query, ";")
   }
