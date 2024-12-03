@@ -54,9 +54,9 @@ limit 500;"
 
 sqlite2oracle(query2)
 
-      create_workflow_script(file_path = "workflow.R",
+create_workflow_script(
                              libraries = "
-                                                            library(dplyr)",
+                                                                                  library(dplyr)",
                              query = "select * 
                              from sim_av_patient
                              where age > 50
@@ -68,7 +68,7 @@ sqlite2oracle(query2)
                               # Additional preprocessing
                               df2 <- survival_days(df1)",
                              analysis = "
-                             model = glm(x ~ x1 + x2 + x3, data=data)",
+                                                                  model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
 
 # End timer and calculate execution time 

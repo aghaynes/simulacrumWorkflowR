@@ -15,28 +15,49 @@
 
 
 ####### Add ToString function. So you just save a chunk of code into a variable like libraries = "library(...)
-                                                                                                 library(..)
+                                                                                                 
 
-############ Make sure to trimws to remove the whitespace between the first letter. The rest have to stay fixed
+######### Make sure to trimws to remove the whitespace between the first letter. The rest have to stay fixed
+                                                                                                 
 
 
+current_datetime <- format(Sys.time(), "%Y%m%d_%H%M")
+create_workflow_script <- function(
+    file_path = paste0("workflow_", current_datetime, ".R"),
+    libraries = NULL,
+    query = "",
+    data_management = NULL,
+    analysis = NULL,
+    model_results = NULL
+) {
 
-# Function to generate a workflow script
-create_workflow_script <- function(file_path = "workflow.R",
-                                   libraries = "",
-                                   query = "",
-                                   data_management = "",
-                                   analysis = "",
-                                   model_results = "") {
+    code_chunk <- function(chunk) {
+    if (is.null(chunk)) return("")
+    
+    chunk_text <- deparse(substitute(chunk))
+    
+    chunk_lines <- chunk_text[-c(1, length(chunk_text))]
+    
+    cleaned_chunk <- paste(trimws(chunk_lines, which = "left"), collapse = "\n")
+    
+    return(cleaned_chunk)
+  }
   
-  # Default workflow template
+  libraries_str <- code_chunk(libraries)
+  query_str <- query
+  data_management_str <- code_chunk(data_management)
+  analysis_str <- code_chunk(analysis)
+  model_results_str <- code_chunk(model_results)
+  
   workflow_template <- "
+# Workflow Start
 start <- start_time()
+
 # Libraries ----------------------------------------------------------
 library(knitr)
 library(DBI)
 library(odbc)
-{trimws{libraries}}
+{LIBRARIES}
 
 # ODBC --------------------------------------------------------------------
 my_oracle <- dbConnect(odbc::odbc(),
@@ -46,29 +67,31 @@ my_oracle <- dbConnect(odbc::odbc(),
                        PWD = \"\",
                        trusted_connection = TRUE)
 
-query1 <- \"{query}\"
+# Query ----------------------------------------------------------
+query1 <- \"{QUERY}\"
 data <- dbGetQuery(my_oracle, query1)
 
-# Datamanagement ----------------------------------------------------------
-{data_management}
+# Data Management ----------------------------------------------------------
+{DATA_MANAGEMENT}
 
-# Analysis ---------------------------------------------------------------
-{analysis}
+# Analysis ----------------------------------------------------------
+{ANALYSIS}
 
 # Model Results ----------------------------------------------------------
-{model_results}
+{MODEL_RESULTS}
 
 end <- end_time()
 compute_time_limit(start, end)
-  "
+"
   
-  workflow_content <- gsub("\\{libraries\\}", toString(libraries), 
-                      gsub("\\{query\\}", toString(query),
-                      gsub("\\{data_management\\}", toString(data_management),
-                      gsub("\\{analysis\\}", toString(analysis),
-                      gsub("\\{model_results\\}", toString(model_results), 
-                      workflow_template)))))
+  workflow_content <- workflow_template
+  workflow_content <- gsub("\\{LIBRARIES\\}", libraries_str, workflow_content)
+  workflow_content <- gsub("\\{QUERY\\}", query_str, workflow_content)
+  workflow_content <- gsub("\\{DATA_MANAGEMENT\\}", data_management_str, workflow_content)
+  workflow_content <- gsub("\\{ANALYSIS\\}", analysis_str, workflow_content)
+  workflow_content <- gsub("\\{MODEL_RESULTS\\}", model_results_str, workflow_content)
+  
+  workflow_content <- gsub("\\n{3,}", "\n\n", workflow_content)
   
   writeLines(workflow_content, file_path)
-
 }

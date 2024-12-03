@@ -28,7 +28,7 @@
 #' @example 
 #' html_table(model)
 
-html_table_model <- function(model, ######### Make the model name dynamic to help against overwritting 
+html_table_model <- function(model, ######### Make the model name dynamic to help against overwritting # Add current date and time to the name of the file
                        file = "results/",
                        file_name = "model_results",
                        title = NULL,
