@@ -36,7 +36,7 @@ create_workflow <- function(
       return("")
     
     if (is.expression(chunk)) {
-      chunk <- toString(chunk) # Convert code into string
+      chunk <- toString(chunk)
     }
     
     cleaned_lines <- trimws(strsplit(chunk, "\n")[[1]])

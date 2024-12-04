@@ -28,6 +28,7 @@
 #'
 #' @export
 #' @importFrom pbapply pblapply
+
 read_csv <- function(dir, selected_files = NULL) {
   if (!requireNamespace("pbapply", quietly = TRUE)) {
     install.packages("pbapply")

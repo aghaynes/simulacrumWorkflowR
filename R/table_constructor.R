@@ -112,7 +112,7 @@ create_dir_if_none <- function(dir) {
 #' @example 
 #' html_table_patient(df)
 
-html_table_patient <- function(df, 
+html_table_patient <- function(df,                                        ##### Test and refine 
                                file = "results/",
                                file_name = "patient_characteristics",
                                title = NULL,

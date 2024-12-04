@@ -38,7 +38,7 @@ The process of using this package for getting access to the data at CAS through 
 
 1) Download the latest version of Simulacrum at: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/
 
-2) Copy the direction to the location of Simulacrum at your locale machien
+2) Copy the direction to the location of Simulacrum at your locale machine
 
 3) Incert the dir string into the data loader function in the package 
 

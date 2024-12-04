@@ -34,10 +34,15 @@ query1 <- query_constructor(
     "sim_av_patient", "sim_av_tumour")
   )
 
-query1
+
+create_workflow(analysis <- {model <- glm(Y ~ X1 + x2, data=data)}) 
+
+query <- 
 
 # Run query on SQLite database
 df1 <- sql_test(query1)
+
+
 
 # Additional preprocessing
 df2 <- survival_days(df1)

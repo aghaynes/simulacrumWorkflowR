@@ -9,7 +9,7 @@
 #' executes the SQL query, retrieves the results as an R data frame, and then deletes the database. 
 #' The process enables the user test SQL without having to setup database or connection between R and the database..
 #' 
-#' This function is particularly usefull for people who wants to use Simulacrum to access the CAS data. 
+#' This function is particularly useful for people who wants to use Simulacrum to access the CAS data. 
 #' As the only setup needed is to install the package in R.  
 #' 
 #' @param query A character string containing the SQL query to execute.
