@@ -30,7 +30,7 @@ create_workflow <- function(
     analysis = NULL,
     model_results = NULL
 ) {
- 
+ browser()
   clean_chunk <- function(chunk) {
     if (is.null(chunk)) 
       return("")

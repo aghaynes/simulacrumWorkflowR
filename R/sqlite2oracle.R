@@ -34,7 +34,7 @@ sqlite2oracle <- function(query) {
   # Convert main SQL keywords to uppercase
   keywords <- c("SELECT", "FROM", "WHERE", "INNER", "OUTER", "JOIN", "RIGHT", "LEFT", "ORDER BY", "GROUP BY", "HAVING")
   for (keyword in keywords) {
-    query <- gsub(keyword, toupper(keyword), query, ignore.case = TRUE)
+   query <- gsub(keyword, toupper(keyword), query, ignore.case = TRUE)
   }
   
   chech_for_where <- grepl("\\bWHERE\\b", query, ignore.case = TRUE)

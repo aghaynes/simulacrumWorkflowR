@@ -292,13 +292,14 @@ survival_days <- function(df) {
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")
   }
-  message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'")
   
   required_columns <- c("DIAGNOSISDATEBEST", "VITALSTATUSDATE", "VITALSTATUS")
   if (!all(required_columns %in% colnames(df))) {
     stop(paste(
       "The input data frame must contain the following columns:",
-      paste(required_columns, collapse = ", ")
+      paste(required_columns, collapse = ", "),
+      message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'")
+      
     ))
   }
   

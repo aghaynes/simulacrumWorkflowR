@@ -1,0 +1,34 @@
+1) Få parrellelliseret indlæsnign af filer med ee.g foreeach pakken
+
+2) slet "pbapply::" foran funktioner, hvis pakken ikke allerede er loaded ind
+
+3) kald data_frames_list
+
+4) overvej om du skal have blod cancer med i pre-processing afsnittet
+
+5) Overvej om alder gruppe funktionen skal med
+
+6) kig på warnings i survival_days() funkctionen, 
+  as.numeric(as.Date("2024-01-20")-as.Date("2020-01-20")) overvej at cutte ned i kode for survivaldays se eksempel
+  omskriv unique(df$VITALSTATUS) til noget læsbart
+
+
+7) overvej om du skal merge for persoen i koden
+
+8) Utils: Indre funktioner referencer
+
+8) Delete null join method (see comment)
+
+9) Delete SQL table list 
+
+10) fix workflow 
+
+11) add source # Deparse
+
+12) sqlite2oracle() splitupper for looped er udkommenteret og indsæat toupper insted
+
+13) Undersøg om man kan sende figurer fra Simulacrum - Hvis ja lav funktion til at gemme figs
+
+14) Function til at vælge html, excel, etc. 
+
+15) log the time it takes to execute each funciton in the script 

@@ -95,7 +95,7 @@ start_time <- function() {
 #' @return A `POSIXct` object representing the current system time.
 #' @export
 #'
-#' @examples
+#' @examples end_time() 
 
 end_time <- function() {
   return(Sys.time())

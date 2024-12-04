@@ -20,6 +20,7 @@ sim_av_tumour
 df <- cancer_grouping(sim_av_tumour)
 df <- group_age(df) 
 df <- group_ethnicity(sim_av_patient)
+extended_summary(sim_av_tumour)
 
 
 # See list of queries for merging
@@ -34,13 +35,13 @@ query1 <- query_constructor(
     "sim_av_patient", "sim_av_tumour")
   )
 
-
+query1 <- "SELECT * FROM sim_av_patient"
 create_workflow(analysis <- {model <- glm(Y ~ X1 + x2, data=data)}) 
 
 query <- 
 
 # Run query on SQLite database
-df1 <- sql_test(query1)
+df1 <- sql_test("SELECT * FROM sim_av_patient")
 
 
 
@@ -54,27 +55,27 @@ df2 <- survival_days(df1)
 
 query2 <- "select *
 from sim_av_patient
-where age > 50
 limit 500;"
 
 sqlite2oracle(query2)
 
 create_workflow(
-                             libraries = "
-                                                                                  library(dplyr)",
+                             libraries = {
+                                                                                  library(dplyr)},
                              query = "select * 
                              from sim_av_patient
                              where age > 50
                              limit 500;",
-                             data_management = "
+                             data_management = {
                              # Run query on SQLite database
-                              df1 <- sql_test(query1)
+                              cancer_grouping(sim_av_tumour)
 
                               # Additional preprocessing
-                              df2 <- survival_days(df1)",
-                             analysis = "
-                                                                  model = glm(x ~ x1 + x2 + x3, data=data)",
-                             model_results = "html_table_model(model)")
+                              #df2 <- survival_days(df1)
+                              },
+                             analysis = 
+                                                                  {model = glm(x ~ x1 + x2 + x3, data=data)},
+                             model_results = {html_table_model(model)})
 
 # End timer and calculate execution time 
 end <- end_time()
