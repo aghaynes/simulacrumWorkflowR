@@ -39,7 +39,7 @@ create_workflow <- function(
       chunk <- toString(chunk)
     }
     
-    cleaned_lines <- trimws(strsplit(chunk, "\n")[[1]])
+    cleaned_lines <- trimws(strsplit(chunk, "\n"))
     cleaned_lines <- cleaned_lines[cleaned_lines != ""]
     paste(cleaned_lines, collapse = "\n")
   }
