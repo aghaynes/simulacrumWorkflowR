@@ -20,26 +20,19 @@
 #'
 #' @examples
 #' 
-
-
 create_workflow <- function(
     file_path = paste0("workflow_", format(Sys.time(), "%Y%m%d_%H%M"), ".R"),
-    libraries = NULL,
+    libraries = "",
     query = "",
-    data_management = NULL,
-    analysis = NULL,
-    model_results = NULL
+    data_management = "",
+    analysis = "",
+    model_results = ""
 ) {
- browser()
   clean_chunk <- function(chunk) {
-    if (is.null(chunk)) 
+    if (is.null(chunk) || chunk == "") 
       return("")
     
-    if (is.expression(chunk)) {
-      chunk <- toString(chunk)
-    }
-    
-    cleaned_lines <- trimws(strsplit(chunk, "\n"))
+    cleaned_lines <- trimws(strsplit(chunk, "\n")[[1]])
     cleaned_lines <- cleaned_lines[cleaned_lines != ""]
     paste(cleaned_lines, collapse = "\n")
   }

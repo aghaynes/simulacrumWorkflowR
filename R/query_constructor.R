@@ -80,14 +80,10 @@ query_constructor <- function(
   
   from_query <- paste("FROM", tables)
   
-  join_query <- if (!is.null(join_method)) { # Delete 
-    paste(
+  join_query <- paste(
       join_method, joins_tables[2],
       "ON", paste0(joins_tables[1], ".", join_id), "=", paste0(joins_tables[2], ".", join_id)
     )
-  } else {
-    ""
-  }
   
   where_query <- if (!is.null(filters)) {
     paste("WHERE", paste(filters, collapse = " AND "))

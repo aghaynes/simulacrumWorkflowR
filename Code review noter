@@ -18,14 +18,18 @@
 - JBKS: (Y)
 
 7) overvej om du skal merge for persoen i koden
+- JBKS: added a function in utils and referenced to it in the preprocessing function
 
 8) Utils: Indre funktioner referencer
 
 8) Delete null join method (see comment)
+- JBKS: (Y) 
 
 9) Delete SQL table list 
+- JBKS
 
 10) fix workflow 
+
 
 11) add source # Deparse
 
