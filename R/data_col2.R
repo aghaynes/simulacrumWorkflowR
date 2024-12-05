@@ -29,10 +29,27 @@
 #' @export
 #' @importFrom pbapply pblapply
 
-read_csv <- function(dir, selected_files = NULL) {
+read_csv <- function(dir, selected_files = NULL, cores = detectCores()) {
   if (!requireNamespace("pbapply", quietly = TRUE)) {
     install.packages("pbapply")
   }
+  if (!requireNamespace("doParallel", quietly = TRUE)) {
+    install.packages("doParallel")
+  }
+  if (!requireNamespace("foreach", quietly = TRUE)) {
+    install.packages("foreach")
+  }
+  if (!requireNamespace("parallel", quietly = TRUE)) {
+    install.packages("parallel")
+  }  
+  if (!requireNamespace("doParallel", quietly = TRUE)) {
+    install.packages("doParallel")
+  }  
+  
+  library(pbapply)
+  library(doParallel)
+  library(foreach)
+  library(parallel)
   
   required_files <- c(
     "sim_av_gene.csv",
@@ -68,11 +85,16 @@ read_csv <- function(dir, selected_files = NULL) {
     files
   }
   
-  data_list <- pbapply::pblapply(files_to_read, function(file) {
+  cl <- makeCluster(cores)
+  registerDoParallel(cl)
+  
+  data_list <- foreach(file = files_to_read, .combine = 'c', .packages = "utils") %dopar% {
     table_name <- tools::file_path_sans_ext(basename(file))
     message(sprintf("Reading: %s", table_name))
-    read.csv(file, stringsAsFactors = FALSE)
-  })
+    list(read.csv(file, stringsAsFactors = FALSE))
+  }
+  
+  stopCluster(cl)  
   
   names(data_list) <- tools::file_path_sans_ext(basename(files_to_read))
   message("Files successfully loaded!")

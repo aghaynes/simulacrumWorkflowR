@@ -1,4 +1,5 @@
 1) Få parrellelliseret indlæsnign af filer med ee.g foreeach pakken
+https://privefl.github.io/blog/a-guide-to-parallelism-in-r/
 
 2) slet "pbapply::" foran funktioner, hvis pakken ikke allerede er loaded ind
   - JBKS: Da jeg prøvede at fjerne pbapply fik jeg fejlen: "could not find function "pblapply""
@@ -7,7 +8,7 @@
   - JBKS: (Y)
 
 4) overvej om du skal have blod cancer med i pre-processing afsnittet
-
+- JBKS: Prøver at gøre det løbende hvis der er tid. 
 
 5) Overvej om alder gruppe funktionen skal med
 - JBKS: funktion er flyttet til "Old_stuff"
@@ -45,5 +46,6 @@
 - JBKS: Change package from tab_model to something else 
 
 15) use table1 package in the table_constructor 
+- JBKS: (Y)
 
 15) log the time it takes to execute each funciton in the script 
