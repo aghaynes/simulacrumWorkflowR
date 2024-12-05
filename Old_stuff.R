@@ -60,3 +60,32 @@ group_age <- function(df, age = "AGE", range1 = c(18, 44), range2 = c(45, 64), r
   }
   return(df)
 }
+
+
+
+
+
+survival_days <- function(df) {              
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data frame.")
+  }
+  
+  required_columns <- c("DIAGNOSISDATEBEST", "VITALSTATUSDATE", "VITALSTATUS")
+  if (!all(required_columns %in% colnames(df))) {
+    stop(paste(
+      "The input data frame must contain the following columns:",
+      paste(required_columns, collapse = ", "),
+      message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'")
+      
+    ))
+  }
+  
+  #  df$DIAGNOSISDATEBEST <- as.Date(df$DIAGNOSISDATEBEST)
+  #  df$VITALSTATUSDATE <- as.Date(df$VITALSTATUSDATE)
+  
+  #  df$diff_date <- difftime(df$VITALSTATUSDATE, df$DIAGNOSISDATEBEST)
+  df$diff_date <- (df$VITALSTATUSDATE - df$DIAGNOSISDATEBEST)
+  df$date_to_death <- ifelse(df$VITALSTATUS == "D", df$diff_date, NA)
+  
+  return(df)
+}
