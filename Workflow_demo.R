@@ -17,11 +17,32 @@ data_frames_lists <- read_csv(dir)
 sim_av_patient <- data_frames_lists$sim_av_patient
 sim_av_tumour <- data_frames_lists$sim_av_tumour
 sim_av_gene <- data_frames_lists$sim_av_gene
+sim_rtds_combined <- data_frames_lists$sim_rtds_combined
+sim_rtds_episode <- data_frames_lists$sim_rtds_episode
+sim_rtds_exposure <- data_frames_lists$sim_rtds_exposure
+sim_rtds_prescription <- data_frames_lists$sim_rtds_prescription
+sim_sact_cycle <- data_frames_lists$sim_sact_cycle
+sim_sact_drug_detail <- data_frames_lists$sim_sact_drug_detail
+sim_sact_outcome <- data_frames_lists$sim_sact_outcome
+sim_sact_regimen <- data_frames_lists$sim_sact_regimen
 
-sim_av_tumour
+
+
+
+library(tableone)
+
+CreateTableOne(data = merged_df,
+               vars = relevant_vars_list)
+
+
+
+relevant_vars_list <- c('GENDER.y', 'VITALSTATUS', 'DEATHLOCATIONCODE', 'diff_date', 'date_to_death',
+                        'Grouped_Ethinicity', 'diag_group', 'GRADE', 'AGE', 'QUINTILE_2019',
+                        'PERFORMANCESTATUS')
+
+
 #Preprocessing
 df <- cancer_grouping(sim_av_tumour)
-df <- group_age(df) 
 df <- group_ethnicity(sim_av_patient)
 extended_summary(sim_av_tumour)
 

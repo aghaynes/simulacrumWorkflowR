@@ -7,7 +7,7 @@
 #' A requirement from the NHS when executing a analysis on the real CAS data it the output should be saved as a locale file.
 #' The reason is that the staff at the database should just be able to run the analysis, copy the result table and send it back to the user by mail. 
 #' 
-#' This function uses `tab_model` a powerful package which designes tables for model summary. 
+#' This function uses tab_model a powerful package which designes tables for model summary. 
 #' The package is fast and flexible, which allows it to be customised for the simulacrumR package.
 #' 
 #' As a extension of using this package, there is added some design modifications like added date and a default results. 
@@ -27,39 +27,31 @@
 #' 
 #' @example 
 #' html_table(model)
-
-html_table_model <- function(model, ######### Make the model name dynamic to help against overwritting # Add current date and time to the name of the file
-                       file = "results/",
-                       file_name = "model_results",
-                       title = NULL,
-                       create_dir = TRUE) {
+html_table_model <- function(model, 
+                             file = "results/",
+                             file_name = paste0("model_results", format(Sys.time(), "%Y%m%d_%H%M")),
+                             title = NULL,
+                             create_dir = TRUE,
+                             output_format = "html") {
   
-  # Check and install required packages
+  output_format <- match.arg(output_format)
+  
   if (!requireNamespace("sjPlot", quietly = TRUE)) {
     install.packages("sjPlot")
   }
-  if (!requireNamespace("sjmisc", quietly = TRUE)) {
-    install.packages("sjmisc")
-  }
-  if (!requireNamespace("sjlabelled", quietly = TRUE)) {
-    install.packages("sjlabelled")
+  if (!requireNamespace("writexl", quietly = TRUE)) {
+    install.packages("writexl")
   }
   
-  # Create directory if needed
   if (create_dir) {
     create_dir_if_none(file)
   }
   
-  # Ensure file path ends with separator
   if (!endsWith(file, "/")) {
     file <- paste0(file, "/")
   }
   
   current_datetime <- format(Sys.time(), "%Y-%m-%d %H:%M")
-  
-  file_name <- paste0(file_name, ".html")
-  
-  full_path <- paste0(file, file_name)
   
   date_title <- if (is.null(title)) {
     sprintf("Model Results %s", current_datetime)
@@ -67,13 +59,31 @@ html_table_model <- function(model, ######### Make the model name dynamic to hel
     sprintf("%s %s", title, current_datetime)
   }
   
-  # Create table
-  html_table <- tab_model(model, 
-                    file = full_path, 
-                    title = date_title)
-  message(sprintf("Results saved to: %s", full_path))
+  full_path <- paste0(file, file_name)
   
-  return(html_table)
+  if (output_format == "html") {
+    full_path <- paste0(full_path, ".html")
+    
+    tab_model(model, 
+              file = full_path, 
+              title = date_title)
+    
+    message(sprintf("Results saved as HTML to: %s", full_path))
+  } else if (output_format == "excel") {
+    full_path <- paste0(full_path, ".xlsx")
+    
+    model_sum <- summary(model)
+    coef_table <- as.data.frame(model_sum$coefficients)
+    
+    metadata <- data.frame(Description = c("Model Title", "Generated On"), 
+                           Value = c(date_title, current_datetime))
+    data_out <- list(Metadata = metadata, Coefficients = coef_table)
+    
+    # Write to Excel
+    writexl::write_xlsx(data_out, full_path)
+    message(sprintf("Results saved as Excel to: %s", full_path))
+  }
+  
 }
 
 
@@ -88,7 +98,7 @@ html_table_model <- function(model, ######### Make the model name dynamic to hel
 #' @example 
 #' ...
 
-create_dir_if_none <- function(dir) {
+create_dir_if_none <- function(dir) {  #### Move to utils
   if (!dir.exists(dir)) {
     dir.create(dir, recursive = TRUE)
   }
@@ -96,57 +106,48 @@ create_dir_if_none <- function(dir) {
 
 
 
-#' Save Patient Characteristics as HTML table
-#'
-#' @param df Dataframe with patient characteristics
-#' @param file Directory path for saving
-#' @param file_name Name of the output file
-#' @param title Title for the table with current date 
-#' @param create_dir Logical, whether to create directory if missing
-#'
-#' @return Invisible path to saved file
-#'
-#' @export
-#' @importFrom sjPlot tab_df
-#'
-#' @example 
-#' html_table_patient(df)
 
-html_table_patient <- function(df,                                        ##### Test and refine 
-                               file = "results/",
-                               file_name = "patient_characteristics",
-                               title = NULL,
-                               create_dir = TRUE) {
-  
-  if (!requireNamespace("sjPlot", quietly = TRUE)) {
-    install.packages("sjPlot")
-  }
-  
-  if (create_dir) {
-    create_dir_if_none(file)
-  }
-  
-  if (!endsWith(file, "/")) {
-    file <- paste0(file, "/")
-  }
-  
-  current_datetime <- format(Sys.time(), "%Y-%m-%d %H:%M")
-  
-  file_name <- paste0(file_name, ".html")
-  
-  full_path <- paste0(file, file_name)
-  
-  date_title <- if (is.null(title)) {
-    sprintf("Patient Characteristics %s", current_datetime)
-  } else {
-    sprintf("%s %s", title, current_datetime)
-  }
-  
-  html_table <- tab_df(df, 
-                       file = full_path, 
-                       title = date_title)
-  
-  message(sprintf("Results saved to: %s", full_path))
-  
-  return(html_table)
+###### Write documentation and test 
+if (!requireNamespace("tableone", quietly = TRUE)) {
+  install.packages("tableone")
 }
+if (!requireNamespace("htmlTable", quietly = TRUE)) {
+  install.packages("htmlTable")
+}
+if (!requireNamespace("writexl", quietly = TRUE)) {
+  install.packages("writexl")
+}
+
+
+create_summary_table <- function(data, vars, strata = NULL, includeNA = FALSE, save_path = NULL, file_format = "html") {
+
+
+  table <- tableone::CreateTableOne(
+    data = data,
+    vars = vars,
+    strata = strata,
+    includeNA = includeNA
+  )
+  
+  if (!is.null(save_path)) {
+    if (file_format == "html") {
+      html <- htmlTable::htmlTable(print(table, printToggle = TRUE))
+      write(html, file = save_path)
+    } else if (file_format == "excel") {
+      table_df <- as.data.frame(print(table, printToggle = TRUE))
+      writexl::write_xlsx(table_df, path = save_path)
+    } else {
+      stop("Invalid `file_format`. Choose 'html' or 'excel'.")
+    }
+  }
+  
+  return(table)
+}
+
+
+
+
+
+########## TableOne: I want to use the function TableOne, but i want to assist it by sorting out problematic
+# variables 
+# and split the variable to be categorical or continuous based on their datatype 

@@ -29,14 +29,21 @@
 - JBKS
 
 10) fix workflow 
-
+- JBKS (Y)
 
 11) add source # Deparse
+- ???? 
 
 12) sqlite2oracle() splitupper for looped er udkommenteret og indsæat toupper insted
+- JBKS: Hard to do this 
 
 13) Undersøg om man kan sende figurer fra Simulacrum - Hvis ja lav funktion til at gemme figs
+- Gonna send a mail later. Will investigate first
+
 
 14) Function til at vælge html, excel, etc. 
+- JBKS: Change package from tab_model to something else 
+
+15) use table1 package in the table_constructor 
 
 15) log the time it takes to execute each funciton in the script 
