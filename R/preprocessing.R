@@ -235,8 +235,8 @@ survival_days <- function(df) {
     stop(paste(
       "The input data frame must contain the following columns:",
       paste(required_columns, collapse = ", "),
-      message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'")
-      
+      message("Please make sure to merge 'sim_av_patient' and 'sim_av_tumour'"),
+      message("Use the function 'df_merged <- av_patient_tumour_merge(sim_av_patient,sim_av_tumour)' to merge the dataframes")
     ))
   }
   

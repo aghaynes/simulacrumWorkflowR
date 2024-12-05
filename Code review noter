@@ -15,7 +15,7 @@
 6) kig på warnings i survival_days() funkctionen, 
   as.numeric(as.Date("2024-01-20")-as.Date("2020-01-20")) overvej at cutte ned i kode for survivaldays se eksempel
   omskriv unique(df$VITALSTATUS) til noget læsbart
-- JBKS: 
+- JBKS: (Y)
 
 7) overvej om du skal merge for persoen i koden
 
