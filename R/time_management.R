@@ -38,7 +38,7 @@ if (!requireNamespace("lubridate", quietly = TRUE)) {
 
 library(lubridate)
 
-compute_time_limit <- function(start_time, end_time) {
+compute_time_limit <- function(start_time, end_time) {     #### Add code telling how much time is left AND how much time it exceeded
   if (!inherits(start_time, "POSIXct") || !inherits(end_time, "POSIXct")) {
     stop("start_time and end_time must be of class POSIXct.")
   }

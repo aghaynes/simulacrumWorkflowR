@@ -1,17 +1,21 @@
 1) Få parrellelliseret indlæsnign af filer med ee.g foreeach pakken
 
 2) slet "pbapply::" foran funktioner, hvis pakken ikke allerede er loaded ind
+  - JBKS: Da jeg prøvede at fjerne pbapply fik jeg fejlen: "could not find function "pblapply""
 
 3) kald data_frames_list
+  - JBKS: (Y)
 
 4) overvej om du skal have blod cancer med i pre-processing afsnittet
 
+
 5) Overvej om alder gruppe funktionen skal med
+- JBKS: funktion er flyttet til "Old_stuff"
 
 6) kig på warnings i survival_days() funkctionen, 
   as.numeric(as.Date("2024-01-20")-as.Date("2020-01-20")) overvej at cutte ned i kode for survivaldays se eksempel
   omskriv unique(df$VITALSTATUS) til noget læsbart
-
+- JBKS: 
 
 7) overvej om du skal merge for persoen i koden
 

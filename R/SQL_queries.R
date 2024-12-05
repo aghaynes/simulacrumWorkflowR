@@ -14,7 +14,7 @@
 #' @examples
 #' table_query_list()
 
-table_query_list <- function(){
+table_query_list <- function(){ #Mayde del 
   writeLines("Generate SQL query for a single table or a merge of tables by executing one of the following functions:
              sql_sim_av_patient()
              sql_av_tumour_patient()
