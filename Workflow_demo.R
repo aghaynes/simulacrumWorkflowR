@@ -11,7 +11,17 @@ start <- start_time()
 
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 # Automated data loading 
+start <- start_time()
 data_frames_lists <- read_csv(dir) 
+end <- end_time()
+compute_time_limit(start, end)
+
+start <- start_time()
+data_frames_lists <- read_csv2(dir) 
+end <- end_time()
+compute_time_limit(start, end)
+
+
 
 #dfs
 sim_av_patient <- data_frames_lists$sim_av_patient

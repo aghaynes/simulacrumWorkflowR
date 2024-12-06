@@ -45,6 +45,10 @@ create_workflow <- function(
   analysis <- clean_chunk(analysis)
   model_results <- clean_chunk(model_results)
   
+  if (query != "") {
+    query <- sqlite2oracle(query)
+  }
+  
   workflow_template <- "
 start <- Sys.time()
 

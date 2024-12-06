@@ -1,3 +1,5 @@
+source("R/utils.R")
+
 #' Save model results as HTML table
 #' 
 #' @description
@@ -87,22 +89,6 @@ html_table_model <- function(model,
 }
 
 
-#' Creating a Dir if there is None
-#' 
-#' @param dir the direction to the folder 
-#' 
-#' @return folder 
-#' 
-#' @export
-#' 
-#' @example 
-#' ...
-
-create_dir_if_none <- function(dir) {  #### Move to utils
-  if (!dir.exists(dir)) {
-    dir.create(dir, recursive = TRUE)
-  }
-}
 
 
 
@@ -145,9 +131,3 @@ create_summary_table <- function(data, vars, strata = NULL, includeNA = FALSE, s
 }
 
 
-
-
-
-########## TableOne: I want to use the function TableOne, but i want to assist it by sorting out problematic
-# variables 
-# and split the variable to be categorical or continuous based on their datatype 

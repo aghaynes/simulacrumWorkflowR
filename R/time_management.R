@@ -38,31 +38,41 @@ if (!requireNamespace("lubridate", quietly = TRUE)) {
 
 library(lubridate)
 
-compute_time_limit <- function(start_time, end_time) {     #### Add code telling how much time is left AND how much time it exceeded
+library(lubridate)
+
+compute_time_limit <- function(start_time, end_time, save_to_file = FALSE, file_path = "execution_time_log.txt") {
+  # Check that start_time and end_time are of class POSIXct
   if (!inherits(start_time, "POSIXct") || !inherits(end_time, "POSIXct")) {
     stop("start_time and end_time must be of class POSIXct.")
   }
   
+  # Calculate execution time
   execution_time <- as.duration(end_time - start_time)
   
+  # Prepare message based on execution time
   if (execution_time > hours(3)) {
     message <- sprintf(
-      "Total Execution Time: %s\n Analysis rejected! Exceeds the three hours threshold of NHS.",
+      "Total Execution Time: %s\nAnalysis rejected! Exceeds the three-hour threshold of NHS.",
       as.character(execution_time)
     )
     warning(message)
-    return(message)
   } else {
     message <- sprintf(
-      "Total Execution Time: %s \n Analysis accepted! It is within the three hour threshold set by the NHS",
+      "Total Execution Time: %s\nAnalysis accepted! It is within the three-hour threshold set by the NHS.",
       as.character(execution_time)
     )
-    writeLines(message)
-    #return(message)
-    
     warning("Please note that the processing power of NHS servers and your local machine may vary significantly. As a result, the time required to run your analysis may differ. Please anticipate potential variations in runtime between the two environments.")
   }
+  
+  # Save message to a file if save_to_file is TRUE
+  if (save_to_file) {
+    writeLines(message, con = file_path)
+  }
+  
+  # Return the message
+  return(message)
 }
+
 
 #################################
 ###### Save log locally #########

@@ -35,3 +35,21 @@ extended_summary <- function(df) { ######### Optimize -  add more to the columns
   )
   return(df_summary)
 }
+
+
+#' Creating a Dir if there is None
+#' 
+#' @param dir the direction to the folder 
+#' 
+#' @return folder 
+#' 
+#' @export
+#' 
+#' @example 
+#' ...
+
+create_dir_if_none <- function(dir) {  #### Move to utils
+  if (!dir.exists(dir)) {
+    dir.create(dir, recursive = TRUE)
+  }
+}
