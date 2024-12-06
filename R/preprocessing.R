@@ -209,7 +209,9 @@ survival_days <- function(df) {
   }
   
   df$diff_date <- as.numeric(as.Date(df$VITALSTATUSDATE) - as.Date(df$DIAGNOSISDATEBEST))
-  df$date_to_death <- ifelse(df$VITALSTATUS == "D", df$diff_date, NA)
-
+  df$time_to_death <- ifelse(df$VITALSTATUS == "D", df$diff_date, NA)
+  df$status_OS <- ifelse(df$VITALSTATUS == "D",yes=1,no=0)
+  df$Time_OS <- df$diff_date
+  
     return(df)
 }

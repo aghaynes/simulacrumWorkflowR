@@ -150,8 +150,8 @@ create_summary_table <- function(data,
                                  addOverall = FALSE,
                                  save_path = NULL, 
                                  file_format = "html") {
-
-
+  
+  
   table <- CreateTableOne(
     data = data,
     vars = vars,
