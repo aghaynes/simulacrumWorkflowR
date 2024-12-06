@@ -33,10 +33,7 @@ https://privefl.github.io/blog/a-guide-to-parallelism-in-r/
 - JBKS (Y)
 
 11) add source # Deparse
-- ???? 
-
-12) sqlite2oracle() splitupper for looped er udkommenteret og indsæat toupper insted
-- JBKS: Hard to do this 
+- (Y)
 
 13) Undersøg om man kan sende figurer fra Simulacrum - Hvis ja lav funktion til at gemme figs
 - Gonna send a mail later. Will investigate first
@@ -49,3 +46,12 @@ https://privefl.github.io/blog/a-guide-to-parallelism-in-r/
 - JBKS: (Y)
 
 15) log the time it takes to execute each funciton in the script 
+
+16) kig ind i fread() for data loading
+
+17) table_sample kill darling
+
+18) packages for ICD codes 
+
+19) vignette get table & tab_model 
+

@@ -32,6 +32,7 @@
 read_csv <- function(dir, selected_files = NULL) {
   if (!requireNamespace("pbapply", quietly = TRUE)) {
     install.packages("pbapply")
+    library("pbapply")
   }
   
   required_files <- c(

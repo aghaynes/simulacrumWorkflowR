@@ -1,3 +1,5 @@
+source("R/sqlite2oracle.R")
+
 #' Workflow Generator
 #'
 #' @description
