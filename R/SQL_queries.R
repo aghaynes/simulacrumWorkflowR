@@ -55,8 +55,8 @@ sql_full_av <- function() {
   writeLines('
 SELECT *
 FROM sim_av_patient
-FULL JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid
-FULL JOIN sim_av_gene ON sim_av_tumour.patientid = sim_av_gene.patientid;
+INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid
+INNER JOIN sim_av_gene ON sim_av_tumour.patientid = sim_av_gene.patientid;
 ')
 }
 
@@ -64,9 +64,9 @@ sql_full_sact <- function() {
   writeLines('
 SELECT *
 FROM sim_sact_regimen
-FULL JOIN sim_sact_outcome ON sim_sact_regimen.merged_regimen_id = sim_sact_outcome.merged_regimen_id
-FULL JOIN sim_sact_cycle ON sim_sact_regimen.merged_regimen_id = sim_sact_cycle.merged_regimen_id
-FULL JOIN sim_sact_drug_detail ON sim_sact_cycle.merged_cycle_id = sim_sact_drug_detail.merged_cycle_id;
+INNER JOIN sim_sact_outcome ON sim_sact_regimen.merged_regimen_id = sim_sact_outcome.merged_regimen_id
+INNER JOIN sim_sact_cycle ON sim_sact_regimen.merged_regimen_id = sim_sact_cycle.merged_regimen_id
+INNER JOIN sim_sact_drug_detail ON sim_sact_cycle.merged_cycle_id = sim_sact_drug_detail.merged_cycle_id;
 ')
 }
 

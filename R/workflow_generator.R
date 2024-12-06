@@ -21,7 +21,6 @@
 #' @examples
 #' 
 
-###################### Add sqlite2oracle function in the create_workflow()
 create_workflow <- function(
     file_path = paste0("workflow_", format(Sys.time(), "%Y%m%d_%H%M"), ".R"),
     libraries = "",
