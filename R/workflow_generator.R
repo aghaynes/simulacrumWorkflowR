@@ -3,19 +3,19 @@ source("R/sqlite2oracle.R")
 #' Create Workflow Script
 #'
 #' @description
-#' This function generates a complete R workflow script for use with NHS data pipelines. It compiles code chunks for library setup, query execution, data management, analysis, and model results into a single executable script. The output script is ready to run and checks execution time to ensure it adheres to the NHS 3-hour time limit.
+#' This function generates a complete R workflow script for use with NHS data pipelines. It compiles code chunks for library setup, query execution, data management, analysis, and model results into a single script. 
 #'
 #' @details
-#' The `create_workflow` function accepts chunks of code as input parameters, processes them, and integrates them into a predefined workflow template. The template includes sections for library setup, database connections (via ODBC), querying, data management, analysis, and result handling. The generated script includes time monitoring to evaluate the total execution time.
+#' The `create_workflow` function accepts chunks of code as input parameters, processes them, and integrates them into a predefined workflow template. The template includes sections for library setup, database connections, querying, data management, analysis, and result handling. The generated script also contains time monitoring to evaluate the total execution time to ensure it is within the three hour limit of the servers at NHS.
 #'
 #' The `sqlite2oracle` function is used to convert SQL queries from SQLite syntax to Oracle syntax.
 #'
 #' @param file_path A character string specifying the file path where the workflow script will be saved. Timestamp is added to prevent overwritten.
-#' @param libraries A character string containing R library calls, formatted with one library per line.
+#' @param libraries A character string containing R library calls.
 #' @param query A character string containing an SQL query to execute. The query is automatically processed using `sqlite2oracle` for Oracle compatibility.
-#' @param data_management A character string with data preprocessing and management steps, formatted as an R script.
-#' @param analysis A character string with data analysis steps, formatted as an R script.
-#' @param model_results A character string containing code to process and export model results, formatted as an R script.
+#' @param data_management A character string with data preprocessing and management steps.
+#' @param analysis A character string with data analysis steps.
+#' @param model_results A character string containing code to process and export model results.
 #'
 #' @return None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.
 #'
