@@ -1,27 +1,38 @@
 source("R/sqlite2oracle.R")
 
-#' Workflow Generator
+#' Create Workflow Script
 #'
 #' @description
-#' Generate a full workflow in R by feeding chunks of code into the `create_workflow` and get a script returned, which is ready to be send to NHS.
+#' This function generates a complete R workflow script for use with NHS data pipelines. It compiles code chunks for library setup, query execution, data management, analysis, and model results into a single executable script. The output script is ready to run and checks execution time to ensure it adheres to the NHS 3-hour time limit.
 #'
 #' @details
-#' 
-#' 
-#' @param file_path
-#' @param libraries bla bla 
-#' @param query 
-#' @param data_management 
-#' @param analysis bla bla 
-#' @param model_results blabla
-#' 
+#' The `create_workflow` function accepts chunks of code as input parameters, processes them, and integrates them into a predefined workflow template. The template includes sections for library setup, database connections (via ODBC), querying, data management, analysis, and result handling. The generated script includes time monitoring to evaluate the total execution time.
 #'
-#' @return A character string containing the total execution time and the result (accepted or rejected).
-#'         If the time exceeds 3 hours, a warning is issued.
+#' The `sqlite2oracle` function is used to convert SQL queries from SQLite syntax to Oracle syntax, if provided.
+#'
+#' @param file_path A character string specifying the file path where the workflow script will be saved. Defaults to a timestamped file name (`"workflow_<timestamp>.R"`).
+#' @param libraries A character string containing R library calls (e.g., `library(dplyr)`), formatted with one library per line.
+#' @param query A character string containing an SQL query to execute. The query is automatically processed using `sqlite2oracle` for Oracle compatibility.
+#' @param data_management A character string with data preprocessing and management steps, formatted as an R script.
+#' @param analysis A character string with data analysis steps, formatted as an R script.
+#' @param model_results A character string containing code to process and export model results, formatted as an R script.
+#'
+#' @return None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.
+#'
 #' @export
 #'
 #' @examples
-#' 
+#' # Generate a workflow script with minimal input
+#' create_workflow(
+#'   libraries = "library(dplyr)",
+#'   query = "SELECT * FROM sim_av_patients LIMIT age > 50;",
+#'   data_management = "df <- cancer_grouping(df)",
+#'   analysis = "model <- glm(Y ~ x1 + x2 + x3, data=df",
+#'   model_results = "write.csv(model, 'results.csv')"
+#' )
+#'
+#' # Output: Workflow script saved at "workflow_<timestamp>.R"
+
 
 create_workflow <- function(
     file_path = paste0("workflow_", format(Sys.time(), "%Y%m%d_%H%M"), ".R"),

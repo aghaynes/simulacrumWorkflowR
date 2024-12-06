@@ -1,23 +1,27 @@
-#' System logger and timer logger 
-#' 
+#' System logger and timer logger
+#'
 #' @description
-#' This function are applied to all the enternal functions of this package to report the time and complexity 
-#' of each function
-#' 
-#' @details
-#' This function uses the two R packages `logger` and `tictoc` and are implemented at each function in all of the scripts in the R folder.
-#' More details tbh
-#' 
-#' @param function a random function of any kind which are loaded ... 
-#' 
-#' @return A text file with a full log report of all the code which have been executed ...
-#' 
-#' @example 
-#' tbh ...
-#' 
+#' This function logs the execution time and system information of a given function. It's designed to be used as a wrapper around other functions to track performance and identify potential bottlenecks.
+#'
+#' @param func The function to be logged.
+#' @param ... Additional arguments to be passed to the `func`.
+#'
+#' @return The return value of the `func`.
+#'
+#' @examples
+#' # Example function
+#' my_function <- function(x) {
+#'   Sys.sleep(2)
+#'   return(x^2)
+#' }
+#'
+#' # Log the execution of my_function
+#' result <- logger(my_function, 5)
+#' print(result)
+#'
 #' @export
-#' @importFrom logger, tictoc
-#' 
+#' @importFrom tictoc tic toc
+#' @importFrom logger log_info log_warn log_error
 
 # tbh
 logger <- function() {}
