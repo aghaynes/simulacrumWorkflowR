@@ -21,14 +21,18 @@ source("R/utils.R")
 #' @param file_name Name of the output file
 #' @param title Title for the table with current date 
 #' @param create_dir Logical, whether to create directory if missing
+#' @param output_format description
 #' 
-#' @return Invisible path to saved file
+#' @return a .html or .xlsx of the summary of a glm model presented as a table. 
+#' The outputted file will be placed in a folder which can be named or created by the user,
+#' but which will by default be placed where the package is installed and called results. 
 #' 
 #' @export
-#' @imprtFrom sjPlot, sjmisc, sjlabelled
+#' @imprtFrom sjPlot, writexl
 #' 
 #' @example 
 #' html_table(model)
+
 html_table_model <- function(model, 
                              file = "results/",
                              file_name = paste0("model_results", format(Sys.time(), "%Y%m%d_%H%M")),
@@ -81,8 +85,7 @@ html_table_model <- function(model,
                            Value = c(date_title, current_datetime))
     data_out <- list(Metadata = metadata, Coefficients = coef_table)
     
-    # Write to Excel
-    writexl::write_xlsx(data_out, full_path)
+    write_xlsx(data_out, full_path)
     message(sprintf("Results saved as Excel to: %s", full_path))
   }
   
@@ -90,10 +93,34 @@ html_table_model <- function(model,
 
 
 
+#' Table one wrapper for making a table of patient charecteristics
+#' 
+#' @description
+#' Creates a table over the patient characteristics and outputs it as either a .html of a .xlsx
+#' 
+#' @details
+#' This function are handy when woring with simualcrum as it allows you to create a easy table of the patient charecteristics of the data. 
+#' The user are able to create a table one where varibles can be selected and splitted into ordinary variables, factor variables stratified or inclusion of NA's.
+#' 
+#' The function is a using the the `tableone` package and which makes it ease to create a comprehensive table with a nice setup. 
+#' All the params with their original description are included from the `tableone` package in this packages adaption, with the only difference being the option to save the tables locally as .html or .xlsx.
+#' The option to save the files locally is important for executing the analysis on the CAS database. 
+#' 
+#' There are added additional code for this function which allows the user to save their table as either a .html or .xlsx. 
+#' 
+#' @inheritParams tableone::CreateTableOne
+#' @param save_path A charecter string providing the direction for the table to be saved. The default value is `NULL` 
+#' which results in the table will be saved where the package is located.
+#' @param file_format A charecter string which can only take the inputs `html` or `xlsx` to decide if the table should be outputted as a .html or .xlsx. 
+#' By default will the table be outputted as .html 
+#' 
+#' @return a html table or a xlsx table into a user specified folder. 
+#' @export
+#' 
+#' @example 
+#' create_summary_table(df_characteristics, vars = c("GENDER", "AGE", "CANCER_DIAG), strata = "GENDER", save_path = "path/to/folder/")
 
-
-
-###### Write documentation and test 
+# Make a list over variables which may create problems 
 if (!requireNamespace("tableone", quietly = TRUE)) {
   install.packages("tableone")
 }
@@ -105,14 +132,43 @@ if (!requireNamespace("writexl", quietly = TRUE)) {
 }
 
 
-create_summary_table <- function(data, vars, strata = NULL, includeNA = FALSE, save_path = NULL, file_format = "html") {
+create_summary_table <- function(data, 
+                                 vars, 
+                                 factorVars, 
+                                 strata = NULL, 
+                                 includeNA = FALSE, 
+                                 test = TRUE,
+                                 testApprox = chisq.test,
+                                 argsApprox = list(correct = TRUE),
+                                 testExact = fisher.test,
+                                 argsExact = list(workspace = 2 * 10^5),
+                                 testNormal = oneway.test,
+                                 argsNormal = list(var.equal = TRUE),
+                                 testNonNormal = kruskal.test,
+                                 argsNonNormal = list(NULL),
+                                 smd = TRUE,
+                                 addOverall = FALSE,
+                                 save_path = NULL, 
+                                 file_format = "html") {
 
 
-  table <- tableone::CreateTableOne(
+  table <- CreateTableOne(
     data = data,
     vars = vars,
+    factorVars,
     strata = strata,
-    includeNA = includeNA
+    includeNA = includeNA,
+    test = test,
+    testApprox = testApprox,
+    argsApprox = argsApprox,
+    testExact = testExact,
+    argsExact = argsExact,
+    testNormal = testNormal,
+    argsNormal = argsNormal,
+    testNonNormal = testNonNormal,
+    argsNonNormal = argsNonNormal,
+    smd = smd,
+    addOverall = addOverall
   )
   
   if (!is.null(save_path)) {
@@ -121,7 +177,7 @@ create_summary_table <- function(data, vars, strata = NULL, includeNA = FALSE, s
       write(html, file = save_path)
     } else if (file_format == "excel") {
       table_df <- as.data.frame(print(table, printToggle = TRUE))
-      writexl::write_xlsx(table_df, path = save_path)
+      write_xlsx(table_df, path = save_path)
     } else {
       stop("Invalid `file_format`. Choose 'html' or 'excel'.")
     }

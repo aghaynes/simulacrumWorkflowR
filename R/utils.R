@@ -1,3 +1,10 @@
+#' Merge of patient and tumour df
+#' 
+#' @description
+#' A simple merge function for gathering the two dataframes .... 
+#' 
+#'
+
 av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_patient){
   message("Merging `sim_av_patient` and `sim_av_tumour`...")
   merged_df <- merge(df1, df2, by = "PATIENTID", all = TRUE) 
@@ -48,7 +55,7 @@ extended_summary <- function(df) { ######### Optimize -  add more to the columns
 #' @example 
 #' ...
 
-create_dir_if_none <- function(dir) {  #### Move to utils
+create_dir_if_none <- function(dir) {
   if (!dir.exists(dir)) {
     dir.create(dir, recursive = TRUE)
   }

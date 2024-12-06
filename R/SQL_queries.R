@@ -1,5 +1,3 @@
-
-
 #' Generate SQL Query for Individual Tables
 #'
 #' @description

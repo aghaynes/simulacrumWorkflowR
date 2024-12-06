@@ -65,7 +65,6 @@ cancer_grouping <- function(df) {
                                           diag_group, 
                                           "Other")
   )
-  
   df <- dplyr::select(df, -ip)  
   
   return(df)

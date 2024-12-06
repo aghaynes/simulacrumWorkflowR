@@ -14,7 +14,6 @@
 #' @param joins_tables A character vector with two table names for the join. Required if `join_method` is specified.
 #' @param join_id A character string specifying the column name used for the join condition. Required if `join_method` is specified.
 #' @param limit An integer specifying the maximum number of rows to return. Default is NULL (no limit).
-#' @param format A logical value indicating whether to format the SQL query for readability (default is TRUE).
 #' 
 #' @return A SQL query string.
 #' 

@@ -35,9 +35,6 @@ if (!requireNamespace("lubridate", quietly = TRUE)) {
   install.packages("lubridate")
 }
 
-
-library(lubridate)
-
 library(lubridate)
 
 compute_time_limit <- function(start_time, end_time, save_to_file = FALSE, file_path = "execution_time_log.txt") {
@@ -46,10 +43,8 @@ compute_time_limit <- function(start_time, end_time, save_to_file = FALSE, file_
     stop("start_time and end_time must be of class POSIXct.")
   }
   
-  # Calculate execution time
   execution_time <- as.duration(end_time - start_time)
   
-  # Prepare message based on execution time
   if (execution_time > hours(3)) {
     message <- sprintf(
       "Total Execution Time: %s\nAnalysis rejected! Exceeds the three-hour threshold of NHS.",
@@ -64,21 +59,12 @@ compute_time_limit <- function(start_time, end_time, save_to_file = FALSE, file_
     warning("Please note that the processing power of NHS servers and your local machine may vary significantly. As a result, the time required to run your analysis may differ. Please anticipate potential variations in runtime between the two environments.")
   }
   
-  # Save message to a file if save_to_file is TRUE
   if (save_to_file) {
     writeLines(message, con = file_path)
   }
   
-  # Return the message
   return(message)
 }
-
-
-#################################
-###### Save log locally #########
-#################################
-
-
 
 
 
