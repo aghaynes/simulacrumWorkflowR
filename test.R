@@ -25,14 +25,6 @@ df <- cancer_grouping(sim_av_tumour)
 df <- group_ethnicity(sim_av_patient)
 extended_summary(sim_av_tumour)
 
-# Query Constructor for merge
-query1 <- query_constructor(
-  tables = "sim_av_patient",
-  join_method = "INNER JOIN",
-  join_id = "patientid",
-  joins_tables = list(
-    "sim_av_patient", "sim_av_tumour")
-)
 
 
 # Run query on SQLite database
