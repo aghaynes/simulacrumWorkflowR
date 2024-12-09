@@ -6,19 +6,7 @@
 #' @param func The function to be logged.
 #' @param ... Additional arguments to be passed to the `func`.
 #'
-#' @return The return value of the `func`.
-#'
-#' @examples
-#' # Example function
-#' my_function <- function(x) {
-#'   Sys.sleep(2)
-#'   return(x^2)
-#' }
-#'
-#' # Log the execution of my_function
-#' result <- logger(my_function, 5)
-#' print(result)
-#'
+#' @return The return text file with the log reported after executing the package.
 #' @export
 #' @importFrom tictoc tic toc
 #' @importFrom logger log_info log_warn log_error
