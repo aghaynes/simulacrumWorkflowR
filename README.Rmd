@@ -132,6 +132,8 @@ create_workflow(
                              model_results = "html_table_model(model)")
 ```
 
+This workflow automates the process, ensuring easy integration and preparation of your Simulacrum data.
+
 
 
 ## References
