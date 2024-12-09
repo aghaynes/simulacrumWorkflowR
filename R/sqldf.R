@@ -21,16 +21,15 @@
 #' @example 
 #' df <- sqldf('SELECT * FROM sim_av_patient') 
 #' @importFrom sqldf sqldf
-
-if (!requireNamespace("sqldf", quietly = TRUE)) {
-  install.packages("sqldf")
-}
-if (!requireNamespace("tcltk", quietly = TRUE)) {
-  install.packages("tcltk")
-}
-library(sqldf)
-library(tcltk)
 sql_test <- function(query) {
+  if (!requireNamespace("sqldf", quietly = TRUE)) {
+    install.packages("sqldf")
+  }
+  if (!requireNamespace("tcltk", quietly = TRUE)) {
+    install.packages("tcltk")
+  }
+  library(sqldf)
+  library(tcltk)
   if(!is.character(query))
     stop("The function must contain a string")
   sqldf(query, stringsAsFactors = FALSE)

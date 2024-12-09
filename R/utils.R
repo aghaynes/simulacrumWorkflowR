@@ -3,7 +3,13 @@
 #' @description
 #' A simple merge function for gathering the two dataframes .... 
 #' 
-#'
+#' @param df1 a dataframe to be merged with df2. df1 is default set to `sim_av_patient`.
+#' @param df2 a dataframe to be merged with df1. df2 is default set to `sim_av_tumour`.
+#' 
+#' @return a merged dataframe
+#' 
+#' @export
+
 
 av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_tumour){
   message("Merging `sim_av_patient` and `sim_av_tumour`...")
