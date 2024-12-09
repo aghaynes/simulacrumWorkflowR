@@ -7,6 +7,7 @@
 #' @param ... Additional arguments to be passed to the `func`.
 #'
 #' @return The return text file with the log reported after executing the package.
+#' 
 #' @export
 #' @importFrom tictoc tic toc
 #' @importFrom logger log_info log_warn log_error
