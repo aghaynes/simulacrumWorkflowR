@@ -6,10 +6,9 @@ Authors@R: c(
     person("Jakob", "Skelmose", email = "j.skelmose@rn.dk", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9192-1814")),
     person("...", "...", role = "aut", comment = c(ORCID = "0000-0001-5537-6767")),
     person("Martin", "Boegsted", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
-    person("Center for Clinical Data Science - Aalborg", role = "?"))
+    person("Center for Clinical Data Science - Aalborg"))
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Maintainer: Jakob Skelmose j.skelmose@rn.dk
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
 Encoding: UTF-8
