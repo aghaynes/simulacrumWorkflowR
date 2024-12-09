@@ -1,6 +1,6 @@
 Package: simulacrumR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: An R package for Streamlined Access and Analysis of the Simulacrum Cancer Dataset
 Version: 0.1.0
 Authors@R: c(
     person("Jakob", "Skelmose", email = "j.skelmose@rn.dk", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9192-1814")),
@@ -8,8 +8,7 @@ Authors@R: c(
     person("Martin", "Boegsted", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
     person("Center for Clinical Data Science - Aalborg"))
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
-Maintainer: Jakob Skelmose j.skelmose@rn.dk
-    Use four spaces when indenting paragraphs within the Description.
+Maintainer: Jakob Skelmose <j.skelmose@rn.dk>
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
