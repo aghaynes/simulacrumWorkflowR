@@ -18,8 +18,6 @@
 #' 
 #' @export
 #' 
-#' @example 
-#' df <- sqldf('SELECT * FROM sim_av_patient') 
 #' @importFrom sqldf sqldf
 sql_test <- function(query) {
   if (!requireNamespace("sqldf", quietly = TRUE)) {

@@ -83,11 +83,9 @@ cancer_grouping <- function(df) {
 #'
 #' @return A data frame with an added column `Grouped_Ethinicity`.
 #' @export
-#' 
-#' @example 
-#' sim_av_patient <- group_ethnicity(sim_av_patient)
 
-group_ethnicity <- function(df) {
+
+group_ethnicity <- function(df) { #### Optimize
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")
   }
@@ -189,9 +187,6 @@ group_ethnicity <- function(df) {
 #' Also, a column called `date_to_death` which is the same column as `date_diff` but where the column `VITALSTATUS` is set to be equal to `D` which means death. 
 #'   
 #' @export
-#' 
-#' @example 
-#' add_survival_merged_df <- survival_days(merged_df)
 
 survival_days <- function(df) {              
   if (!is.data.frame(df)) {
