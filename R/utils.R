@@ -57,9 +57,7 @@ extended_summary <- function(df) { ######### Optimize -  add more to the columns
 #' @return folder 
 #' 
 #' @export
-#' 
-#' @example 
-#' ...
+
 
 create_dir_if_none <- function(dir) {
   if (!dir.exists(dir)) {
