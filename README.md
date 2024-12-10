@@ -20,8 +20,8 @@ simulacrumR may be installed using the following command:
 
 ``` r
 devtools::install_github("CLINDA-AAU/simulacrumR") 
-# Or including a vignette that demonstrates the bias and coverage of the estimators
-devtools::install_github("CLINDA-AAU/simulacrumR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual")) ???????
+
+devtools::install_github("CLINDA-AAU/simulacrumR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
 
 # Overview
@@ -161,7 +161,7 @@ create_workflow(
                              analysis = "
                                                                   model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20241210_0437.R
+#> Workflow script created at: workflow_20241210_0915.R
 ```
 
 This workflow automates the process, ensuring easy integration and

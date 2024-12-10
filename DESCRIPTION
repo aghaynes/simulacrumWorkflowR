@@ -28,6 +28,8 @@ Imports: pbapply,
         sqldf,
         tictoc,
         logger,
+        ODBC, 
+        DBI,
         Rdpack
 Depends: R (>= 4.3.3)
 RdMacros: Rdpack
