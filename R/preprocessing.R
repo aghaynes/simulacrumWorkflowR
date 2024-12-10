@@ -85,86 +85,35 @@ cancer_grouping <- function(df) {
 #' @export
 
 
-group_ethnicity <- function(df) { #### Optimize
+group_ethnicity <- function(df) {
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")
   }
-  ethnicity_mapping <- c(
-    "A" = "White", 
-    "B" = "White", 
-    "C" = "White", 
-    "C2" = "White", 
-    "C3" = "White",
-    "CA" = "White", 
-    "CB" = "White", 
-    "CC" = "White", 
-    "CD" = "White", 
-    "CE" = "White",
-    "CF" = "White", 
-    "CG" = "White", 
-    "CH" = "White", 
-    "CJ" = "White", 
-    "CK" = "White",
-    "CL" = "White", 
-    "CM" = "White", 
-    "CN" = "White", 
-    "CP" = "White", 
-    "CQ" = "White",
-    "CR" = "White", 
-    "CS" = "White", 
-    "CT" = "White", 
-    "CU" = "White", 
-    "CV" = "White",
-    "CW" = "White", 
-    "CX" = "White", 
-    "CY" = "White", 
-    "D" = "Mixed", 
-    "E" = "Mixed",
-    "F" = "Mixed", 
-    "G" = "Mixed", 
-    "GA" = "Mixed", 
-    "GB" = "Mixed", 
-    "GC" = "Mixed",
-    "GD" = "Mixed", 
-    "GE" = "Mixed", 
-    "GF" = "Mixed", 
-    "H" = "Asian", 
-    "J" = "Asian",
-    "K" = "Asian", 
-    "L" = "Asian", 
-    "LA" = "Asian", 
-    "LB" = "Asian", 
-    "LC" = "Asian",
-    "LD" = "Asian", 
-    "LE" = "Asian", 
-    "LF" = "Asian", 
-    "LG" = "Asian", 
-    "LH" = "Asian",
-    "LJ" = "Asian", 
-    "LK" = "Asian", 
-    "R" = "Asian", 
-    "M" = "Black", 
-    "N" = "Black", 
-    "P" = "Black",
-    "PA" = "Black", 
-    "PB" = "Black", 
-    "PC" = "Black", 
-    "PD" = "Black", 
-    "PE" = "Black",
-    "S" = "Other", 
-    "SA" = "Other", 
-    "SB" = "Other", 
-    "SC" = "Other",
-    "SD" = "Other", 
-    "SE" = "Other"
+  if (!"ETHNICITY" %in% names(df)) {
+    stop("`df` must contain a column named 'ETHNICITY'.")
+  }
+  
+  ethnicity_mapping <- list(
+    White = c("A", "B", "C", "C2", "C3", "CA", "CB", "CC", "CD", "CE", "CF", 
+              "CG", "CH", "CJ", "CK", "CL", "CM", "CN", "CP", "CQ", "CR", 
+              "CS", "CT", "CU", "CV", "CW", "CX", "CY"),
+    Mixed = c("D", "E", "F", "G", "GA", "GB", "GC", "GD", "GE", "GF"),
+    Asian = c("H", "J", "K", "L", "LA", "LB", "LC", "LD", "LE", "LF", "LG", 
+              "LH", "LJ", "LK", "R"),
+    Black = c("M", "N", "P", "PA", "PB", "PC", "PD", "PE"),
+    Other = c("S", "SA", "SB", "SC", "SD", "SE")
   )
+  
+  ethnicity_vector <- unlist(ethnicity_mapping)
+  names(ethnicity_vector) <- rep(names(ethnicity_mapping), lengths(ethnicity_mapping))
   
   df$ETHNICITY <- as.character(df$ETHNICITY)
   
-  df$Grouped_Ethinicity <- ethnicity_mapping[df$ETHNICITY]
+  df$Grouped_Ethnicity <- ethnicity_vector[df$ETHNICITY]
   
   return(df)
 }
+
 
 
 

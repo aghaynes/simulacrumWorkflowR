@@ -58,7 +58,6 @@ extended_summary <- function(df) { ######### Optimize -  add more to the columns
 #' 
 #' @export
 
-
 create_dir_if_none <- function(dir) {
   if (!dir.exists(dir)) {
     dir.create(dir, recursive = TRUE)
