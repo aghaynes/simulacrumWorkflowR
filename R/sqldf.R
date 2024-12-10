@@ -20,14 +20,6 @@
 #' 
 #' @importFrom sqldf sqldf
 sql_test <- function(query) {
-  if (!requireNamespace("sqldf", quietly = TRUE)) {
-    install.packages("sqldf")
-  }
-  if (!requireNamespace("tcltk", quietly = TRUE)) {
-    install.packages("tcltk")
-  }
-  library(sqldf)
-  library(tcltk)
   if(!is.character(query))
     stop("The function must contain a string")
   sqldf(query, stringsAsFactors = FALSE)

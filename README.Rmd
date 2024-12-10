@@ -57,7 +57,6 @@ The workflow is built around the SQLdf package where the user are able to setup 
 The latest Simulacrum data is formatted identically to the real CAS data. Once downloaded, the read_csv() function can automatically load the CSV files as data frames in R:
 
 ```{r}
-source("R/data_col2.R")
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 # Automated data loading 
 data_frames_lists <- read_csv(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
@@ -90,7 +89,7 @@ df1 <- sql_test(query)
 To accommodate differences between SQLite and Oracle queries, use the sqlite2oracle() function:
 
 ```{r}
-source("R/sqlite2oracle.R")
+
 query2 <- "select *
 from sim_av_patient
 where age > 50
@@ -113,7 +112,6 @@ simulacrumR includes functions to simplify data preprocessing:
 When data management and analysis are complete, use the workflow generator function to produce an R script ready for submission to the NHS:
 
 ```{r}
-source("R/workflow_generator.R")
 create_workflow(
                              libraries = "library(dplyr)",
                              query = "select * 
