@@ -161,7 +161,7 @@ create_workflow(
                              analysis = "
                                                                   model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20241209_0603.R
+#> Workflow script created at: workflow_20241210_0437.R
 ```
 
 This workflow automates the process, ensuring easy integration and
@@ -169,8 +169,15 @@ preparation of your Simulacrum data.
 
 ## References
 
-1.  Simulacrum …
+- Grothendieck G, (2017). Sqldf: Manipulate R Data Frames Using SQL.
+  Link: ggrothendieck/sqldf: Perform SQL  
+  Selects on R Data Frames
 
-2.  …
+- Frayling L, Jose S. (2023) Simulacrum v2 User Guide. Health Data
+  Insight. Link: Simulacrum-v2-User-Guide.pdf
 
-3.  …
+- National Disease Registration Service (NDRS). (2022). Guide to using
+  Simulacrum and Submitting code. Link: NDRS Branded Document
+
+- Nielsen L, Skelmose J, Brøndum R, Bøgsted M. (2024). Simulacrum-study.
+  Link: CLINDA-AAU/Simulacrum-study
