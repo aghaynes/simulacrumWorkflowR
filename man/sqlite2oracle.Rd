@@ -36,5 +36,4 @@ If more query translation could be beneficial, we welcome pull requests!
 \examples{
 sqlite_query <- "select * from sim_av_patient where age > 50 limit 500;"
 oracle_query <- sqlite2oracle(sqlite_query)
-print(oracle_query) 
 }
