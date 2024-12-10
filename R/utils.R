@@ -63,3 +63,17 @@ create_dir_if_none <- function(dir) {
     dir.create(dir, recursive = TRUE)
   }
 }
+
+
+#' Generate a HTML or XLSX table for regressions or dataframes
+#' 
+#' @description
+#' tbh
+#' 
+#' @param tbh tbh
+#' 
+#' @return tbh
+#' 
+#' @export
+
+#Save_results <- function(functions = NULL, file_path = NULL, )
