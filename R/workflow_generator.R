@@ -1,5 +1,3 @@
-source("R/sqlite2oracle.R")
-
 #' Create Workflow Script
 #'
 #' @description
@@ -18,6 +16,8 @@ source("R/sqlite2oracle.R")
 #' @param model_results A character string containing code to process and export model results.
 #'
 #' @return None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.
+#'
+#' @importFrom package function
 #'
 #' @export
 #'
