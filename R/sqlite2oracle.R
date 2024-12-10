@@ -23,6 +23,7 @@
 #' 
 #' @param query A string containing the SQLite query to be translated.
 #' @return A string containing the translated Oracle-compatible query.
+#' @export
 #' @examples
 #' sqlite_query <- "select * from sim_av_patient where age > 50 limit 500;"
 #' oracle_query <- sqlite2oracle(sqlite_query)
