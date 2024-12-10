@@ -26,6 +26,8 @@ Imports: pbapply,
         tibble,
         data.table,
         sqldf,
+        tictoc,
+        logger,
         Rdpack
 Depends: R (>= 4.3.3)
 RdMacros: Rdpack
