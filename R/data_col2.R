@@ -1,3 +1,7 @@
+# Make a dir = "./data/"
+# Make a function looking for sim v2.1 in downloads or desktop and place them in the project folder
+# ...
+
 #' Read and Load Multiple CSV Files
 #'
 #' @description
