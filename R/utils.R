@@ -64,6 +64,8 @@ create_dir_if_none <- function(dir) {
   }
 }
 
+# Make it to work with tab_model, tableOne, dfs, etc. 
+# add example in vignette
 
 #' Generate a HTML or XLSX table for regressions or dataframes
 #' 

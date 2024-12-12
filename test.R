@@ -3,7 +3,7 @@ library(simulacrumR)
 start <- start_time()
 
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
-data_frames_lists <- read_csv(dir) 
+data_frames_lists <- read_simulacrum(dir) 
 
 #dfs
 sim_av_patient <- data_frames_lists$sim_av_patient
