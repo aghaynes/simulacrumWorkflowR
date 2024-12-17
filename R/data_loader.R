@@ -20,6 +20,8 @@
 #' @param dir A character string specifying the directory containing the CSV files.
 #' @param selected_files A character vector of file names (without extensions) to load. If NULL, all required files are loaded. Default is NULL.
 #'
+#' @importFrom simulacrumR log_func
+#'
 #' @return A named list where each element is a data frame corresponding to a loaded CSV file. The names of the list elements are the file names without extensions.
 #'
 #' @examples
@@ -33,10 +35,8 @@
 #' @export
 #' @importFrom pbapply pblapply
 
-read_simulacrum <- function(dir, selected_files = NULL) {
-  if (!requireNamespace("pbapply", quietly = TRUE)) {
-    install.packages("pbapply")
-  }
+read_simulacrum <- function(dir = "./simulacrum_v2.1.0/Data/", selected_files = NULL) {
+  log_func(function() {
   
   required_files <- c(
     "sim_av_gene.csv",
@@ -81,6 +81,7 @@ read_simulacrum <- function(dir, selected_files = NULL) {
   names(data_list) <- tools::file_path_sans_ext(basename(files_to_read))
   message("Files successfully loaded!")
   return(data_list)
+  })
 }
 
 

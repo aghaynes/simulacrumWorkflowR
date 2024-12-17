@@ -28,13 +28,13 @@ devtools::install_github("CLINDA-AAU/simulacrumR", build = TRUE, build_opts = c(
 # Overview
 The main functions of simulacrumR is: 
 
-- Integrated SQL Environment: Leverages the SQLdf package (ref) to make the user able to write queries within R.
+- Integrated SQL Environment: Leverages the SQLdf (Grothendieck, 2017) package to enable SQL queries directly within R, eliminating the need for external database setup and ODBC connections by creating a local SQLite temporary database within the R environment.  
 
-- Query helper functions: Providing users with premade queries for joining tables, query constructor for assisting the user in building queries, SQLite to Oracle query transleter 
+- Query Helper: Offers a collection of queries custom-made for the Simulacrum, for pulling and merging certain tables. Additionally, does the sqlite2oracle function assist in translating queries to be compatible with the NHS servers. 
 
-- Time management: logging the time for completing the full workflow or to smaller parts of the script. 
+- Helper Tools: Offers a range of data preprocessing functions for cleaning, and preparing the data for analysis, ensuring data quality and consistency. Key functions include cancer type grouping, survival status, and detailed logging.  
 
-- Preprocessing: Multiple functions custom built to The Simulacrum dataset, which are considered as common operations when working with Cancer data and for the nature of the studies, like survival analysis. 
+- Workflow Generator: Generates an R script with the complete workflow. Ensuring correct layout and the ability to integrate all the necessary code to obtain a workflow suitable for submission to the NHS and execution on the CAS database.  
 
 # The process 
 The process of using this package for getting access to the data at CAS through Simulacrum is as following: 
@@ -47,19 +47,21 @@ The process of using this package for getting access to the data at CAS through 
 
 4) Utilize R to handle data preprocessing and analysis 
 
-5) save the complete workflow with the workflow generator function 
+5) Save the complete workflow with the workflow generator function 
 
 6) Send the Workflow to NHS and wait for the results
 
 ## Explanation of the workflow
 The workflow is built around the SQLdf package where the user are able to setup a invisible database in the span of seconds and fully automated. Before the database is intialised, the user is required to download the latest version of the Simulacrum (v2.1.0) data: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/ .
 
-The latest Simulacrum data is formatted identically to the real CAS data. Once downloaded, the read_csv() function can automatically load the CSV files as data frames in R:
+The latest Simulacrum data is formatted identically to the real CAS data. Once downloaded, the read_simulacrum() function can automatically load the CSV files as data frames in R:
 
 ```{r}
+library(simulacrumR)
+
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 # Automated data loading 
-data_frames_lists <- read_csv(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
+data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 ```
 
 Access individual data frames as follows:
@@ -67,7 +69,6 @@ Access individual data frames as follows:
 ```{r}
 sim_av_patient <- data_frames_lists$sim_av_patient
 sim_av_tumour <- data_frames_lists$sim_av_tumour
-
 ```
 
 Once data frames are loaded, you can start writing queries. It's recommended to keep queries simple and handle data management in R. Use the table_query_list function to access premade query templates. For example, to merge tables:
@@ -81,7 +82,6 @@ INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;"
 Execute queries with the sql_test() function:
 
 ```{r}
-source("R/sqldf.R")
 df1 <- sql_test(query)
 ```
 ## SQLite to Oracle Query Translation
@@ -125,14 +125,13 @@ create_workflow(
                               # Additional preprocessing
                               #df2 <- survival_days(df1)
                               ",
-                             analysis = "
-                                                                  model = glm(x ~ x1 + x2 + x3, data=data)",
+                             analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
 ```
 
 This workflow automates the process, ensuring easy integration and preparation of your Simulacrum data.
 
-
+In the event of an error on NHS servers while executing the analysis pipeline, the `log_func` function and the base R `sink` will generate a comprehensive log to facilitate seamless debugging.
 
 ## References
 

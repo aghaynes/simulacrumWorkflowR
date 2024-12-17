@@ -28,19 +28,25 @@ devtools::install_github("CLINDA-AAU/simulacrumR", build = TRUE, build_opts = c(
 
 The main functions of simulacrumR is:
 
-- Integrated SQL Environment: Leverages the SQLdf package (ref) to make
-  the user able to write queries within R.
+- Integrated SQL Environment: Leverages the SQLdf (Grothendieck, 2017)
+  package to enable SQL queries directly within R, eliminating the need
+  for external database setup and ODBC connections by creating a local
+  SQLite temporary database within the R environment.
 
-- Query helper functions: Providing users with premade queries for
-  joining tables, query constructor for assisting the user in building
-  queries, SQLite to Oracle query transleter
+- Query Helper: Offers a collection of queries custom-made for the
+  Simulacrum, for pulling and merging certain tables. Additionally, does
+  the sqlite2oracle function assist in translating queries to be
+  compatible with the NHS servers.
 
-- Time management: logging the time for completing the full workflow or
-  to smaller parts of the script.
+- Helper Tools: Offers a range of data preprocessing functions for
+  cleaning, and preparing the data for analysis, ensuring data quality
+  and consistency. Key functions include cancer type grouping, survival
+  status, and detailed logging.
 
-- Preprocessing: Multiple functions custom built to The Simulacrum
-  dataset, which are considered as common operations when working with
-  Cancer data and for the nature of the studies, like survival analysis.
+- Workflow Generator: Generates an R script with the complete workflow.
+  Ensuring correct layout and the ability to integrate all the necessary
+  code to obtain a workflow suitable for submission to the NHS and
+  execution on the CAS database.
 
 # The process
 
@@ -57,7 +63,7 @@ through Simulacrum is as following:
 
 4)  Utilize R to handle data preprocessing and analysis
 
-5)  save the complete workflow with the workflow generator function
+5)  Save the complete workflow with the workflow generator function
 
 6)  Send the Workflow to NHS and wait for the results
 
@@ -71,17 +77,19 @@ download the latest version of the Simulacrum (v2.1.0) data:
 .
 
 The latest Simulacrum data is formatted identically to the real CAS
-data. Once downloaded, the read_csv() function can automatically load
-the CSV files as data frames in R:
+data. Once downloaded, the read_simulacrum() function can automatically
+load the CSV files as data frames in R:
 
 ``` r
-source("R/data_col2.R")
+library(simulacrumR)
+
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 # Automated data loading 
-data_frames_lists <- read_csv(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
+data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 #> Reading: sim_av_patient
 #> Reading: sim_av_tumour
 #> Files successfully loaded!
+#> 34 sec elapsed
 ```
 
 Access individual data frames as follows:
@@ -105,11 +113,7 @@ INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;"
 Execute queries with the sql_test() function:
 
 ``` r
-source("R/sqldf.R")
 df1 <- sql_test(query)
-#> Indlæser krævet pakke: gsubfn
-#> Indlæser krævet pakke: proto
-#> Indlæser krævet pakke: RSQLite
 ```
 
 ## SQLite to Oracle Query Translation
@@ -118,13 +122,14 @@ To accommodate differences between SQLite and Oracle queries, use the
 sqlite2oracle() function:
 
 ``` r
-source("R/sqlite2oracle.R")
+
 query2 <- "select *
 from sim_av_patient
 where age > 50
 limit 500;"
 
 sqlite2oracle(query2)
+#> 0 sec elapsed
 #> [1] "SELECT *\nFROM sim_av_patient\nWHERE age > 50\nAND ROWNUM <= 500;"
 ```
 
@@ -144,7 +149,6 @@ generator function to produce an R script ready for submission to the
 NHS:
 
 ``` r
-source("R/workflow_generator.R")
 create_workflow(
                              libraries = "library(dplyr)",
                              query = "select * 
@@ -158,14 +162,21 @@ create_workflow(
                               # Additional preprocessing
                               #df2 <- survival_days(df1)
                               ",
-                             analysis = "
-                                                                  model = glm(x ~ x1 + x2 + x3, data=data)",
+                             analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20241210_0915.R
+#> 0 sec elapsed
+#> 0 sec elapsed
+#> Workflow script created at: workflow_20241217_1512.R
+#> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
+#> NULL
 ```
 
 This workflow automates the process, ensuring easy integration and
 preparation of your Simulacrum data.
+
+In the event of an error on NHS servers while executing the analysis
+pipeline, the `log_func` function and the base R `sink` will generate a
+comprehensive log to facilitate seamless debugging.
 
 ## References
 

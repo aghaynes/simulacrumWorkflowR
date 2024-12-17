@@ -2,7 +2,7 @@
 % Please edit documentation in R/sqlite2oracle.R
 \name{sqlite2oracle}
 \alias{sqlite2oracle}
-\title{Translate SQLite Queries to Oracle-Compatible Queries}
+\title{Translate SQLite to Oracle-Compatible Queries}
 \usage{
 sqlite2oracle(query)
 }

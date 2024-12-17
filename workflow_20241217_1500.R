@@ -1,6 +1,6 @@
 
 start <- Sys.time()
-
+log_func(function() {
 # Libraries ----------------------------------------------------------
 library(knitr)
 library(DBI)
@@ -36,4 +36,5 @@ html_table_model(model)
 
 end <- Sys.time()
 compute_time_limit(start, end)
-
+  })
+  

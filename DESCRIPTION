@@ -4,7 +4,9 @@ Title: An R package for Streamlined Access and Analysis of the Simulacrum Cancer
 Version: 0.1.0
 Authors@R: c(
     person("Jakob", "Skelmose", email = "j.skelmose@rn.dk", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-9192-1814")),
-    person("...", "...", role = "aut", comment = c(ORCID = "0000-0001-5537-6767")),
+    person("Rasmus", "Rask", email = "rasmus.rask@rn.dk", role = c("aut"), comment = c(ORCID = "0009-0000-7249-2196")),
+    person("Jennifer ", "Bartell", email = "bartell@sund.ku.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2750-9678")),
+    person("Lars ", "Nielsen", email = "l.boerty@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0002-3715-8528")),
     person("Martin", "Boegsted", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
     person("Center for Clinical Data Science - Aalborg"))
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
@@ -18,15 +20,12 @@ Suggests:
     parallel
 VignetteBuilder: knitr 
 Imports: pbapply,
-        sjPlot,
-        sjmisc,
         knitr,
-        sjlabelled,
-        lubridate,
-        tibble,
         data.table,
         sqldf,
         tictoc,
+        lubridate,
+        dplyr,
         logger,
         odbc, 
         DBI,

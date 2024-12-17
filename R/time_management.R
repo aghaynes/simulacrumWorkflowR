@@ -1,5 +1,3 @@
-# Look into why the time is not working properly
-
 #' Compute and Check Execution Time Against a Limit
 #'
 #' @description
@@ -25,6 +23,9 @@
 #'
 #' @return A character string containing the total execution time and the result (accepted or rejected).
 #'         If the time exceeds 3 hours, a warning is issued.
+#' 
+#' @importFrom lubridate duration
+#' 
 #' @export
 #'
 #' @examples
@@ -33,16 +34,7 @@
 #' end <- end_time()
 #' compute_time_limit(start, end)
 
-
-compute_time_limit <- function(start_time, end_time, save_to_file = FALSE, file_path = "execution_time_log.txt") {
-  if (!requireNamespace("lubridate", quietly = TRUE)) {
-    install.packages("lubridate")
-  }
-  library(lubridate)
-    if (!inherits(start_time, "POSIXct") || !inherits(end_time, "POSIXct")) {
-    stop("start_time and end_time must be of class POSIXct.")
-  }
-  
+compute_time_limit <- function(start_time, end_time, save_to_file = TRUE, file_path = "execution_time_log.txt") {
   execution_time <- as.duration(end_time - start_time)
   
   if (execution_time > hours(3)) {
@@ -93,7 +85,6 @@ start_time <- function() {
 #'
 #' @examples end_time() 
 
-end_time <- function() {
+stop_time <- function() {
   return(Sys.time())
 }
-

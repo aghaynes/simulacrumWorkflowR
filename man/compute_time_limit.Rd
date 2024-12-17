@@ -7,7 +7,7 @@
 compute_time_limit(
   start_time,
   end_time,
-  save_to_file = FALSE,
+  save_to_file = TRUE,
   file_path = "execution_time_log.txt"
 )
 }

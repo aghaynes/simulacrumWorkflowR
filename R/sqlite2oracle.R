@@ -1,4 +1,4 @@
-#' Translate SQLite Queries to Oracle-Compatible Queries
+#' Translate SQLite to Oracle-Compatible Queries
 #'
 #' @description
 #' This functions take a string as input, which is a SQLite query and transform it into a Oracle compatible query string
@@ -22,33 +22,40 @@
 #' If more query translation could be beneficial, we welcome pull requests! 
 #' 
 #' @param query A string containing the SQLite query to be translated.
+#' 
+#' @importFrom simulacrumR log_func
+#' 
 #' @return A string containing the translated Oracle-compatible query.
+#' 
 #' @export
+#' 
 #' @examples
 #' sqlite_query <- "select * from sim_av_patient where age > 50 limit 500;"
 #' oracle_query <- sqlite2oracle(sqlite_query)
 
 sqlite2oracle <- function(query) {
-  if (!is.character(query)) stop("Please make sure input query is a string")
-  
-  # Convert main SQL keywords to uppercase
-  keywords <- c("SELECT", "FROM", "WHERE", "INNER", "OUTER", "JOIN", "RIGHT", "LEFT", "ORDER BY", "GROUP BY", "HAVING")
-  for (keyword in keywords) {
-   query <- gsub(keyword, toupper(keyword), query, ignore.case = TRUE)
-  }
-  
-  chech_for_where <- grepl("\\bWHERE\\b", query, ignore.case = TRUE)
-  
-  if (chech_for_where) {
-    query <- gsub("LIMIT\\s+(\\d+)", "AND ROWNUM <= \\1", query, ignore.case = TRUE)
-  } else {
-    query <- gsub("LIMIT\\s+(\\d+)", "WHERE ROWNUM <= \\1", query, ignore.case = TRUE)
-  }
-  
-  query <- trimws(query)
-  if (!grepl(";$", query)) {
-    query <- paste0(query, ";")
-  }
-  
-  return(query)
+  log_func(function() {
+    if (!is.character(query)) stop("Please make sure input query is a string")
+    
+    # Convert main SQL keywords to uppercase
+    keywords <- c("SELECT", "FROM", "WHERE", "INNER", "OUTER", "JOIN", "RIGHT", "LEFT", "ORDER BY", "GROUP BY", "HAVING")
+    for (keyword in keywords) {
+      query <- gsub(keyword, toupper(keyword), query, ignore.case = TRUE)
+    }
+    
+    chech_for_where <- grepl("\\bWHERE\\b", query, ignore.case = TRUE)
+    
+    if (chech_for_where) {
+      query <- gsub("LIMIT\\s+(\\d+)", "AND ROWNUM <= \\1", query, ignore.case = TRUE)
+    } else {
+      query <- gsub("LIMIT\\s+(\\d+)", "WHERE ROWNUM <= \\1", query, ignore.case = TRUE)
+    }
+    
+    query <- trimws(query)
+    if (!grepl(";$", query)) {
+      query <- paste0(query, ";")
+    }
+    
+    return(query)
+  })
 }
