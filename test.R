@@ -6,11 +6,8 @@ sink(report, type = 'message')
 
 start <- start_time()
 
-print('æg')
 
-stop <- stop_time()
-compute_time_limit(start, stop)
-compute_time_limit
+
 
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
@@ -67,8 +64,9 @@ create_workflow(
   analysis = "                model = glm(x ~ x1 + x2 + x3, data=data)",
   model_results = "html_table_model(model)")
 
-# End timer and calculate execution time 
-
+stop <- stop_time()
+compute_time_limit(start, stop)
+compute_time_limit
 
 sink()
 sink()
