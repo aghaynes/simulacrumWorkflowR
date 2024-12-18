@@ -20,8 +20,6 @@ simulacrumR may be installed using the following command:
 
 ``` r
 devtools::install_github("CLINDA-AAU/simulacrumR") 
-
-devtools::install_github("CLINDA-AAU/simulacrumR", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
 
 # Overview
@@ -89,7 +87,6 @@ data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "
 #> Reading: sim_av_patient
 #> Reading: sim_av_tumour
 #> Files successfully loaded!
-#> 34 sec elapsed
 ```
 
 Access individual data frames as follows:
@@ -129,7 +126,6 @@ where age > 50
 limit 500;"
 
 sqlite2oracle(query2)
-#> 0 sec elapsed
 #> [1] "SELECT *\nFROM sim_av_patient\nWHERE age > 50\nAND ROWNUM <= 500;"
 ```
 
@@ -164,19 +160,16 @@ create_workflow(
                               ",
                              analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> 0 sec elapsed
-#> 0 sec elapsed
-#> Workflow script created at: workflow_20241217_1512.R
+#> Workflow script created at: workflow_20241218_1037.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
-#> NULL
 ```
 
 This workflow automates the process, ensuring easy integration and
 preparation of your Simulacrum data.
 
 In the event of an error on NHS servers while executing the analysis
-pipeline, the `log_func` function and the base R `sink` will generate a
-comprehensive log to facilitate seamless debugging.
+pipeline, the `time_management` function and the base R `sink` will
+generate a comprehensive log to facilitate seamless debugging.
 
 ## References
 
