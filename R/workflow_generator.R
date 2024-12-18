@@ -18,7 +18,6 @@
 #' @return None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.
 #'
 #' @importFrom simulacrumR sqlite2oracle 
-#' @importFrom simulacrumR log_func
 #'
 #' @export
 #'
@@ -43,7 +42,7 @@ create_workflow <- function(
     model_results = ""
 ) 
   {
-  log_func(function() {
+
   clean_chunk <- function(chunk) {
     if (is.null(chunk) || chunk == "") 
       return("")
@@ -117,5 +116,4 @@ sink()
   writeLines(workflow_content, file_path)
   message("Workflow script created at: ", file_path)
   message("The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.")  
-  })
   }

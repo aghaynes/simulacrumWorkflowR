@@ -6,9 +6,6 @@ sink(report, type = 'message')
 
 start <- start_time()
 
-
-
-
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 

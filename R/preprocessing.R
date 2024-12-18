@@ -38,7 +38,6 @@ table_sample <- function(df, n = 1000) {
 #'
 #' @param df A data frame containing a column `SITE_ICD10_O2_3CHAR` with ICD-10 codes.
 #'
-#' @importFrom simulacrumR log_func
 #' @importFrom dplyr select
 #'
 #' @return A data frame with an added column `diag_group` for the cancer category.
@@ -48,7 +47,6 @@ table_sample <- function(df, n = 1000) {
 #' sim_av_tumour <- cancer_grouping(sim_av_tumour)
 
 cancer_grouping <- function(df) {
-  log_func(function() {
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")
   }
@@ -77,7 +75,6 @@ cancer_grouping <- function(df) {
   df <- dplyr::select(df, -ip)  
   
   return(df)
-  })
 }
 
 #' Group Ethnicity Categories
@@ -91,14 +88,12 @@ cancer_grouping <- function(df) {
 #' 
 #' @param df A data frame containing an `ETHNICITY` column with ethnicity codes.
 #'
-#' @importFrom simulacrumR log_func
 #'
 #' @return A data frame with an added column `Grouped_Ethinicity`.
 #' @export
 
 
 group_ethnicity <- function(df) {
-  log_func(function() {
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")
   }
@@ -125,7 +120,6 @@ group_ethnicity <- function(df) {
   df$Grouped_Ethnicity <- ethnicity_vector[df$ETHNICITY]
   
   return(df)
-  })
 }
 
 
@@ -145,7 +139,6 @@ group_ethnicity <- function(df) {
 #' @param df A data frame containing the necessary columns: 'DIAGNOSISDATEBEST', 
 #' 'VITALSTATUSDATE', and 'VITALSTATUS'.
 #' 
-#' @importFrom simulacrumR log_func
 #'
 #' @return The input data frame with an additional column `date_diff`, 
 #' representing the number of days between `DIAGNOSISDATEBEST` and `VITALSTATUSDATE`.

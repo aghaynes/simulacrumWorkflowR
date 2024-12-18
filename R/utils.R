@@ -6,7 +6,6 @@
 #' @param df1 a dataframe to be merged with df2. df1 is default set to `sim_av_patient`.
 #' @param df2 a dataframe to be merged with df1. df2 is default set to `sim_av_tumour`.
 #' 
-#' @importFrom simulacrumR log_func
 #' 
 #' @return a merged dataframe
 #' 
@@ -14,11 +13,9 @@
 
 
 av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_tumour){
-  log_func(function() {
   message("Merging `sim_av_patient` and `sim_av_tumour`...")
   merged_df <- merge(df1, df2, by = "PATIENTID", all = TRUE) 
   return(merged_df)
-  })
 }
 
 
@@ -30,7 +27,6 @@ av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_tumour){
 #'
 #' @param df A data frame to summarize.
 #' 
-#' @importFrom simulacrumR log_func
 #'
 #' @return A data frame summarizing:
 #' - Column names
@@ -60,7 +56,6 @@ extended_summary <- function(df) { ######### Optimize -  add more to the columns
 #' 
 #' @param dir the direction to the folder 
 #' 
-#' @importFrom simulacrumR log_func
 #' 
 #' @return folder 
 #' 

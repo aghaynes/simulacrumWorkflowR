@@ -23,7 +23,6 @@
 #' 
 #' @param query A string containing the SQLite query to be translated.
 #' 
-#' @importFrom simulacrumR log_func
 #' 
 #' @return A string containing the translated Oracle-compatible query.
 #' 
@@ -34,7 +33,6 @@
 #' oracle_query <- sqlite2oracle(sqlite_query)
 
 sqlite2oracle <- function(query) {
-  log_func(function() {
     if (!is.character(query)) stop("Please make sure input query is a string")
     
     # Convert main SQL keywords to uppercase
@@ -57,5 +55,4 @@ sqlite2oracle <- function(query) {
     }
     
     return(query)
-  })
 }
