@@ -19,7 +19,9 @@ generation, and query testing.
 simulacrumR may be installed using the following command:
 
 ``` r
-devtools::install_github("CLINDA-AAU/simulacrumR") 
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("CLINDA-AAU/simulacrumR",
+dependencies = TRUE) 
 ```
 
 # Overview
@@ -160,7 +162,7 @@ create_workflow(
                               ",
                              analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20241218_1037.R
+#> Workflow script created at: workflow_20241219_2207.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
 ```
 
