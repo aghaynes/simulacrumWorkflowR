@@ -51,36 +51,3 @@ extended_summary <- function(df) { ######### Optimize -  add more to the columns
   return(df_summary)
 }
 
-
-#' Creating a Dir if there is None
-#' 
-#' @param dir the direction to the folder 
-#' 
-#' 
-#' @return folder 
-#' 
-#' @export
-
-create_dir_if_none <- function(dir) {
-  if (!dir.exists(dir)) {
-    dir.create(dir, recursive = TRUE)
-  }
-}
-
-# Make it to work with tab_model, tableOne, dfs, etc. 
-# add example in vignette
-
-#' Generate a HTML or XLSX table for regressions or dataframes
-#' 
-#' @description
-#' tbh
-#' 
-#' @param tbh tbh
-#' 
-#' @return tbh
-#' 
-#' @export
-
-#Save_results <- function(functions = NULL, file_path = NULL, )
-
-
