@@ -1,0 +1,591 @@
+  |                                                  | 0 % ~calculating  Reading: sim_av_patient
+  |+++++++++++++++++++++++++                         | 50% ~01m 53s      Reading: sim_av_tumour
+  |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed=02m 30s
+Files successfully loaded!
+                                                      Columns Missing_Values Unique_Values     Class
+TUMOURID                                             TUMOURID              0       1995570   integer
+GENDER                                                 GENDER              0             3   integer
+PATIENTID                                           PATIENTID              0       1871605   integer
+DIAGNOSISDATEBEST                           DIAGNOSISDATEBEST              0          1461 character
+SITE_ICD10_O2_3CHAR                       SITE_ICD10_O2_3CHAR              0           109 character
+SITE_ICD10_O2                                   SITE_ICD10_O2              0           537 character
+SITE_ICD10R4_O2_3CHAR_FROM2013 SITE_ICD10R4_O2_3CHAR_FROM2013              0           110 character
+SITE_ICD10R4_O2_FROM2013             SITE_ICD10R4_O2_FROM2013              0           569 character
+SITE_ICDO3REV2011                           SITE_ICDO3REV2011              0           325 character
+SITE_ICDO3REV2011_3CHAR               SITE_ICDO3REV2011_3CHAR              0            71 character
+MORPH_ICD10_O2                                 MORPH_ICD10_O2              0           446   integer
+MORPH_ICDO3REV2011                         MORPH_ICDO3REV2011             32           615   integer
+BEHAVIOUR_ICD10_O2                         BEHAVIOUR_ICD10_O2              0             7   integer
+BEHAVIOUR_ICDO3REV2011                 BEHAVIOUR_ICDO3REV2011              0             7   integer
+T_BEST                                                 T_BEST              0            39 character
+N_BEST                                                 N_BEST              0            18 character
+M_BEST                                                 M_BEST              0             9 character
+STAGE_BEST                                         STAGE_BEST              0            98 character
+GRADE                                                   GRADE              0             9 character
+AGE                                                       AGE              0           108   integer
+CREG_CODE                                           CREG_CODE              0             8 character
+STAGE_BEST_SYSTEM                           STAGE_BEST_SYSTEM              0            17 character
+LATERALITY                                         LATERALITY              0             5 character
+SCREENINGSTATUSFULL_CODE             SCREENINGSTATUSFULL_CODE              0            34 character
+ER_STATUS                                           ER_STATUS              0             7 character
+PR_STATUS                                           PR_STATUS              0             7 character
+HER2_STATUS                                       HER2_STATUS              0             6 character
+QUINTILE_2019                                   QUINTILE_2019              0             5 character
+DATE_FIRST_SURGERY                         DATE_FIRST_SURGERY              0          2448 character
+CANCERCAREPLANINTENT                     CANCERCAREPLANINTENT              0             5 character
+PERFORMANCESTATUS                           PERFORMANCESTATUS        1203232             7   integer
+CHRL_TOT_27_03                                 CHRL_TOT_27_03           4331            17   integer
+COMORBIDITIES_27_03                       COMORBIDITIES_27_03              0          2802 character
+GLEASON_PRIMARY                               GLEASON_PRIMARY        1848168             6   integer
+GLEASON_SECONDARY                           GLEASON_SECONDARY        1848163             8   integer
+GLEASON_TERTIARY                             GLEASON_TERTIARY        1989615            12   integer
+GLEASON_COMBINED                             GLEASON_COMBINED        1848176             9   integer
+Merging `sim_av_patient` and `sim_av_tumour`...
+[1] "SELECT *\nFROM sim_av_patient\nWHERE ROWNUM <= 500;"
+   PATIENTID             GENDER       ETHNICITY         DEATHCAUSECODE_1A  DEATHCAUSECODE_1B  DEATHCAUSECODE_1C  DEATHCAUSECODE_2  
+ Min.   : 10000001   Min.   :1.000   Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.: 10465343   1st Qu.:1.000   Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median : 40048934   Median :2.000   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   : 51457222   Mean   :1.503                                                                                                 
+ 3rd Qu.: 70071249   3rd Qu.:2.000                                                                                                 
+ Max.   :250002543   Max.   :9.000                                                                                                 
+                                                                                                                                   
+ DEATHCAUSECODE_UNDERLYING DEATHLOCATIONCODE  VITALSTATUS        VITALSTATUSDATE      LINKNUMBER           TUMOURID            GENDER     
+ Length:1995570            Length:1995570     Length:1995570     Length:1995570     Min.   :100000001   Min.   :10000000   Min.   :1.000  
+ Class :character          Class :character   Class :character   Class :character   1st Qu.:100467821   1st Qu.:10499972   1st Qu.:1.000  
+ Mode  :character          Mode  :character   Mode  :character   Mode  :character   Median :100936074   Median :10999970   Median :2.000  
+                                                                                    Mean   :100935897   Mean   :10999981   Mean   :1.503  
+                                                                                    3rd Qu.:101404013   3rd Qu.:11499986   3rd Qu.:2.000  
+                                                                                    Max.   :101871605   Max.   :11999999   Max.   :9.000  
+                                                                                                                                          
+   PATIENTID         DIAGNOSISDATEBEST  SITE_ICD10_O2_3CHAR SITE_ICD10_O2      SITE_ICD10R4_O2_3CHAR_FROM2013 SITE_ICD10R4_O2_FROM2013 SITE_ICDO3REV2011 
+ Min.   : 10000001   Length:1995570     Length:1995570      Length:1995570     Length:1995570                 Length:1995570           Length:1995570    
+ 1st Qu.: 10465343   Class :character   Class :character    Class :character   Class :character               Class :character         Class :character  
+ Median : 40048934   Mode  :character   Mode  :character    Mode  :character   Mode  :character               Mode  :character         Mode  :character  
+ Mean   : 51457222                                                                                                                                       
+ 3rd Qu.: 70071249                                                                                                                                       
+ Max.   :250002543                                                                                                                                       
+                                                                                                                                                         
+ SITE_ICDO3REV2011_3CHAR MORPH_ICD10_O2 MORPH_ICDO3REV2011 BEHAVIOUR_ICD10_O2 BEHAVIOUR_ICDO3REV2011    T_BEST             N_BEST         
+ Length:1995570          Min.   :8000   Min.   :8000       Min.   :0.000      Min.   :0.000          Length:1995570     Length:1995570    
+ Class :character        1st Qu.:8090   1st Qu.:8090       1st Qu.:3.000      1st Qu.:3.000          Class :character   Class :character  
+ Mode  :character        Median :8140   Median :8140       Median :3.000      Median :3.000          Mode  :character   Mode  :character  
+                         Mean   :8347   Mean   :8348       Mean   :2.856      Mean   :2.879                                               
+                         3rd Qu.:8500   3rd Qu.:8500       3rd Qu.:3.000      3rd Qu.:3.000                                               
+                         Max.   :9989   Max.   :9992       Max.   :9.000      Max.   :9.000                                               
+                                        NA's   :32                                                                                        
+    M_BEST           STAGE_BEST           GRADE                AGE          CREG_CODE         STAGE_BEST_SYSTEM   LATERALITY       
+ Length:1995570     Length:1995570     Length:1995570     Min.   :  0.00   Length:1995570     Length:1995570     Length:1995570    
+ Class :character   Class :character   Class :character   1st Qu.: 58.00   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Median : 70.00   Mode  :character   Mode  :character   Mode  :character  
+                                                          Mean   : 67.05                                                           
+                                                          3rd Qu.: 79.00                                                           
+                                                          Max.   :107.00                                                           
+                                                                                                                                   
+ SCREENINGSTATUSFULL_CODE  ER_STATUS          PR_STATUS         HER2_STATUS        QUINTILE_2019      DATE_FIRST_SURGERY CANCERCAREPLANINTENT
+ Length:1995570           Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570      
+ Class :character         Class :character   Class :character   Class :character   Class :character   Class :character   Class :character    
+ Mode  :character         Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character    
+                                                                                                                                             
+                                                                                                                                             
+                                                                                                                                             
+                                                                                                                                             
+ PERFORMANCESTATUS CHRL_TOT_27_03   COMORBIDITIES_27_03 GLEASON_PRIMARY   GLEASON_SECONDARY GLEASON_TERTIARY  GLEASON_COMBINED 
+ Min.   :0.0       Min.   : 0.000   Length:1995570      Min.   :1.0       Min.   :1.0       Min.   : 0        Min.   : 2.0     
+ 1st Qu.:0.0       1st Qu.: 0.000   Class :character    1st Qu.:3.0       1st Qu.:3.0       1st Qu.: 5        1st Qu.: 7.0     
+ Median :1.0       Median : 0.000   Mode  :character    Median :3.0       Median :4.0       Median : 7        Median : 7.0     
+ Mean   :1.8       Mean   : 0.446                       Mean   :3.5       Mean   :3.8       Mean   : 6        Mean   : 7.2     
+ 3rd Qu.:2.0       3rd Qu.: 0.000                       3rd Qu.:4.0       3rd Qu.:4.0       3rd Qu.: 8        3rd Qu.: 8.0     
+ Max.   :9.0       Max.   :15.000                       Max.   :5.0       Max.   :7.0       Max.   :10        Max.   :10.0     
+ NA's   :1203232   NA's   :4331                         NA's   :1848168   NA's   :1848163   NA's   :1989615   NA's   :1848176  
+   PATIENTID             GENDER       ETHNICITY         DEATHCAUSECODE_1A  DEATHCAUSECODE_1B  DEATHCAUSECODE_1C  DEATHCAUSECODE_2  
+ Min.   : 10000001   Min.   :1.000   Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.: 10465343   1st Qu.:1.000   Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median : 40048934   Median :2.000   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   : 51457222   Mean   :1.503                                                                                                 
+ 3rd Qu.: 70071249   3rd Qu.:2.000                                                                                                 
+ Max.   :250002543   Max.   :9.000                                                                                                 
+                                                                                                                                   
+ DEATHCAUSECODE_UNDERLYING DEATHLOCATIONCODE  VITALSTATUS        VITALSTATUSDATE      LINKNUMBER           TUMOURID       
+ Length:1995570            Length:1995570     Length:1995570     Length:1995570     Min.   :100000001   Min.   :10000000  
+ Class :character          Class :character   Class :character   Class :character   1st Qu.:100467821   1st Qu.:10499972  
+ Mode  :character          Mode  :character   Mode  :character   Mode  :character   Median :100936074   Median :10999970  
+                                                                                    Mean   :100935897   Mean   :10999981  
+                                                                                    3rd Qu.:101404013   3rd Qu.:11499986  
+                                                                                    Max.   :101871605   Max.   :11999999  
+                                                                                                                          
+     GENDER        PATIENTID         DIAGNOSISDATEBEST  SITE_ICD10_O2_3CHAR SITE_ICD10_O2      SITE_ICD10R4_O2_3CHAR_FROM2013
+ Min.   :1.000   Min.   : 10000001   Length:1995570     Length:1995570      Length:1995570     Length:1995570                
+ 1st Qu.:1.000   1st Qu.: 10465343   Class :character   Class :character    Class :character   Class :character              
+ Median :2.000   Median : 40048934   Mode  :character   Mode  :character    Mode  :character   Mode  :character              
+ Mean   :1.503   Mean   : 51457222                                                                                           
+ 3rd Qu.:2.000   3rd Qu.: 70071249                                                                                           
+ Max.   :9.000   Max.   :250002543                                                                                           
+                                                                                                                             
+ SITE_ICD10R4_O2_FROM2013 SITE_ICDO3REV2011  SITE_ICDO3REV2011_3CHAR MORPH_ICD10_O2 MORPH_ICDO3REV2011 BEHAVIOUR_ICD10_O2
+ Length:1995570           Length:1995570     Length:1995570          Min.   :8000   Min.   :8000       Min.   :0.000     
+ Class :character         Class :character   Class :character        1st Qu.:8090   1st Qu.:8090       1st Qu.:3.000     
+ Mode  :character         Mode  :character   Mode  :character        Median :8140   Median :8140       Median :3.000     
+                                                                     Mean   :8347   Mean   :8348       Mean   :2.856     
+                                                                     3rd Qu.:8500   3rd Qu.:8500       3rd Qu.:3.000     
+                                                                     Max.   :9989   Max.   :9992       Max.   :9.000     
+                                                                                    NA's   :32                           
+ BEHAVIOUR_ICDO3REV2011    T_BEST             N_BEST             M_BEST           STAGE_BEST           GRADE          
+ Min.   :0.000          Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.:3.000          Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median :3.000          Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :2.879                                                                                                        
+ 3rd Qu.:3.000                                                                                                        
+ Max.   :9.000                                                                                                        
+                                                                                                                      
+      AGE          CREG_CODE         STAGE_BEST_SYSTEM   LATERALITY        SCREENINGSTATUSFULL_CODE  ER_STATUS        
+ Min.   :  0.00   Length:1995570     Length:1995570     Length:1995570     Length:1995570           Length:1995570    
+ 1st Qu.: 58.00   Class :character   Class :character   Class :character   Class :character         Class :character  
+ Median : 70.00   Mode  :character   Mode  :character   Mode  :character   Mode  :character         Mode  :character  
+ Mean   : 67.05                                                                                                       
+ 3rd Qu.: 79.00                                                                                                       
+ Max.   :107.00                                                                                                       
+                                                                                                                      
+  PR_STATUS         HER2_STATUS        QUINTILE_2019      DATE_FIRST_SURGERY CANCERCAREPLANINTENT PERFORMANCESTATUS CHRL_TOT_27_03  
+ Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570       Min.   :0.0       Min.   : 0.000  
+ Class :character   Class :character   Class :character   Class :character   Class :character     1st Qu.:0.0       1st Qu.: 0.000  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character     Median :1.0       Median : 0.000  
+                                                                                                  Mean   :1.8       Mean   : 0.446  
+                                                                                                  3rd Qu.:2.0       3rd Qu.: 0.000  
+                                                                                                  Max.   :9.0       Max.   :15.000  
+                                                                                                  NA's   :1203232   NA's   :4331    
+ COMORBIDITIES_27_03 GLEASON_PRIMARY   GLEASON_SECONDARY GLEASON_TERTIARY  GLEASON_COMBINED 
+ Length:1995570      Min.   :1.0       Min.   :1.0       Min.   : 0        Min.   : 2.0     
+ Class :character    1st Qu.:3.0       1st Qu.:3.0       1st Qu.: 5        1st Qu.: 7.0     
+ Mode  :character    Median :3.0       Median :4.0       Median : 7        Median : 7.0     
+                     Mean   :3.5       Mean   :3.8       Mean   : 6        Mean   : 7.2     
+                     3rd Qu.:4.0       3rd Qu.:4.0       3rd Qu.: 8        3rd Qu.: 8.0     
+                     Max.   :5.0       Max.   :7.0       Max.   :10        Max.   :10.0     
+                     NA's   :1848168   NA's   :1848163   NA's   :1989615   NA's   :1848176  
+   PATIENTID GENDER ETHNICITY DEATHCAUSECODE_1A DEATHCAUSECODE_1B DEATHCAUSECODE_1C DEATHCAUSECODE_2 DEATHCAUSECODE_UNDERLYING
+1   10000001      1         A                                                                                                 
+2   10000002      1                                                                                                           
+3   10000003      2         A                                                                                                 
+4   10000004      1         A                                                                                                 
+5   10000005      1         A                                                                                                 
+6   10000005      1         A                                                                                                 
+7   10000006      1         A                                                                                                 
+8   10000007      1         A               F03                                            G309,J459                       F03
+9   10000008      1         A                                                                                                 
+10  10000009      2         A                                                                                                 
+11  10000010      1         A                                                                                                 
+12  10000011      1         A                                                                                                 
+13  10000011      1         A                                                                                                 
+14  10000012      2         A                                                                                                 
+15  10000013      2         A                                                                                                 
+16  10000014      1                                                                                                           
+17  10000015      2         A                                                                                                 
+18  10000016      2         A                                                                                                 
+19  10000017      1         A                                                                                                 
+20  10000018      2         A                                                                                                 
+   DEATHLOCATIONCODE VITALSTATUS VITALSTATUSDATE LINKNUMBER TUMOURID GENDER PATIENTID DIAGNOSISDATEBEST SITE_ICD10_O2_3CHAR
+1                              A      2022-07-05  101610884 10399610      1  10000001        2017-03-31                 C44
+2                              A      2022-07-05  101343783 10694862      1  10000002        2016-01-14                 C44
+3                              A      2022-07-05  101560124 11938715      2  10000003        2018-12-10                 C44
+4                              A      2022-07-05  101833580 11869010      1  10000004        2018-04-05                 C44
+5                              A      2022-07-05  100957799 10870155      1  10000005        2018-10-22                 C44
+6                              A      2022-07-05  100957799 11037077      1  10000005        2018-04-23                 C44
+7                              A      2022-07-05  101247088 10160169      1  10000006        2016-10-13                 C44
+8                  X           D      2020-06-05  101226750 11847214      1  10000007        2017-05-25                 C44
+9                              A      2022-07-05  101201400 11640280      1  10000008        2016-08-17                 C44
+10                             A      2022-07-05  100840481 10820696      2  10000009        2019-04-03                 C44
+11                             A      2022-07-05  100390314 10806573      1  10000010        2017-10-10                 C44
+12                             A      2022-07-05  101332859 10514720      1  10000011        2018-07-26                 C44
+13                             A      2022-07-05  101332859 10643849      1  10000011        2017-12-06                 C44
+14                             A      2022-07-05  100257646 11429968      2  10000012        2019-10-18                 C44
+15                             A      2022-07-05  100716600 10206659      2  10000013        2018-09-18                 C44
+16                             A      2022-07-05  100706739 11405965      1  10000014        2017-03-24                 C44
+17                             A      2022-07-05  100123610 11984399      2  10000015        2019-09-24                 C44
+18                             A      2022-07-05  100594160 10682165      2  10000016        2016-09-16                 C44
+19                             A      2022-07-05  101261412 10891376      1  10000017        2018-06-28                 C44
+20                             A      2022-07-05  100278991 10288999      2  10000018        2017-11-10                 C44
+   SITE_ICD10_O2 SITE_ICD10R4_O2_3CHAR_FROM2013 SITE_ICD10R4_O2_FROM2013 SITE_ICDO3REV2011 SITE_ICDO3REV2011_3CHAR MORPH_ICD10_O2
+1           C444                            C44                     C444              C444                     C44           8070
+2           C449                            C44                     C449              C449                     C44           8090
+3           C442                            C44                     C442              C442                     C44           8070
+4           C449                            C44                     C449              C449                     C44           8090
+5           C443                            C44                     C443              C443                     C44           8070
+6           C446                            C44                     C446              C446                     C44           8070
+7           C449                            C44                     C449              C449                     C44           8090
+8           C443                            C44                     C443              C443                     C44           8090
+9           C449                            C44                     C449              C449                     C44           8090
+10          C449                            C44                     C449              C449                     C44           8090
+11          C449                            C44                     C449              C449                     C44           8090
+12          C449                            C44                     C449              C449                     C44           8090
+13          C444                            C44                     C444              C444                     C44           8090
+14          C445                            C44                     C445              C445                     C44           8070
+15          C443                            C44                     C443              C443                     C44           8070
+16          C447                            C44                     C447              C447                     C44           8070
+17          C449                            C44                     C449              C449                     C44           8090
+18          C449                            C44                     C449              C449                     C44           8090
+19          C447                            C44                     C447              C447                     C44           8070
+20          C442                            C44                     C442              C442                     C44           8070
+   MORPH_ICDO3REV2011 BEHAVIOUR_ICD10_O2 BEHAVIOUR_ICDO3REV2011 T_BEST N_BEST M_BEST STAGE_BEST GRADE AGE CREG_CODE STAGE_BEST_SYSTEM
+1                8070                  3                      3                               ?    G3  84     L1201                  
+2                8090                  3                      3                               ?    GX  67     L1701                  
+3                8070                  3                      3                               ?    G2  79     L0801            UICC 8
+4                8090                  3                      3                               ?    GX  76     L0801                  
+5                8070                  3                      3                               ?    GX  69     L1001                  
+6                8070                  3                      3      1                        ?    G2  49     L1001            UICC 8
+7                8090                  3                      3                               ?    GX  71     L0801                  
+8                8090                  3                      3                               ?    GX  93     L0901                  
+9                8090                  3                      3                               ?    GX  85     L1701                  
+10               8090                  3                      3                               ?    GX  70     L1001                  
+11               8090                  3                      3                               ?    GX  37     L0801                  
+12               8090                  3                      3                               ?    GX  70     L1001                  
+13               8090                  3                      3                               ?    GX  49     L0801                  
+14               8070                  3                      3                               ?    G2  55     L0401                  
+15               8070                  3                      3     1a      0      0          1    G2  77     L1001                  
+16               8070                  3                      3                               ?    G1  68     L0801            AJCC 7
+17               8090                  3                      3                               ?    GX  97     L1001                  
+18               8090                  3                      3                               ?    GX  60     L1701                  
+19               8070                  3                      3                               ?    G1  79     L1001                  
+20               8070                  3                      3                               ?    G2  65     L0301                  
+   LATERALITY SCREENINGSTATUSFULL_CODE ER_STATUS PR_STATUS HER2_STATUS      QUINTILE_2019 DATE_FIRST_SURGERY CANCERCAREPLANINTENT
+1           9                                                                           4                                        
+2           9                                                          5 - least deprived         2016-01-14                     
+3           R                                                                           3         2018-12-10                     
+4           9                                                                           4                                       C
+5           9                                                                           3         2018-10-22                     
+6           L                                                                           3         2018-04-23                     
+7           9                                                                           3                                        
+8           R                                                          5 - least deprived         2017-05-25                     
+9           9                                                          5 - least deprived         2016-08-17                     
+10          9                                                                           4         2019-08-04                     
+11          9                                                                           4                                        
+12          9                                                          5 - least deprived         2018-07-26                     
+13          R                                                                           3                                        
+14          9                                                          5 - least deprived         2019-10-18                    C
+15          R                                                                           2         2018-09-18                     
+16          R                                                          5 - least deprived         2017-03-24                     
+17          L                                                                           3         2019-09-24                     
+18          9                                                           1 - most deprived                                        
+19          R                                                                           4         2018-06-28                    C
+20          R                                                                           4         2017-11-10                     
+   PERFORMANCESTATUS CHRL_TOT_27_03 COMORBIDITIES_27_03 GLEASON_PRIMARY GLEASON_SECONDARY GLEASON_TERTIARY GLEASON_COMBINED
+1                  3              0                                  NA                NA               NA               NA
+2                 NA              0                                  NA                NA               NA               NA
+3                 NA              0                                  NA                NA               NA               NA
+4                  0              1                  06              NA                NA               NA               NA
+5                  0              0                                  NA                NA               NA               NA
+6                  0              0                                  NA                NA               NA               NA
+7                 NA              2               06,09              NA                NA               NA               NA
+8                 NA              1                  05              NA                NA               NA               NA
+9                 NA              0                                  NA                NA               NA               NA
+10                NA              0                                  NA                NA               NA               NA
+11                 0              0                                  NA                NA               NA               NA
+12                NA              0                                  NA                NA               NA               NA
+13                NA              0                                  NA                NA               NA               NA
+14                NA              0                                  NA                NA               NA               NA
+15                NA              0                                  NA                NA               NA               NA
+16                 1              0                                  NA                NA               NA               NA
+17                NA              0                                  NA                NA               NA               NA
+18                NA              0                                  NA                NA               NA               NA
+19                 0              0                                  NA                NA               NA               NA
+20                NA              1                  06              NA                NA               NA               NA
+ [ reached 'max' / getOption("max.print") -- omitted 1995550 rows ]
+   PATIENTID GENDER.x ETHNICITY DEATHCAUSECODE_1A DEATHCAUSECODE_1B DEATHCAUSECODE_1C DEATHCAUSECODE_2 DEATHCAUSECODE_UNDERLYING
+1   10000001        1         A                                                                                                 
+2   10000002        1                                                                                                           
+3   10000003        2         A                                                                                                 
+4   10000004        1         A                                                                                                 
+5   10000005        1         A                                                                                                 
+6   10000005        1         A                                                                                                 
+7   10000006        1         A                                                                                                 
+8   10000007        1         A               F03                                            G309,J459                       F03
+9   10000008        1         A                                                                                                 
+10  10000009        2         A                                                                                                 
+11  10000010        1         A                                                                                                 
+12  10000011        1         A                                                                                                 
+13  10000011        1         A                                                                                                 
+14  10000012        2         A                                                                                                 
+15  10000013        2         A                                                                                                 
+16  10000014        1                                                                                                           
+17  10000015        2         A                                                                                                 
+18  10000016        2         A                                                                                                 
+19  10000017        1         A                                                                                                 
+20  10000018        2         A                                                                                                 
+   DEATHLOCATIONCODE VITALSTATUS VITALSTATUSDATE LINKNUMBER TUMOURID GENDER.y DIAGNOSISDATEBEST SITE_ICD10_O2_3CHAR SITE_ICD10_O2
+1                              A      2022-07-05  101610884 10399610        1        2017-03-31                 C44          C444
+2                              A      2022-07-05  101343783 10694862        1        2016-01-14                 C44          C449
+3                              A      2022-07-05  101560124 11938715        2        2018-12-10                 C44          C442
+4                              A      2022-07-05  101833580 11869010        1        2018-04-05                 C44          C449
+5                              A      2022-07-05  100957799 11037077        1        2018-04-23                 C44          C446
+6                              A      2022-07-05  100957799 10870155        1        2018-10-22                 C44          C443
+7                              A      2022-07-05  101247088 10160169        1        2016-10-13                 C44          C449
+8                  X           D      2020-06-05  101226750 11847214        1        2017-05-25                 C44          C443
+9                              A      2022-07-05  101201400 11640280        1        2016-08-17                 C44          C449
+10                             A      2022-07-05  100840481 10820696        2        2019-04-03                 C44          C449
+11                             A      2022-07-05  100390314 10806573        1        2017-10-10                 C44          C449
+12                             A      2022-07-05  101332859 10643849        1        2017-12-06                 C44          C444
+13                             A      2022-07-05  101332859 10514720        1        2018-07-26                 C44          C449
+14                             A      2022-07-05  100257646 11429968        2        2019-10-18                 C44          C445
+15                             A      2022-07-05  100716600 10206659        2        2018-09-18                 C44          C443
+16                             A      2022-07-05  100706739 11405965        1        2017-03-24                 C44          C447
+17                             A      2022-07-05  100123610 11984399        2        2019-09-24                 C44          C449
+18                             A      2022-07-05  100594160 10682165        2        2016-09-16                 C44          C449
+19                             A      2022-07-05  101261412 10891376        1        2018-06-28                 C44          C447
+20                             A      2022-07-05  100278991 10288999        2        2017-11-10                 C44          C442
+   SITE_ICD10R4_O2_3CHAR_FROM2013 SITE_ICD10R4_O2_FROM2013 SITE_ICDO3REV2011 SITE_ICDO3REV2011_3CHAR MORPH_ICD10_O2
+1                             C44                     C444              C444                     C44           8070
+2                             C44                     C449              C449                     C44           8090
+3                             C44                     C442              C442                     C44           8070
+4                             C44                     C449              C449                     C44           8090
+5                             C44                     C446              C446                     C44           8070
+6                             C44                     C443              C443                     C44           8070
+7                             C44                     C449              C449                     C44           8090
+8                             C44                     C443              C443                     C44           8090
+9                             C44                     C449              C449                     C44           8090
+10                            C44                     C449              C449                     C44           8090
+11                            C44                     C449              C449                     C44           8090
+12                            C44                     C444              C444                     C44           8090
+13                            C44                     C449              C449                     C44           8090
+14                            C44                     C445              C445                     C44           8070
+15                            C44                     C443              C443                     C44           8070
+16                            C44                     C447              C447                     C44           8070
+17                            C44                     C449              C449                     C44           8090
+18                            C44                     C449              C449                     C44           8090
+19                            C44                     C447              C447                     C44           8070
+20                            C44                     C442              C442                     C44           8070
+   MORPH_ICDO3REV2011 BEHAVIOUR_ICD10_O2 BEHAVIOUR_ICDO3REV2011 T_BEST N_BEST M_BEST STAGE_BEST GRADE AGE CREG_CODE STAGE_BEST_SYSTEM
+1                8070                  3                      3                               ?    G3  84     L1201                  
+2                8090                  3                      3                               ?    GX  67     L1701                  
+3                8070                  3                      3                               ?    G2  79     L0801            UICC 8
+4                8090                  3                      3                               ?    GX  76     L0801                  
+5                8070                  3                      3      1                        ?    G2  49     L1001            UICC 8
+6                8070                  3                      3                               ?    GX  69     L1001                  
+7                8090                  3                      3                               ?    GX  71     L0801                  
+8                8090                  3                      3                               ?    GX  93     L0901                  
+9                8090                  3                      3                               ?    GX  85     L1701                  
+10               8090                  3                      3                               ?    GX  70     L1001                  
+11               8090                  3                      3                               ?    GX  37     L0801                  
+12               8090                  3                      3                               ?    GX  49     L0801                  
+13               8090                  3                      3                               ?    GX  70     L1001                  
+14               8070                  3                      3                               ?    G2  55     L0401                  
+15               8070                  3                      3     1a      0      0          1    G2  77     L1001                  
+16               8070                  3                      3                               ?    G1  68     L0801            AJCC 7
+17               8090                  3                      3                               ?    GX  97     L1001                  
+18               8090                  3                      3                               ?    GX  60     L1701                  
+19               8070                  3                      3                               ?    G1  79     L1001                  
+20               8070                  3                      3                               ?    G2  65     L0301                  
+   LATERALITY SCREENINGSTATUSFULL_CODE ER_STATUS PR_STATUS HER2_STATUS      QUINTILE_2019 DATE_FIRST_SURGERY CANCERCAREPLANINTENT
+1           9                                                                           4                                        
+2           9                                                          5 - least deprived         2016-01-14                     
+3           R                                                                           3         2018-12-10                     
+4           9                                                                           4                                       C
+5           L                                                                           3         2018-04-23                     
+6           9                                                                           3         2018-10-22                     
+7           9                                                                           3                                        
+8           R                                                          5 - least deprived         2017-05-25                     
+9           9                                                          5 - least deprived         2016-08-17                     
+10          9                                                                           4         2019-08-04                     
+11          9                                                                           4                                        
+12          R                                                                           3                                        
+13          9                                                          5 - least deprived         2018-07-26                     
+14          9                                                          5 - least deprived         2019-10-18                    C
+15          R                                                                           2         2018-09-18                     
+16          R                                                          5 - least deprived         2017-03-24                     
+17          L                                                                           3         2019-09-24                     
+18          9                                                           1 - most deprived                                        
+19          R                                                                           4         2018-06-28                    C
+20          R                                                                           4         2017-11-10                     
+   PERFORMANCESTATUS CHRL_TOT_27_03 COMORBIDITIES_27_03 GLEASON_PRIMARY GLEASON_SECONDARY GLEASON_TERTIARY GLEASON_COMBINED
+1                  3              0                                  NA                NA               NA               NA
+2                 NA              0                                  NA                NA               NA               NA
+3                 NA              0                                  NA                NA               NA               NA
+4                  0              1                  06              NA                NA               NA               NA
+5                  0              0                                  NA                NA               NA               NA
+6                  0              0                                  NA                NA               NA               NA
+7                 NA              2               06,09              NA                NA               NA               NA
+8                 NA              1                  05              NA                NA               NA               NA
+9                 NA              0                                  NA                NA               NA               NA
+10                NA              0                                  NA                NA               NA               NA
+11                 0              0                                  NA                NA               NA               NA
+12                NA              0                                  NA                NA               NA               NA
+13                NA              0                                  NA                NA               NA               NA
+14                NA              0                                  NA                NA               NA               NA
+15                NA              0                                  NA                NA               NA               NA
+16                 1              0                                  NA                NA               NA               NA
+17                NA              0                                  NA                NA               NA               NA
+18                NA              0                                  NA                NA               NA               NA
+19                 0              0                                  NA                NA               NA               NA
+20                NA              1                  06              NA                NA               NA               NA
+ [ reached 'max' / getOption("max.print") -- omitted 1995550 rows ]
+   PATIENTID             GENDER       ETHNICITY         DEATHCAUSECODE_1A  DEATHCAUSECODE_1B  DEATHCAUSECODE_1C  DEATHCAUSECODE_2  
+ Min.   : 10000001   Min.   :1.000   Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.: 10465343   1st Qu.:1.000   Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median : 40048934   Median :2.000   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   : 51457222   Mean   :1.503                                                                                                 
+ 3rd Qu.: 70071249   3rd Qu.:2.000                                                                                                 
+ Max.   :250002543   Max.   :9.000                                                                                                 
+                                                                                                                                   
+ DEATHCAUSECODE_UNDERLYING DEATHLOCATIONCODE  VITALSTATUS        VITALSTATUSDATE      LINKNUMBER           TUMOURID       
+ Length:1995570            Length:1995570     Length:1995570     Length:1995570     Min.   :100000001   Min.   :10000000  
+ Class :character          Class :character   Class :character   Class :character   1st Qu.:100467821   1st Qu.:10499972  
+ Mode  :character          Mode  :character   Mode  :character   Mode  :character   Median :100936074   Median :10999970  
+                                                                                    Mean   :100935897   Mean   :10999981  
+                                                                                    3rd Qu.:101404013   3rd Qu.:11499986  
+                                                                                    Max.   :101871605   Max.   :11999999  
+                                                                                                                          
+     GENDER        PATIENTID         DIAGNOSISDATEBEST  SITE_ICD10_O2_3CHAR SITE_ICD10_O2      SITE_ICD10R4_O2_3CHAR_FROM2013
+ Min.   :1.000   Min.   : 10000001   Length:1995570     Length:1995570      Length:1995570     Length:1995570                
+ 1st Qu.:1.000   1st Qu.: 10465343   Class :character   Class :character    Class :character   Class :character              
+ Median :2.000   Median : 40048934   Mode  :character   Mode  :character    Mode  :character   Mode  :character              
+ Mean   :1.503   Mean   : 51457222                                                                                           
+ 3rd Qu.:2.000   3rd Qu.: 70071249                                                                                           
+ Max.   :9.000   Max.   :250002543                                                                                           
+                                                                                                                             
+ SITE_ICD10R4_O2_FROM2013 SITE_ICDO3REV2011  SITE_ICDO3REV2011_3CHAR MORPH_ICD10_O2 MORPH_ICDO3REV2011 BEHAVIOUR_ICD10_O2
+ Length:1995570           Length:1995570     Length:1995570          Min.   :8000   Min.   :8000       Min.   :0.000     
+ Class :character         Class :character   Class :character        1st Qu.:8090   1st Qu.:8090       1st Qu.:3.000     
+ Mode  :character         Mode  :character   Mode  :character        Median :8140   Median :8140       Median :3.000     
+                                                                     Mean   :8347   Mean   :8348       Mean   :2.856     
+                                                                     3rd Qu.:8500   3rd Qu.:8500       3rd Qu.:3.000     
+                                                                     Max.   :9989   Max.   :9992       Max.   :9.000     
+                                                                                    NA's   :32                           
+ BEHAVIOUR_ICDO3REV2011    T_BEST             N_BEST             M_BEST           STAGE_BEST           GRADE          
+ Min.   :0.000          Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.:3.000          Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median :3.000          Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :2.879                                                                                                        
+ 3rd Qu.:3.000                                                                                                        
+ Max.   :9.000                                                                                                        
+                                                                                                                      
+      AGE          CREG_CODE         STAGE_BEST_SYSTEM   LATERALITY        SCREENINGSTATUSFULL_CODE  ER_STATUS        
+ Min.   :  0.00   Length:1995570     Length:1995570     Length:1995570     Length:1995570           Length:1995570    
+ 1st Qu.: 58.00   Class :character   Class :character   Class :character   Class :character         Class :character  
+ Median : 70.00   Mode  :character   Mode  :character   Mode  :character   Mode  :character         Mode  :character  
+ Mean   : 67.05                                                                                                       
+ 3rd Qu.: 79.00                                                                                                       
+ Max.   :107.00                                                                                                       
+                                                                                                                      
+  PR_STATUS         HER2_STATUS        QUINTILE_2019      DATE_FIRST_SURGERY CANCERCAREPLANINTENT PERFORMANCESTATUS CHRL_TOT_27_03  
+ Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570       Min.   :0.0       Min.   : 0.000  
+ Class :character   Class :character   Class :character   Class :character   Class :character     1st Qu.:0.0       1st Qu.: 0.000  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character     Median :1.0       Median : 0.000  
+                                                                                                  Mean   :1.8       Mean   : 0.446  
+                                                                                                  3rd Qu.:2.0       3rd Qu.: 0.000  
+                                                                                                  Max.   :9.0       Max.   :15.000  
+                                                                                                  NA's   :1203232   NA's   :4331    
+ COMORBIDITIES_27_03 GLEASON_PRIMARY   GLEASON_SECONDARY GLEASON_TERTIARY  GLEASON_COMBINED 
+ Length:1995570      Min.   :1.0       Min.   :1.0       Min.   : 0        Min.   : 2.0     
+ Class :character    1st Qu.:3.0       1st Qu.:3.0       1st Qu.: 5        1st Qu.: 7.0     
+ Mode  :character    Median :3.0       Median :4.0       Median : 7        Median : 7.0     
+                     Mean   :3.5       Mean   :3.8       Mean   : 6        Mean   : 7.2     
+                     3rd Qu.:4.0       3rd Qu.:4.0       3rd Qu.: 8        3rd Qu.: 8.0     
+                     Max.   :5.0       Max.   :7.0       Max.   :10        Max.   :10.0     
+                     NA's   :1848168   NA's   :1848163   NA's   :1989615   NA's   :1848176  
+  |                                                  | 0 % ~calculating  Reading: sim_av_patient
+  |+++++++++++++++++++++++++                         | 50% ~13s          Reading: sim_av_tumour
+  |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed=44s  
+Files successfully loaded!
+                                                      Columns Missing_Values Unique_Values     Class
+TUMOURID                                             TUMOURID              0       1995570   integer
+GENDER                                                 GENDER              0             3   integer
+PATIENTID                                           PATIENTID              0       1871605   integer
+DIAGNOSISDATEBEST                           DIAGNOSISDATEBEST              0          1461 character
+SITE_ICD10_O2_3CHAR                       SITE_ICD10_O2_3CHAR              0           109 character
+SITE_ICD10_O2                                   SITE_ICD10_O2              0           537 character
+SITE_ICD10R4_O2_3CHAR_FROM2013 SITE_ICD10R4_O2_3CHAR_FROM2013              0           110 character
+SITE_ICD10R4_O2_FROM2013             SITE_ICD10R4_O2_FROM2013              0           569 character
+SITE_ICDO3REV2011                           SITE_ICDO3REV2011              0           325 character
+SITE_ICDO3REV2011_3CHAR               SITE_ICDO3REV2011_3CHAR              0            71 character
+MORPH_ICD10_O2                                 MORPH_ICD10_O2              0           446   integer
+MORPH_ICDO3REV2011                         MORPH_ICDO3REV2011             32           615   integer
+BEHAVIOUR_ICD10_O2                         BEHAVIOUR_ICD10_O2              0             7   integer
+BEHAVIOUR_ICDO3REV2011                 BEHAVIOUR_ICDO3REV2011              0             7   integer
+T_BEST                                                 T_BEST              0            39 character
+N_BEST                                                 N_BEST              0            18 character
+M_BEST                                                 M_BEST              0             9 character
+STAGE_BEST                                         STAGE_BEST              0            98 character
+GRADE                                                   GRADE              0             9 character
+AGE                                                       AGE              0           108   integer
+CREG_CODE                                           CREG_CODE              0             8 character
+STAGE_BEST_SYSTEM                           STAGE_BEST_SYSTEM              0            17 character
+LATERALITY                                         LATERALITY              0             5 character
+SCREENINGSTATUSFULL_CODE             SCREENINGSTATUSFULL_CODE              0            34 character
+ER_STATUS                                           ER_STATUS              0             7 character
+PR_STATUS                                           PR_STATUS              0             7 character
+HER2_STATUS                                       HER2_STATUS              0             6 character
+QUINTILE_2019                                   QUINTILE_2019              0             5 character
+DATE_FIRST_SURGERY                         DATE_FIRST_SURGERY              0          2448 character
+CANCERCAREPLANINTENT                     CANCERCAREPLANINTENT              0             5 character
+PERFORMANCESTATUS                           PERFORMANCESTATUS        1203232             7   integer
+CHRL_TOT_27_03                                 CHRL_TOT_27_03           4331            17   integer
+COMORBIDITIES_27_03                       COMORBIDITIES_27_03              0          2802 character
+GLEASON_PRIMARY                               GLEASON_PRIMARY        1848168             6   integer
+GLEASON_SECONDARY                           GLEASON_SECONDARY        1848163             8   integer
+GLEASON_TERTIARY                             GLEASON_TERTIARY        1989615            12   integer
+GLEASON_COMBINED                             GLEASON_COMBINED        1848176             9   integer
+Merging `sim_av_patient` and `sim_av_tumour`...
+[1] "SELECT *\nFROM sim_av_patient\nWHERE ROWNUM <= 500;"
+   PATIENTID             GENDER       ETHNICITY         DEATHCAUSECODE_1A  DEATHCAUSECODE_1B  DEATHCAUSECODE_1C  DEATHCAUSECODE_2  
+ Min.   : 10000001   Min.   :1.000   Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.: 10465343   1st Qu.:1.000   Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median : 40048934   Median :2.000   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   : 51457222   Mean   :1.503                                                                                                 
+ 3rd Qu.: 70071249   3rd Qu.:2.000                                                                                                 
+ Max.   :250002543   Max.   :9.000                                                                                                 
+                                                                                                                                   
+ DEATHCAUSECODE_UNDERLYING DEATHLOCATIONCODE  VITALSTATUS        VITALSTATUSDATE      LINKNUMBER           TUMOURID       
+ Length:1995570            Length:1995570     Length:1995570     Length:1995570     Min.   :100000001   Min.   :10000000  
+ Class :character          Class :character   Class :character   Class :character   1st Qu.:100467821   1st Qu.:10499972  
+ Mode  :character          Mode  :character   Mode  :character   Mode  :character   Median :100936074   Median :10999970  
+                                                                                    Mean   :100935897   Mean   :10999981  
+                                                                                    3rd Qu.:101404013   3rd Qu.:11499986  
+                                                                                    Max.   :101871605   Max.   :11999999  
+                                                                                                                          
+     GENDER        PATIENTID         DIAGNOSISDATEBEST  SITE_ICD10_O2_3CHAR SITE_ICD10_O2      SITE_ICD10R4_O2_3CHAR_FROM2013
+ Min.   :1.000   Min.   : 10000001   Length:1995570     Length:1995570      Length:1995570     Length:1995570                
+ 1st Qu.:1.000   1st Qu.: 10465343   Class :character   Class :character    Class :character   Class :character              
+ Median :2.000   Median : 40048934   Mode  :character   Mode  :character    Mode  :character   Mode  :character              
+ Mean   :1.503   Mean   : 51457222                                                                                           
+ 3rd Qu.:2.000   3rd Qu.: 70071249                                                                                           
+ Max.   :9.000   Max.   :250002543                                                                                           
+                                                                                                                             
+ SITE_ICD10R4_O2_FROM2013 SITE_ICDO3REV2011  SITE_ICDO3REV2011_3CHAR MORPH_ICD10_O2 MORPH_ICDO3REV2011 BEHAVIOUR_ICD10_O2
+ Length:1995570           Length:1995570     Length:1995570          Min.   :8000   Min.   :8000       Min.   :0.000     
+ Class :character         Class :character   Class :character        1st Qu.:8090   1st Qu.:8090       1st Qu.:3.000     
+ Mode  :character         Mode  :character   Mode  :character        Median :8140   Median :8140       Median :3.000     
+                                                                     Mean   :8347   Mean   :8348       Mean   :2.856     
+                                                                     3rd Qu.:8500   3rd Qu.:8500       3rd Qu.:3.000     
+                                                                     Max.   :9989   Max.   :9992       Max.   :9.000     
+                                                                                    NA's   :32                           
+ BEHAVIOUR_ICDO3REV2011    T_BEST             N_BEST             M_BEST           STAGE_BEST           GRADE          
+ Min.   :0.000          Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570    
+ 1st Qu.:3.000          Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median :3.000          Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :2.879                                                                                                        
+ 3rd Qu.:3.000                                                                                                        
+ Max.   :9.000                                                                                                        
+                                                                                                                      
+      AGE          CREG_CODE         STAGE_BEST_SYSTEM   LATERALITY        SCREENINGSTATUSFULL_CODE  ER_STATUS        
+ Min.   :  0.00   Length:1995570     Length:1995570     Length:1995570     Length:1995570           Length:1995570    
+ 1st Qu.: 58.00   Class :character   Class :character   Class :character   Class :character         Class :character  
+ Median : 70.00   Mode  :character   Mode  :character   Mode  :character   Mode  :character         Mode  :character  
+ Mean   : 67.05                                                                                                       
+ 3rd Qu.: 79.00                                                                                                       
+ Max.   :107.00                                                                                                       
+                                                                                                                      
+  PR_STATUS         HER2_STATUS        QUINTILE_2019      DATE_FIRST_SURGERY CANCERCAREPLANINTENT PERFORMANCESTATUS CHRL_TOT_27_03  
+ Length:1995570     Length:1995570     Length:1995570     Length:1995570     Length:1995570       Min.   :0.0       Min.   : 0.000  
+ Class :character   Class :character   Class :character   Class :character   Class :character     1st Qu.:0.0       1st Qu.: 0.000  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character     Median :1.0       Median : 0.000  
+                                                                                                  Mean   :1.8       Mean   : 0.446  
+                                                                                                  3rd Qu.:2.0       3rd Qu.: 0.000  
+                                                                                                  Max.   :9.0       Max.   :15.000  
+                                                                                                  NA's   :1203232   NA's   :4331    
+ COMORBIDITIES_27_03 GLEASON_PRIMARY   GLEASON_SECONDARY GLEASON_TERTIARY  GLEASON_COMBINED 
+ Length:1995570      Min.   :1.0       Min.   :1.0       Min.   : 0        Min.   : 2.0     
+ Class :character    1st Qu.:3.0       1st Qu.:3.0       1st Qu.: 5        1st Qu.: 7.0     
+ Mode  :character    Median :3.0       Median :4.0       Median : 7        Median : 7.0     
+                     Mean   :3.5       Mean   :3.8       Mean   : 6        Mean   : 7.2     
+                     3rd Qu.:4.0       3rd Qu.:4.0       3rd Qu.: 8        3rd Qu.: 8.0     
+                     Max.   :5.0       Max.   :7.0       Max.   :10        Max.   :10.0     
+                     NA's   :1848168   NA's   :1848163   NA's   :1989615   NA's   :1848176  
+  |                                                  | 0 % ~calculating    |+++++++++++++++++++++++++                         | 50% ~20s            |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed=51s  

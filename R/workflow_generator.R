@@ -14,6 +14,7 @@
 #' @param data_management A character string with data preprocessing and management steps.
 #' @param analysis A character string with data analysis steps.
 #' @param model_results A character string containing code to process and export model results.
+#' @param logging A boolen value where the user can decide if there should be any logging in the complete workflow file.
 #'
 #' @return None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.
 #'
@@ -39,7 +40,8 @@ create_workflow <- function(
     query = "",
     data_management = "",
     analysis = "",
-    model_results = ""
+    model_results = "",
+    logging = TRUE
 ) 
   {
 
@@ -62,13 +64,30 @@ create_workflow <- function(
     query <- sqlite2oracle(query)
   }
   
-  workflow_template <- "
+  if (logging == TRUE) {
+    logging_top = "
 # logging ----------------------------------------------------------
 start <- start_time()
 report <- file('console_log_test.txt', open = 'wt')
 sink(report ,type = 'output')
-sink(report, type = 'message')
-
+sink(report, type = 'message')" } 
+  else {
+    logging_top <- ""
+  }
+  
+  if (logging == TRUE) {
+    logging_bottom = "
+stop <- stop_time()
+compute_time_limit(start, stop)
+sink()
+sink()" } 
+  else {
+    logging_bottom <- ""
+  }
+  
+  workflow_template <- "
+# Complete Workflow for NHS  
+  {LOGGING_TOP}
 
 # Libraries ----------------------------------------------------------
 library(knitr)
@@ -97,14 +116,12 @@ data <- dbGetQuery(my_oracle, query1)
 # Model Results ----------------------------------------------------------
 {MODEL_RESULTS}
 
-stop <- stop_time()
-compute_time_limit(start, stop)
-
-sink()
-sink()
+{LOGGING_BOTTOM}
   "
   
   workflow_content <- workflow_template
+  workflow_content <- gsub("\\{LOGGING_TOP\\}", logging_top, workflow_content)
+  workflow_content <- gsub("\\{LOGGING_BOTTOM\\}", logging_bottom, workflow_content)
   workflow_content <- gsub("\\{LIBRARIES\\}", libraries, workflow_content)
   workflow_content <- gsub("\\{QUERY\\}", query, workflow_content)
   workflow_content <- gsub("\\{DATA_MANAGEMENT\\}", data_management, workflow_content)

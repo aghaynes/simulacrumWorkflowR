@@ -1,41 +1,101 @@
-library(simulacrumR)
-start <- start_time()
+---
+title: "Example: Running the whole workflow"
+author: "Jakob Skelmose, Rasmus Rask, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example Running the whole workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simulacrumR)
+```
+
+
+```{r}
 dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
+```
+
 
 #dfs
+```{r}
 sim_av_patient <- data_frames_lists$sim_av_patient
 sim_av_tumour <- data_frames_lists$sim_av_tumour
+```
 
 #Preprocessing
+```{r}
 df <- cancer_grouping(sim_av_tumour)
 df <- group_ethnicity(sim_av_patient)
 extended_summary(sim_av_tumour)
+```
 
-# Run query on SQLite database
+# Run query on SQLite database9
+```{r}
 df1 <- sql_test("SELECT *
 FROM sim_av_patient
 INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;")
+```
 
 # built-in merge for the survival_days(). The merge is similar to the df1 above. 
+```{r}
 merged_df <- av_patient_tumour_merge(sim_av_patient, sim_av_tumour)
+```
 
 # Additional preprocessing
+```{r}
 df2 <- survival_days(merged_df)
 
+df21 <- df2
+```
+
+```{r}
+df21 <- df2
+```
+
+```{r}
 query2 <- "select *
 from sim_av_patient
 limit 500;"
+```
+
 
 # demonstration of the sql query translator 
+```{r}
 print(sqlite2oracle(query2))
+```
 
-summary(df1)
+```{r}
+extended_summary(df2)
+
+```
+
+
 
 # example of model of the synthetic data
-model <- glm(Y ~ x1 + x2 + x3, data=df1)
+```{r}
+df21$VITALSTATUS <- ifelse(df21$VITALSTATUS == "A", 1,
+                              ifelse(df21$VITALSTATUS == "D", 0, NA))
 
+
+unique(df21$VITALSTATUS)
+
+
+library(survival)
+model <- coxph(Surv(diff_date, VITALSTATUS) ~ AGE + factor(GENDER.x) + factor(PERFORMANCESTATUS), data=df21)
+summary(model)
+```
+
+```{r}
 create_workflow(
   libraries = "              library(dplyr)",
   query = "                  select * from sim_av_patient
@@ -49,6 +109,7 @@ create_workflow(
                               ",
   analysis = "                model = glm(x ~ x1 + x2 + x3, data=data)",
   model_results = "html_table_model(model)")
+```
 
 stop <- stop_time()
 compute_time_limit(start, stop)
