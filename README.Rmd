@@ -68,15 +68,15 @@ data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "
 Access individual data frames as follows:
 
 ```{r}
-sim_av_patient <- data_frames_lists$sim_av_patient
-sim_av_tumour <- data_frames_lists$sim_av_tumour
+SIM_AV_PATIENT <- data_frames_lists$sim_av_patient
+SIM_AV_TUMOUR <- data_frames_lists$sim_av_tumour
 ```
 
 Once data frames are loaded, you can start writing queries. It's recommended to keep queries simple and handle data management in R. Use the table_query_list function to access premade query templates. For example, to merge tables:
 ```{r}
 query <- "SELECT *
-FROM sim_av_patient
-INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;"
+FROM SIM_AV_PATIENT
+INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;"
 ```
 
 
@@ -92,7 +92,7 @@ To accommodate differences between SQLite and Oracle queries, use the sqlite2ora
 ```{r}
 
 query2 <- "select *
-from sim_av_patient
+from SIM_AV_PATIENT
 where age > 50
 limit 500;"
 
@@ -116,7 +116,7 @@ When data management and analysis are complete, use the workflow generator funct
 create_workflow(
                              libraries = "library(dplyr)",
                              query = "select * 
-                             from sim_av_patient
+                             from SIM_AV_PATIENT
                              where age > 50
                              limit 500;",
                              data_management = "

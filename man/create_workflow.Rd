@@ -10,7 +10,8 @@ create_workflow(
   query = "",
   data_management = "",
   analysis = "",
-  model_results = ""
+  model_results = "",
+  logging = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ create_workflow(
 \item{analysis}{A character string with data analysis steps.}
 
 \item{model_results}{A character string containing code to process and export model results.}
+
+\item{logging}{A boolen value where the user can decide if there should be logging in the complete workflow file. The logging consist of the `sink` function and the `compute_time_limit` function.}
 }
 \value{
 None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.

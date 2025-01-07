@@ -14,7 +14,7 @@
 #' @param data_management A character string with data preprocessing and management steps.
 #' @param analysis A character string with data analysis steps.
 #' @param model_results A character string containing code to process and export model results.
-#' @param logging A boolen value where the user can decide if there should be any logging in the complete workflow file.
+#' @param logging A boolen value where the user can decide if there should be logging in the complete workflow file. The logging consist of the `sink` function and the `compute_time_limit` function. 
 #'
 #' @return None. The function writes the generated workflow script to the specified file path and outputs a message with the location of the created script.
 #'

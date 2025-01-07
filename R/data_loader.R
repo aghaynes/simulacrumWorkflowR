@@ -81,6 +81,7 @@ read_simulacrum <- function(dir = "./simulacrum_v2.1.0/Data/", selected_files = 
   
   names(data_list) <- tools::file_path_sans_ext(basename(files_to_read))
   message("Files successfully loaded!")
+  warning("Please refer to tables by their original names, capitalized as presented (e.g., SIM_AV_PATIENT)")
   return(data_list)
 
 }
