@@ -24,6 +24,10 @@ In  this example notebook, we want to demonstrate the cababilities of the sql_te
 For this demonstration, we use a guide for sql queries published by Health Data Insigt: "Simulacrum Guidance: Getting started with extracting data", which can be found on: https://simulacrum.healthdatainsight.org.uk/wp/wp-content/uploads/2018/11/SQL-Query-Guide.pdf. 
 
 
+############################################################### 
+############## Find the correct variable names 
+############################################################### 
+
 # Setup the database: 
 
 ``` {r}
@@ -74,9 +78,9 @@ summary(SIM_AV_TUMOUR)
 
 # 2. WHERE
 ```{R}
-query <- "SELECT *                          ###### find the new diagnosisyear variable
+query <- "SELECT *                          
 FROM SIM_AV_TUMOUR
-WHERE diagnosisyear = 2014;
+WHERE DIAGNOSISDATEBEST = 2014;
 "
 
 print(sql_test(query))
@@ -109,7 +113,7 @@ print(sql_test(query5))
 query6 <- "SELECT * 
 FROM SIM_AV_TUMOUR
 WHERE age = 34
-AND gender = '2';" # Changed sex to gender (variable name has changed after between Simulacrum v.1.2 and v.2.0)
+AND gender = '2';" 
 
 print(sql_test(query6))
 
@@ -151,15 +155,16 @@ print(sql_test(query3))
 
 # 5. Counting in groups
 ```{r}
-query <- "SELECT sex, COUNT(*) 
-FROM SIMULACRUM.SIM_AV_TUMOUR
-GROUP BY sex
-ORDER BY sex;"
+query <- "SELECT gender, COUNT(*) 
+FROM SIM_AV_TUMOUR
+GROUP BY GENDER
+ORDER BY GENDER;"
 
 print(sql_test(query))
 ```
 
 # 6. Other aggregate functions (avg, min, max)
+In query 2, 3 and 4 there is a example a sql function which convert interval or datetime into a datetime variable TO_CHAR 
 ``` {r}
 query <- "
 SELECT MAX(age), SUM(age), COUNT(age), AVG(age) 
@@ -167,30 +172,34 @@ FROM SIM_AV_TUMOUR;"
 
 print(sql_test(query))
 
-# query2 <- "SELECT diagnosisyear, MAX(age), TO_CHAR (AVG(age),'9,999.99') 
-# FROM SIMULACRUM.SIM_AV_TUMOUR
-# GROUP BY diagnosisyear
-# ORDER BY diagnosisyear; "
+# query2 <- "SELECT DIAGNOSISDATEBEST, MAX(age), TO_CHAR (AVG(age),'9,999.99') 
+# FROM SIM_AV_TUMOUR
+# GROUP BY DIAGNOSISDATEBEST
+# ORDER BY DIAGNOSISDATEBEST;"
 
-# query3 <- "SELECT EXTRACT(YEAR FROM diagnosisdatebest) AS diagnosisyear, MAX(age), 
+
+#query3 <- "SELECT EXTRACT(YEAR FROM diagnosisdatebest) AS diagnosisyear, MAX(age), 
 #TO_CHAR(AV(age),'9,999.99') 
-#FROM SIMULACRUM.SIM_AV_TUMOUR
+#FROM SIM_AV_TUMOUR
 #GROUP BY EXTRACT(YEAR FROM diagnosisdatebest)
 #ORDER BY diagnosisyear;"
 
+
 #query4 <- "SELECT diagnosisdatebest
-# , TO_CHAR (diagnosisdatebest,'yyyy/mm/dd')
-# , TO_CHAR (diagnosisdatebest,'dd/mm/yyyy')
-# , TO_CHAR (diagnosisdatebest,'FMMonth DD, YYYY') 
-#FROM SIMULACRUM.SIM_AV_TUMOUR;"
+#, TO_CHAR (diagnosisdatebest,'yyyy/mm/dd')
+#, TO_CHAR (diagnosisdatebest,'dd/mm/yyyy')
+#, TO_CHAR (diagnosisdatebest,'FMMonth DD, YYYY') 
+#FROM SIM_AV_TUMOUR;"
 ```
 
 # 7. Distinct 
+In this markdown we get another example of the difference between sqlite and Oracle as we have a example where we want to extract Year 2014 from the diagnosisdatebest column. If we wanted to the same for sqlite, it should be written as in query instead of how it is written in query2 
 ``` {r}
-query <- "SELECT COUNT (DISTINCT patientid)
+query <- "
+SELECT COUNT (DISTINCT patientid)
 FROM SIM_AV_TUMOUR
 WHERE site_icd10_o2_3char IN ('C50','C53','C54','C55','C56')
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014;"
+AND strftime('%Y', diagnosisdatebest) = '2014';"
 
 print(sql_test(query))
 
@@ -203,7 +212,8 @@ GROUP BY site_icd10_o2_3char;"
 print(sql_test(query2))
 ```
 
-# 8. Case statements 
+# 8. Case statements
+Again does TO_CHAR and EXTRACT cause problems
 ``` {r}
 query <- "SELECT age, 
 CASE 
@@ -229,25 +239,20 @@ print(sql_test(query))
 # 9. Linking/joining tables 
 ``` {r}
 query <- "SELECT *
- FROM SIM_AV_PATIENT, SIM_AV_TUMOUR;"
-
-print(sql_test(query))
-
-query2 <- "SELECT *
 FROM SIM_AV_PATIENT
 LEFT OUTER JOIN SIM_AV_TUMOUR
 ON SIM_AV_PATIENT.patientid = 
 SIM_AV_TUMOUR.patientid;
 "
 
-print(sql_test(query2))
+print(sql_test(query))
 
-query3 <- "SELECT *
+query2 <- "SELECT *
 FROM SIM_AV_PATIENT p
 LEFT OUTER JOIN SIM_AV_TUMOUR t
 ON p.patientid = t.patientid;"
 
-print(sql_test(query3))
+print(sql_test(query2))
 
 
 quey4 <- "SELECT tumourid, laterality
@@ -257,6 +262,7 @@ print(sql_test(query4))
 ```
 
 # 10. Subqueries 
+These queries all contain either TO_CHAR or EXTRACT which means they cannot get executed in the sqlite 
 ```{r}
 query <- "SELECT * 
 FROM sim_av_tumour

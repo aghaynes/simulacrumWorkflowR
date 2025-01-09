@@ -18,9 +18,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(simulacrumR)
 library(survival)
-library(sjPlot)
-library(sjmisc)
-library(sjlabelled)
+library(openxlsx)
 ```
 
 
@@ -36,13 +34,6 @@ SIM_AV_PATIENT <- data_frames_lists$sim_av_patient
 SIM_AV_TUMOUR <- data_frames_lists$sim_av_tumour
 ```
 
-#Preprocessing
-```{r}
-df <- cancer_grouping(sim_av_tumour)
-df <- group_ethnicity(sim_av_patient)
-extended_summary(sim_av_tumour)
-```
-
 # demonstration of the sql query translator 
 ```{r}
 query2 <- "select *
@@ -55,36 +46,42 @@ print(sqlite2oracle(query2))
 ```
 
 # Run query on SQLite database
+#### Select the variables of interest
 ```{r}
-df1 <- sql_test("SELECT *
+df1 <- sql_test("SELECT 
+SIM_AV_PATIENT.PATIENTID, SIM_AV_PATIENT.GENDER, SIM_AV_PATIENT.VITALSTATUS, SIM_AV_PATIENT.VITALSTATUSDATE, SIM_AV_TUMOUR.DIAGNOSISDATEBEST, SIM_AV_TUMOUR.AGE, SIM_AV_TUMOUR.PERFORMANCESTATUS
+
 FROM SIM_AV_PATIENT
-INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;")
+INNER JOIN SIM_AV_TUMOUR 
+    ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;
+")
 ```
 
 # Additional preprocessing
 ```{r}
+
 df2 <- survival_days(df1)
+df2$VITALSTATUS <- ifelse(df2$VITALSTATUS == "A", 1,
+                              ifelse(df2$VITALSTATUS == "D", 0, NA))
 
-df21 <- df2
+extended_summary(df2)
 ```
 
+#Preprocessing
 ```{r}
-df21 <- df2
-```
-
-
-# example of a Cox model of the synthetic data
-```{r}
+df21 <- cancer_grouping(df21)
+df21 <- group_ethnicity(df21)
 df21$VITALSTATUS <- ifelse(df21$VITALSTATUS == "A", 1,
                               ifelse(df21$VITALSTATUS == "D", 0, NA))
 
+extended_summary(df21)
+```
 
-unique(df21$VITALSTATUS)
-
+# example of a Cox model of the synthetic data
+```{r}
 cox_model <- coxph(Surv(diff_date, VITALSTATUS) ~ AGE + factor(GENDER) + factor(PERFORMANCESTATUS), data=df21)
 summary(cox_model)
 ```
-
 
 # Example of a Logistic regression of the synthetic data
 ```{r}
@@ -94,8 +91,19 @@ summary(log_model)
 
 # Save models as html tabels
 ``` {R}
-tab_model(cox_model)
-tab_model(log_model)
+# Save Cox model as Excel file 
+model_summary <- summary(cox_model)
+wb <- createWorkbook()
+addWorksheet(wb, "Model Summary")
+writeData(wb, "Model Summary", model_summary$coefficients)
+saveWorkbook(wb, file = "glm_model_results.xlsx", overwrite = TRUE) 
+
+# Save Logistic regression model as Excel file 
+model_summary <- summary(log_model)
+wb <- createWorkbook()
+addWorksheet(wb, "Model Summary")
+writeData(wb, "Model Summary", model_summary$coefficients)
+saveWorkbook(wb, file = "log_model_results.xlsx", overwrite = TRUE) 
 ```
 
 
