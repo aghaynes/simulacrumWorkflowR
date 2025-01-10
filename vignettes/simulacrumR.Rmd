@@ -92,6 +92,7 @@ write.xlsx(cox_model_sum, "cox_model.xlsx")
 
 log_model_sum <- tidy(log_model) 
 write.xlsx(log_model_sum, "log_model.xlsx")
+
 ```
 
 
@@ -124,7 +125,8 @@ tab_model(cox_model)
 tab_model(log_model)
 ')
 ```
-
+```{r}
 stop <- stop_time()
 compute_time_limit(start, stop)
 compute_time_limit
+```
