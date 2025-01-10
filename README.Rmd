@@ -22,7 +22,7 @@ simulacrumR may be installed using the following command:
 ```{r, eval = FALSE}
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("CLINDA-AAU/simulacrumR",
-dependencies = TRUE) 
+dependencies = TRUE, force = TRUE) 
 
 ```
 

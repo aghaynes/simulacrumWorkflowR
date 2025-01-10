@@ -19,11 +19,13 @@ knitr::opts_chunk$set(
 library(simulacrumR)
 library(survival)
 library(openxlsx)
+library(broom)
+library(openxlsx)
 ```
 
 
 ```{r}
-dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
+dir <- "C:/Users/jakob/OneDrive/Skrivebord/private projects/Simulacrum/simulacrum_v2.1.0/Data"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 ```
 
@@ -49,7 +51,7 @@ print(sqlite2oracle(query2))
 #### Select the variables of interest
 ```{r}
 df1 <- sql_test("SELECT 
-SIM_AV_PATIENT.PATIENTID, SIM_AV_PATIENT.GENDER, SIM_AV_PATIENT.VITALSTATUS, SIM_AV_PATIENT.VITALSTATUSDATE, SIM_AV_TUMOUR.DIAGNOSISDATEBEST, SIM_AV_TUMOUR.AGE, SIM_AV_TUMOUR.PERFORMANCESTATUS
+SIM_AV_PATIENT.PATIENTID, SIM_AV_PATIENT.GENDER, SIM_AV_PATIENT.VITALSTATUS, SIM_AV_PATIENT.VITALSTATUSDATE, SIM_AV_TUMOUR.DIAGNOSISDATEBEST, SIM_AV_TUMOUR.AGE, SIM_AV_TUMOUR.PERFORMANCESTATUS, SIM_AV_TUMOUR.SITE_ICD10_O2_3CHAR
 
 FROM SIM_AV_PATIENT
 INNER JOIN SIM_AV_TUMOUR 
@@ -64,18 +66,10 @@ df2 <- survival_days(df1)
 df2$VITALSTATUS <- ifelse(df2$VITALSTATUS == "A", 1,
                               ifelse(df2$VITALSTATUS == "D", 0, NA))
 
-extended_summary(df2)
-```
-
-#Preprocessing
-```{r}
-df21 <- cancer_grouping(df21)
-df21 <- group_ethnicity(df21)
-df21$VITALSTATUS <- ifelse(df21$VITALSTATUS == "A", 1,
-                              ifelse(df21$VITALSTATUS == "D", 0, NA))
-
+df21 <- cancer_grouping(df2)
 extended_summary(df21)
 ```
+
 
 # example of a Cox model of the synthetic data
 ```{r}
@@ -88,22 +82,16 @@ summary(cox_model)
 log_model <- glm(VITALSTATUS ~ AGE + factor(GENDER) + factor(PERFORMANCESTATUS), data=df21, family = "binomial")
 summary(log_model)
 ```
-
 # Save models as html tabels
-``` {R}
-# Save Cox model as Excel file 
-model_summary <- summary(cox_model)
-wb <- createWorkbook()
-addWorksheet(wb, "Model Summary")
-writeData(wb, "Model Summary", model_summary$coefficients)
-saveWorkbook(wb, file = "glm_model_results.xlsx", overwrite = TRUE) 
 
-# Save Logistic regression model as Excel file 
-model_summary <- summary(log_model)
-wb <- createWorkbook()
-addWorksheet(wb, "Model Summary")
-writeData(wb, "Model Summary", model_summary$coefficients)
-saveWorkbook(wb, file = "log_model_results.xlsx", overwrite = TRUE) 
+```{r}
+# Convert output of models into tibble and Save model as Excel file 
+
+cox_model_sum <- tidy(cox_model)
+write.xlsx(cox_model_sum, "cox_model.xlsx")
+
+log_model_sum <- tidy(log_model) 
+write.xlsx(log_model_sum, "log_model.xlsx")
 ```
 
 
