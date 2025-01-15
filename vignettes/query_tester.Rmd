@@ -55,7 +55,7 @@ FROM SIM_AV_PATIENT
 INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;"
 
 
-print(sql_test(query))
+print(query_sql(query))
 ```
 
 
@@ -64,13 +64,13 @@ print(sql_test(query))
 qeury <- "SELECT *
 FROM SIM_AV_TUMOUR;"
 
-print(sql_test(query))
+print(query_sql(query))
 
 
 query2 <- "SELECT diagnosisdatebest, site_icd10_o2
 FROM SIM_AV_TUMOUR;"
 
-print(sql_test(query2))
+print(query_sql(query2))
 ```
 ```{r}
 summary(SIM_AV_TUMOUR)
@@ -83,45 +83,45 @@ FROM SIM_AV_TUMOUR
 WHERE DIAGNOSISDATEBEST = 2014;
 "
 
-print(sql_test(query))
+print(query_sql(query))
 
 
 query2 <- "SELECT * 
 FROM SIM_AV_TUMOUR
 WHERE age>90;"
 
-print(sql_test(query2))
+print(query_sql(query2))
 
 query3 <- "SELECT * 
 FROM SIM_AV_TUMOUR
 WHERE age BETWEEN 18 AND 100;"
 
-print(sql_test(query3))
+print(query_sql(query3))
 
 query4 <- "SELECT * 
 FROM SIM_AV_PATIENT
 WHERE vitalstatusdate IS NULL;
 "
-print(sql_test(query4))
+print(query_sql(query4))
 
 query5 <- "SELECT * 
 FROM SIM_AV_TUMOUR
 WHERE site_icd10_o2_3char IN ('C33','C34');"
 
-print(sql_test(query5))
+print(query_sql(query5))
 
 query6 <- "SELECT * 
 FROM SIM_AV_TUMOUR
 WHERE age = 34
 AND gender = '2';" 
 
-print(sql_test(query6))
+print(query_sql(query6))
 
 query7 <- "SELECT COUNT (patientid) 
 FROM SIM_AV_PATIENT
 WHERE DEATHCAUSECODE_1A LIKE UPPER('%c50%');"
 
-print(sql_test(query7))
+print(query_sql(query7))
 ```
 
 # 3. Ordering 
@@ -131,7 +131,7 @@ FROM SIM_AV_TUMOUR
 ORDER BY diagnosisdatebest DESC;
 "
 
-print(sql_test(query))
+print(query_sql(query))
 ```
 
 # 4. Counting 
@@ -139,18 +139,18 @@ print(sql_test(query))
 query <- "SELECT COUNT(*)
 FROM SIM_AV_TUMOUR;"
 
-print(sql_test(query))
+print(query_sql(query))
 
 query2 <- "SELECT COUNT(*) 
 FROM SIM_AV_PATIENT
 WHERE vitalstatusdate IS NOT NULL;"
 
-print(sql_test(query2))
+print(query_sql(query2))
 
 query3 <- "SELECT COUNT (*) ,COUNT(tumourid) , COUNT(er_status) 
 FROM SIM_AV_TUMOUR;"
 
-print(sql_test(query3))
+print(query_sql(query3))
 ```
 
 # 5. Counting in groups
@@ -160,7 +160,7 @@ FROM SIM_AV_TUMOUR
 GROUP BY GENDER
 ORDER BY GENDER;"
 
-print(sql_test(query))
+print(query_sql(query))
 ```
 
 # 6. Other aggregate functions (avg, min, max)
@@ -170,7 +170,7 @@ query <- "
 SELECT MAX(age), SUM(age), COUNT(age), AVG(age) 
 FROM SIM_AV_TUMOUR;"
 
-print(sql_test(query))
+print(query_sql(query))
 
 # query2 <- "SELECT DIAGNOSISDATEBEST, MAX(age), TO_CHAR (AVG(age),'9,999.99') 
 # FROM SIM_AV_TUMOUR
@@ -201,7 +201,7 @@ FROM SIM_AV_TUMOUR
 WHERE site_icd10_o2_3char IN ('C50','C53','C54','C55','C56')
 AND strftime('%Y', diagnosisdatebest) = '2014';"
 
-print(sql_test(query))
+print(query_sql(query))
 
 query2 <- "SELECT COUNT (DISTINCT patientid), site_icd10_o2_3char
 FROM SIM_AV_TUMOUR
@@ -209,7 +209,7 @@ WHERE site_icd10_o2_3char IN ('C50','C53','C54','C55','C56')
 AND EXTRACT(YEAR FROM diagnosisdatebest)= 2014
 GROUP BY site_icd10_o2_3char;"
 
-print(sql_test(query2))
+print(query_sql(query2))
 ```
 
 # 8. Case statements
@@ -260,100 +260,3 @@ FROM SIM_AV_TUMOUR; "
 
 print(sql_test(query4))
 ```
-
-# 10. Subqueries 
-These queries all contain either TO_CHAR or EXTRACT which means they cannot get executed in the sqlite 
-```{r}
-query <- "SELECT * 
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014;"
-
-print(sql_test(query))
-
-
-query2 <- "SELECT DISTINCT patientid
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014;"
-
-print(sql_test(query2))
-
-query3 <- "SELECT patientid, COUNT(*)
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014
-GROUP BY patientid;"
-
-print(sql_test(query3))
-
-query4 <- "WITH breastpatients AS
-(SELECT patientid, count(*) 
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014
-GROUP BY patientid)
-SELECT * FROM breastpatients;"
-
-print(sql_test(query4))
-
-query5 <- "WITH breastpatients AS
-(SELECT patientid, count(*) 
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014
-GROUP BY patientid)
-SELECT COUNT(*)
-FROM breastpatients;"
-
-print(sql_test(query5))
-
-query6 <- "WITH breastpatients AS
-(SELECT patientid, count(*) as tumourcount
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014
-GROUP BY patientid)SELECT tumourcount, count(*) 
-FROM breastpatients
-GROUP BY tumourcount
-ORDER BY tumourcount asc;"
-
-
-print(sql_test(query6))
-
-query7 <- "SELECT tumourcount, count(*) 
-FROM 
-(SELECT patientid, count(*) as tumourcount
-FROM sim_av_tumour
-WHERE site_icd10_o2_3char = 'C50'
-AND EXTRACT(YEAR FROM diagnosisdatebest) = 2014
-GROUP BY patientid) breastpatients
-GROUP BY tumourcount
-ORDER BY tumourcount asc;"
-
-print(sql_test(query6))
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

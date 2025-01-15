@@ -25,7 +25,7 @@ library(openxlsx)
 
 
 ```{r}
-dir <- "C:/Users/jakob/OneDrive/Skrivebord/private projects/Simulacrum/simulacrum_v2.1.0/Data"
+dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 ```
 
@@ -50,7 +50,7 @@ print(sqlite2oracle(query2))
 # Run query on SQLite database
 #### Select the variables of interest
 ```{r}
-df1 <- sql_test("SELECT 
+df1 <- query_sql("SELECT 
 SIM_AV_PATIENT.PATIENTID, SIM_AV_PATIENT.GENDER, SIM_AV_PATIENT.VITALSTATUS, SIM_AV_PATIENT.VITALSTATUSDATE, SIM_AV_TUMOUR.DIAGNOSISDATEBEST, SIM_AV_TUMOUR.AGE, SIM_AV_TUMOUR.PERFORMANCESTATUS, SIM_AV_TUMOUR.SITE_ICD10_O2_3CHAR
 
 FROM SIM_AV_PATIENT
@@ -125,6 +125,8 @@ tab_model(cox_model)
 tab_model(log_model)
 ')
 ```
+
+
 ```{r}
 stop <- stop_time()
 compute_time_limit(start, stop)

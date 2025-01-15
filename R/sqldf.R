@@ -19,7 +19,7 @@
 #' @export
 #' 
 #' @importFrom sqldf sqldf
-sql_test <- function(query) {
+query_sql <- function(query) {
   if(!is.character(query))
     stop("The function must contain a string")
   sqldf(query, stringsAsFactors = FALSE)
