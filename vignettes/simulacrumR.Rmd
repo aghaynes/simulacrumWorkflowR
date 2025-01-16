@@ -128,7 +128,7 @@ tab_model(log_model)
 
 
 ```{r}
-#stop <- stop_time()
-#compute_time_limit(start, stop)
-#compute_time_limit
+stop <- stop_time()
+compute_time_limit(start, stop)
+compute_time_limit
 ```

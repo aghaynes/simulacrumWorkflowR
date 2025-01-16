@@ -14,14 +14,14 @@ process, the simulacrumR package automates the setup of a database
 within R and provides various utility functions for preprocessing, query
 generation, and query testing.
 
-## Installation
+# Installation
 
 simulacrumR may be installed using the following command:
 
 ``` r
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("CLINDA-AAU/simulacrumR",
-dependencies = TRUE) 
+dependencies = TRUE, force = TRUE) 
 ```
 
 # Overview
@@ -94,8 +94,8 @@ data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "
 Access individual data frames as follows:
 
 ``` r
-sim_av_patient <- data_frames_lists$sim_av_patient
-sim_av_tumour <- data_frames_lists$sim_av_tumour
+SIM_AV_PATIENT <- data_frames_lists$sim_av_patient
+SIM_AV_TUMOUR <- data_frames_lists$sim_av_tumour
 ```
 
 Once data frames are loaded, you can start writing queries. It’s
@@ -105,8 +105,8 @@ example, to merge tables:
 
 ``` r
 query <- "SELECT *
-FROM sim_av_patient
-INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;"
+FROM SIM_AV_PATIENT
+INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;"
 ```
 
 Execute queries with the sql_test() function:
@@ -123,12 +123,12 @@ sqlite2oracle() function:
 ``` r
 
 query2 <- "select *
-from sim_av_patient
+from SIM_AV_PATIENT
 where age > 50
 limit 500;"
 
 sqlite2oracle(query2)
-#> [1] "SELECT *\nFROM sim_av_patient\nWHERE age > 50\nAND ROWNUM <= 500;"
+#> [1] "SELECT *\nFROM SIM_AV_PATIENT\nWHERE age > 50\nAND ROWNUM <= 500;"
 ```
 
 ## Preprocessing Functions
@@ -150,7 +150,7 @@ NHS:
 create_workflow(
                              libraries = "library(dplyr)",
                              query = "select * 
-                             from sim_av_patient
+                             from SIM_AV_PATIENT
                              where age > 50
                              limit 500;",
                              data_management = "
@@ -162,7 +162,7 @@ create_workflow(
                               ",
                              analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20241219_2207.R
+#> Workflow script created at: workflow_20250116_1148.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
 ```
 

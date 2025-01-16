@@ -1,0 +1,2 @@
+Total Execution Time: 5321.14639210701s (~1.48 hours)
+Analysis accepted! It is within the three-hour threshold set by the NHS.

@@ -7,7 +7,7 @@ Authors@R: c(
     person("Rasmus", "Rask", email = "rasmus.rask@rn.dk", role = c("aut"), comment = c(ORCID = "0009-0000-7249-2196")),
     person("Jennifer ", "Bartell", email = "bartell@sund.ku.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2750-9678")),
     person("Lars ", "Nielsen", email = "l.boerty@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0002-3715-8528")),
-    person("Charles ", "Vesteghem", email = "charles.vesteghem@rn.dk", role = c("aut"), commet = c(ORCID = "0000-0003-2301-9081")),
+    person("Charles ", "Vesteghem", email = "charles.vesteghem@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2301-9081")),
     person("Martin", "Boegsted", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
     person("Center for Clinical Data Science - Aalborg"))
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 

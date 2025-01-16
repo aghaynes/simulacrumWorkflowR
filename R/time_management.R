@@ -21,10 +21,11 @@
 #' @param start_time A `POSIXct` object representing the start time.
 #' @param end_time A `POSIXct` object representing the end time.
 #'
+#' @importFrom lubridate duration
+#'
 #' @return A character string containing the total execution time and the result (accepted or rejected).
 #'         If the time exceeds 3 hours, a warning is issued.
 #' 
-#' @importFrom lubridate duration
 #' 
 #' @export
 #'
