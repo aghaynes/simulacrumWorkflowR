@@ -203,13 +203,13 @@ AND strftime('%Y', diagnosisdatebest) = '2014';"
 
 print(query_sql(query))
 
-query2 <- "SELECT COUNT (DISTINCT patientid), site_icd10_o2_3char
-FROM SIM_AV_TUMOUR
-WHERE site_icd10_o2_3char IN ('C50','C53','C54','C55','C56')
-AND EXTRACT(YEAR FROM diagnosisdatebest)= 2014
-GROUP BY site_icd10_o2_3char;"
+#query2 <- "SELECT COUNT (DISTINCT patientid), site_icd10_o2_3char
+#FROM SIM_AV_TUMOUR
+#WHERE site_icd10_o2_3char IN ('C50','C53','C54','C55','C56')
+#AND EXTRACT(YEAR FROM diagnosisdatebest)= 2014
+#GROUP BY site_icd10_o2_3char;"
 
-print(query_sql(query2))
+#print(query_sql(query2))
 ```
 
 # 8. Case statements
@@ -223,7 +223,7 @@ ELSE '70+'
 END AS agegroup
 FROM SIM_AV_TUMOUR;"
 
-print(sql_test(query))
+print(query_sql(query))
 
 #query2 <- "SELECT patientid,
 #CASE WHEN sex IN (2) THEN TO_CHAR(diagnosisdatebest, 'DD/MM/YYY')
@@ -245,18 +245,18 @@ ON SIM_AV_PATIENT.patientid =
 SIM_AV_TUMOUR.patientid;
 "
 
-print(sql_test(query))
+print(query_sql(query))
 
 query2 <- "SELECT *
 FROM SIM_AV_PATIENT p
 LEFT OUTER JOIN SIM_AV_TUMOUR t
 ON p.patientid = t.patientid;"
 
-print(sql_test(query2))
+print(query_sql(query2))
 
 
 quey4 <- "SELECT tumourid, laterality
 FROM SIM_AV_TUMOUR; "
 
-print(sql_test(query4))
+print(query_sql(query4))
 ```
