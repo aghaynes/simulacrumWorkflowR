@@ -66,6 +66,7 @@ Providing a streamlined setup for building the workflow in R. The package includ
 2.	Query Helper: Offers a collection of queries custom-made for the Simulacrum, for pulling and merging certain tables. Additionally, does the `sqlite2oracle` function assist in translating queries to be compatible with the NHS servers.
 3.	Helper Tools: Offers a range of data preprocessing functions for cleaning, and preparing the data for analysis, ensuring data quality and consistency. Key functions include cancer type grouping, survival status, and logging. 
 4.	Workflow Generator: Generates an R script with the complete workflow. Ensuring correct layout and the ability to integrate all the necessary code to obtain a workflow suitable for submission to the NHS and execution on the CAS database. 
+
 # Workflow illustration
 simulacrumR was developed with R version 4.3.3. Installation requires devtools and relies on dependencies listed in the DESCRIPTION file on GitHub. These dependencies are automatically installed during package installation.
 ### Installation:
