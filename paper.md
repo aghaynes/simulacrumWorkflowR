@@ -102,9 +102,10 @@ In the event of an error on NHS servers while executing the analysis pipeline, t
 # Limitations 
 Expertise: As Simulacrum is designed to mimic real cancer patient data, a certain level of domain expertise is necessary for any meaningful analysis.
 SQLite: The simulacrumR library leverages the sqldf package to provide users with a streamlined SQL interface for interacting with the Simulacrum dataset. However, the utilization of SQLite introduces a consideration: potential differences in SQL syntax compared to Oracle. While SQLite and Oracle share a common foundation in SQL, variations in certain queries exist. Table 1 highlights some key variations:  
-Feature	SQLite	Oracle
-Case Sensitivity	Doesn't matter if you use upper or lower case for commands. Example: ‘select’, ‘Select’, ‘SELECT’.	Uppercase. Example: ‘SELECT’
-Limits on Results	Use LIMIT. ‘LIMIT 50;’	Use ROWNUM, OFFSET, and FETCH NEXT. ‘WHERE ROWNUM => 50;’
+| Feature | SQLite | Oracle |
+|---|---|---|
+| Case Sensitivity | Doesn't matter if you use upper or lower case for commands. Example: `select`, `Select`, `SELECT`. | Uppercase. Example: `SELECT` |
+| Limits on Results | Use `LIMIT`. `LIMIT 50;` | Use `ROWNUM`, `OFFSET`, and `FETCH NEXT`. `WHERE ROWNUM => 50;` |
 Table 1: An overview of the difference between basic SQL commands for SQLite and Oracle.  
 The difference between the syntax is important to consider when writing the queries in SQLite database and submitting the queries for execution on an Oracle server. To ensure compatibility with the servers at NHS, it is highly recommended to minimize SQL queries. Compute: While the time management function can provide an indication of the analysis being able to pass the three-hour time limit on NHS servers (@national2022guide) , there will likely be a difference between the user's local machine and the servers of NHS in terms of the time for the computation. It Is advised to divide the analysis into parts, to make sure some of the analysis can be returned. An example of divided analyses can be found in @nielsen2024simulacrum.
 
