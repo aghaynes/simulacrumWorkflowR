@@ -46,6 +46,7 @@ The advantages of utilizing Simulacrum can be summarized as follows:
 2.	Democratization of data.
 3.	Improving Privacy. 
 4.	Eliminating Data Dredging.
+
 However, due to Simulacrum prioritizing privacy over utility, the dataset is primarily suitable for designing and testing analysis pipelines for the CAS data, not generating actionable results (@bullward2023reseach). 
 The process of accessing the real data through Simulacrum requires users to download multiple CSV files, install a dedicated Oracle database system locally, configure ODBC connections, and construct SQL queries all within an R workflow (@national2022guide), see Figure 1. 
  
