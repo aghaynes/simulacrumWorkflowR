@@ -126,7 +126,7 @@ create_workflow(
                               # Additional preprocessing
                               #df2 <- survival_days(df1)
                               ",
-                             analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
+                             analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
 ```
 
