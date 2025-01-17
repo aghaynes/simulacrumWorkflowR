@@ -29,7 +29,7 @@ affiliations:
 - index: 1
   name: Center for Clinical Data Science, Aalborg University , Aalborg, Denmark
 - index: 2
-  name: Health Data Science Sandbox, University of Copenhagen, Denmark
+  name: Health Data Science Sandbox, University of Copenhagen, Copenhagen, Denmark
 - index: 3
   name: Center for Health Data Science, University of Copenhagen, Copenhagen, Denmark
 date: 16 January 2025
