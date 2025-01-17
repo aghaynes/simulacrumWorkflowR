@@ -106,6 +106,7 @@ SQLite: The simulacrumR library leverages the sqldf package to provide users wit
 |---|---|---|
 | Case Sensitivity | Doesn't matter if you use upper or lower case for commands. Example: `select`, `Select`, `SELECT`. | Uppercase. Example: `SELECT` |
 | Limits on Results | Use `LIMIT`. `LIMIT 50;` | Use `ROWNUM`, `OFFSET`, and `FETCH NEXT`. `WHERE ROWNUM => 50;` |
+
 Table 1: An overview of the difference between basic SQL commands for SQLite and Oracle.  
 The difference between the syntax is important to consider when writing the queries in SQLite database and submitting the queries for execution on an Oracle server. To ensure compatibility with the servers at NHS, it is highly recommended to minimize SQL queries. Compute: While the time management function can provide an indication of the analysis being able to pass the three-hour time limit on NHS servers (@national2022guide) , there will likely be a difference between the user's local machine and the servers of NHS in terms of the time for the computation. It Is advised to divide the analysis into parts, to make sure some of the analysis can be returned. An example of divided analyses can be found in @nielsen2024simulacrum.
 
