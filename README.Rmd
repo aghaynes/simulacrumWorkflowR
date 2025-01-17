@@ -13,6 +13,9 @@ knitr::opts_chunk$set(
 library(knitr)
 ```
 
+# simulacrumR
+
+
 simulacrumR is a package developed to assist users of the Simulacrum dataset in better preparing to use the dataset as a precursor to accessing real patient data in the Cancer Administration System (CAS).
 
 The Simulacrum data is a synthetic version of the real patient data at CAS. It is publicly available and can be used to create and test analyses in R or STATA before executing them on the real data. However, setting up Simulacrum requires creating a local Oracle database, importing the data, and setting up an ODBC connection. To simplify this process, the simulacrumR package automates the setup of a database within R and provides various utility functions for preprocessing, query generation, and query testing.

@@ -24,9 +24,6 @@ In  this example notebook, we want to demonstrate the cababilities of the sql_te
 For this demonstration, we use a guide for sql queries published by Health Data Insigt: "Simulacrum Guidance: Getting started with extracting data", which can be found on: https://simulacrum.healthdatainsight.org.uk/wp/wp-content/uploads/2018/11/SQL-Query-Guide.pdf. 
 
 
-############################################################### 
-############## Find the correct variable names 
-############################################################### 
 
 # Setup the database: 
 
@@ -260,3 +257,9 @@ FROM SIM_AV_TUMOUR; "
 
 print(query_sql(query4))
 ```
+
+## Conclusion
+
+Examination of the NDRS SQL manual, which is designed for Oracle syntax, shows that basic queries are compatible with the SQLite server. However, increasing query complexity results in a higher frequency of errors.
+
+It is recommended that users of this package utilize simple queries for data extraction. Should more complex queries be required, users are encouraged to conduct a research of the compatibility between Oracle and SQLite syntax to ensure successful execution.

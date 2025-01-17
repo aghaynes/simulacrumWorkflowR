@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# simulacrumR
+
 simulacrumR is a package developed to assist users of the Simulacrum
 dataset in better preparing to use the dataset as a precursor to
 accessing real patient data in the Cancer Administration System (CAS).
@@ -160,9 +162,9 @@ create_workflow(
                               # Additional preprocessing
                               #df2 <- survival_days(df1)
                               ",
-                             analysis = "model = glm(x ~ x1 + x2 + x3, data=data)",
+                             analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20250116_1148.R
+#> Workflow script created at: workflow_20250117_0935.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
 ```
 
