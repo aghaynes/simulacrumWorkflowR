@@ -49,12 +49,12 @@ The advantages of utilizing Simulacrum can be summarized as follows:
 However, due to Simulacrum prioritizing privacy over utility, the dataset is primarily suitable for designing and testing analysis pipelines for the CAS data, not generating actionable results (@bullward2023reseach). 
 The process of accessing the real data through Simulacrum requires users to download multiple CSV files, install a dedicated Oracle database system locally, configure ODBC connections, and construct SQL queries all within an R workflow (@national2022guide), see Figure 1. 
  
-*FIGURE 1
+![](fig/figure1_the_process.drawio.png)
 
 Figure 1: Overview of the process of running an analysis on the CAS Database using an R workflow tested on Simulacrum. 
 These technical hurdles limit the accessibility of Simulacrum and reduce the engagement of researchers who could potentially contribute to cancer research. Setting up the database, configuring the ODBC connection, and integrating the components into an R workflow has proven complex and time-consuming. To address these challenges and improve accessibility, we propose the simulacrumR package. Our workflow streamlines the testing of SQL queries by eliminating the need for setting up a dedicated Oracle database or configuring ODBC connections (Figure 2). 
 
-*FIGURE 2
+![](fig/figure2_the_suggested_process.drawio.png)
  
 Figure 2: Overview of the process of running an analysis on the CAS Database using the simulacrumR package.
 The simulacrumR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum to facilitate access and execution of analysis on the CAS database.
