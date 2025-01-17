@@ -52,11 +52,13 @@ The process of accessing the real data through Simulacrum requires users to down
 ![](fig/figure1_the_process.drawio.png)
 
 Figure 1: Overview of the process of running an analysis on the CAS Database using an R workflow tested on Simulacrum. 
+
 These technical hurdles limit the accessibility of Simulacrum and reduce the engagement of researchers who could potentially contribute to cancer research. Setting up the database, configuring the ODBC connection, and integrating the components into an R workflow has proven complex and time-consuming. To address these challenges and improve accessibility, we propose the simulacrumR package. Our workflow streamlines the testing of SQL queries by eliminating the need for setting up a dedicated Oracle database or configuring ODBC connections (Figure 2). 
 
 ![](fig/figure2_the_suggested_process.drawio.png)
  
 Figure 2: Overview of the process of running an analysis on the CAS Database using the simulacrumR package.
+
 The simulacrumR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum to facilitate access and execution of analysis on the CAS database.
 # Key functionalities 
 Providing a streamlined setup for building the workflow in R. The package includes:
@@ -101,6 +103,7 @@ The `sqlite2oracle` function ensures basic query translation for Oracle database
 In the event of an error on NHS servers while executing the analysis pipeline, the `time_management` function and the base R `sink` function will generate a comprehensive log to facilitate seamless debugging.
 # Limitations 
 Expertise: As Simulacrum is designed to mimic real cancer patient data, a certain level of domain expertise is necessary for any meaningful analysis.
+
 SQLite: The simulacrumR library leverages the sqldf package to provide users with a streamlined SQL interface for interacting with the Simulacrum dataset. However, the utilization of SQLite introduces a consideration: potential differences in SQL syntax compared to Oracle. While SQLite and Oracle share a common foundation in SQL, variations in certain queries exist. Table 1 highlights some key variations:  
 | Feature | SQLite | Oracle |
 |---|---|---|
@@ -108,6 +111,7 @@ SQLite: The simulacrumR library leverages the sqldf package to provide users wit
 | Limits on Results | Use `LIMIT`. `LIMIT 50;` | Use `ROWNUM`, `OFFSET`, and `FETCH NEXT`. `WHERE ROWNUM => 50;` |
 
 Table 1: An overview of the difference between basic SQL commands for SQLite and Oracle.  
+
 The difference between the syntax is important to consider when writing the queries in SQLite database and submitting the queries for execution on an Oracle server. To ensure compatibility with the servers at NHS, it is highly recommended to minimize SQL queries. Compute: While the time management function can provide an indication of the analysis being able to pass the three-hour time limit on NHS servers (@national2022guide) , there will likely be a difference between the user's local machine and the servers of NHS in terms of the time for the computation. It Is advised to divide the analysis into parts, to make sure some of the analysis can be returned. An example of divided analyses can be found in @nielsen2024simulacrum.
 
 # References 
