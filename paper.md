@@ -39,6 +39,7 @@ bibliography: simulacrumrRef.bib
 
 # Summary
 The simulacrumR package addresses the technical barriers associated with utilizing Simulacrum through a streamlined workflow for accessing, preprocessing, and validating statistical analyses on the Simulacrum dataset. Thus, making it more accessible to researchers and clinicians with limited database expertise. The main function of this package is the `create_workflow()` function which creates an R script, based on the users input, that includes all the necessary code and is compatible for execution on the Cancer Administration System (CAS) database servers.
+
 # Statement of need 
 Simulacrum is a synthetic dataset mimicking the CAS database in England, which is held by the National Disease Registration Service (@national2022guide). Simulacrum is developed by Health Data Insight with support from AstraZeneca and IQVIA. The first version of Simulacrum was published in 2018 and the latest version (Simulacrum V2.1.0.) was published in 2023. The latest version of Simulacrum contains information about patient characteristics, tumor diagnosis, systematic anti-cancer treatment, radiotherapy, and gene testing data (@frayling2023simulacrum). The core innovation is the ability to develop and refine algorithms for statistical analysis using synthetic data while allowing for the execution of these algorithms on the real CAS database without the need to access sensitive patient data, protecting privacy while facilitating research. Once the algorithm run by NDRS on the real CAS data, researchers receive aggregated results. 
 The advantages of utilizing Simulacrum can be summarized as follows: 
@@ -61,6 +62,7 @@ These technical hurdles limit the accessibility of Simulacrum and reduce the eng
 Figure 2: Overview of the process of running an analysis on the CAS Database using the simulacrumR package.
 
 The simulacrumR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum to facilitate access and execution of analysis on the CAS database.
+
 # Key functionalities 
 Providing a streamlined setup for building the workflow in R. The package includes:
 1.	Integrated SQL Environment: Leverages the SQLdf (@grothendieck2017sqldf) package to enable SQL queries directly within R, eliminating the need for external database setup and ODBC connections by creating a local temporary SQLite database within the R environment. 
@@ -70,12 +72,14 @@ Providing a streamlined setup for building the workflow in R. The package includ
 
 # Workflow illustration
 simulacrumR was developed with R version 4.3.3. Installation requires devtools and relies on dependencies listed in the DESCRIPTION file on GitHub. These dependencies are automatically installed during package installation.
+
 ### Installation:
 ```{R]
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("CLINDA-AAU/simulacrumR",
 dependencies = TRUE)) 
 ```
+
 ### Loading data:
 ```{R}
 library(simulacrumR)
@@ -84,6 +88,7 @@ Dir <- “/path/to/simulacrum/csv/files”
 #Import the Simulacrum data files 
 Data_frames <- read_simulacrum(Dir)
 ```
+
 ### Quering data:
 ```{R}
 query <- “SELECT * FROM sim_av_patient INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid”
@@ -101,8 +106,10 @@ Logger_report=TRUE)
 ```
 ### Oracle Compatibility: 
 The `sqlite2oracle` function ensures basic query translation for Oracle databases.
+
 ### Logging: 
 In the event of an error on NHS servers while executing the analysis pipeline, the `time_management` function and the base R `sink` function will generate a comprehensive log to facilitate seamless debugging.
+
 # Limitations 
 Expertise: As Simulacrum is designed to mimic real cancer patient data, a certain level of domain expertise is necessary for any meaningful analysis.
 
