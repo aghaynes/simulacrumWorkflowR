@@ -5,7 +5,7 @@ authors:
   name: Jakob Skelmose 
   orcid: 0000-0001-9192-1814
 - affiliation: "1"
-  name: Rasmus Rask
+  name: Rasmus Rask Kragh Jørgensen
   orcid: 0009-0000-7249-2196
 - affiliation: "2, 3"
   name: Jennifer Bartell 
