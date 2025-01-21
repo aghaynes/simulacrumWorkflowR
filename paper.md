@@ -38,11 +38,12 @@ bibliography: simulacrumrRef.bib
 
 
 # Summary
-The simulacrumR package addresses the technical barriers associated with utilizing Simulacrum through a streamlined workflow for accessing, preprocessing, and validating statistical analyses on the Simulacrum dataset. Thus, making it more accessible to researchers and clinicians with limited database expertise. The main function of this package is the `create_workflow()` function which creates an R script, based on the users input, that includes all the necessary code and is compatible for execution on the Cancer Administration System (CAS) database servers.
+The simulacrumR R package addresses the technical barriers associated with utilizing Simulacrum through a streamlined workflow for accessing, preprocessing, and validating statistical analyses on the Simulacrum dataset. Thus, making it more accessible to researchers and clinicians with limited database expertise. The main function of this package is the `create_workflow()` function which creates an R script, based on the users input, that includes all the necessary code and is compatible for execution on the Cancer Administration System (CAS) database servers.
 
 # Statement of need 
 Simulacrum is a synthetic dataset mimicking the CAS database in England, which is held by the National Disease Registration Service (@national2022guide). Simulacrum is developed by Health Data Insight with support from AstraZeneca and IQVIA. The first version of Simulacrum was published in 2018 and the latest version (Simulacrum V2.1.0.) was published in 2023. The latest version of Simulacrum contains information about patient characteristics, tumor diagnosis, systematic anti-cancer treatment, radiotherapy, and gene testing data (@frayling2023simulacrum). The core innovation is the ability to develop and refine algorithms for statistical analysis using synthetic data while allowing for the execution of these algorithms on the real CAS database without the need to access sensitive patient data, protecting privacy while facilitating research. Once the algorithm run by NDRS on the real CAS data, researchers receive aggregated results. 
 The advantages of utilizing Simulacrum can be summarized as follows: 
+
 1.	Accelerated research.
 2.	Democratization of data.
 3.	Improving Privacy. 
