@@ -113,8 +113,6 @@ The `sqlite2oracle` function ensures basic query translation for Oracle database
 In the event of an error on NHS servers while executing the analysis pipeline, the `time_management` function and the base R `sink` function will generate a comprehensive log to facilitate seamless debugging.
 
 # Limitations 
-Expertise: As Simulacrum is designed to mimic real cancer patient data, a certain level of domain expertise is necessary for any meaningful analysis.
-
 SQLite: The simulacrumR library leverages the sqldf package to provide users with a streamlined SQL interface for interacting with the Simulacrum dataset. However, the utilization of SQLite introduces a consideration: potential differences in SQL syntax compared to Oracle. While SQLite and Oracle share a common foundation in SQL, variations in certain queries exist. Table 1 highlights some key variations:  
 
 | Feature | SQLite | Oracle |
