@@ -62,7 +62,7 @@ These technical hurdles limit the accessibility of Simulacrum and reduce the eng
 
 ![](fig/figure2_the_suggested_process.drawio.png)
  
-Figure 2: Overview of the process of running an analysis on the CAS Database using the simulacrumR package.
+Figure 2: Overview of the process of running an analysis pipeline on the CAS Database using the simulacrumR package.
 
 The simulacrumR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum to facilitate access and execution of analysis on the CAS database.
 
@@ -98,6 +98,7 @@ Data_frames <- read_simulacrum(Dir);
 query <- “SELECT * FROM sim_av_patient INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid”
 merged_data <- query_sql(query)
 ```
+
 ### Generating a Reproducible Workflow for NHS Submission 
 ```
 create_workflow( 
@@ -108,6 +109,7 @@ analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
 model_results = "html_table_model(model)", 
 Logger_report=TRUE)
 ```
+
 ### Oracle Compatibility: 
 The `sqlite2oracle` function ensures basic query translation for Oracle databases.
 
