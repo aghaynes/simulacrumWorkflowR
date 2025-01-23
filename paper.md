@@ -3,7 +3,7 @@ title: 'simulacrumR: An R package for Streamlined Access and Analysis of the Sim
 authors:
 - affiliation: "1, 2"
   name: Jakob Skelmose 
-  orcid: 0000-0001-9192-1814
+  orcid: 0009-0006-8967-9268
 - affiliation: "1"
   name: Rasmus Rask Kragh Jørgensen
   orcid: 0009-0000-7249-2196
@@ -12,7 +12,7 @@ authors:
   orcid: 0000-0003-2750-9678
 - affiliation: "1"
   name: Lars Nielsen  
-  orcid: 0000-0003-2750-9678
+  orcid: 0000-0002-3715-8528
 - affiliation: "1"
   name: Charles Vesteghem  
   orcid: 0000-0003-2301-9081

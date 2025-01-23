@@ -1,9 +1,9 @@
 ---
-title: "Example: Testing Oracle compatible queries in the sql_test function"
+title: "Example: Testing Oracle compatible queries in the query_sql function"
 author: "Jakob Skelmose, Rasmus Rask, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Example Testing Oracle compatible queries in the sql_test function}
+  %\VignetteIndexEntry{Example Testing Oracle compatible query in the sql_test function}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 library(simulacrumR)
 ```
 
-In  this example notebook, we want to demonstrate the cababilities of the sql_test function in the package, which is based on the sqldf library and which creates an temporal sqlite database in the R environment. 
+In  this example notebook, we want to demonstrate the cababilities of the query_sql function in the package, which is based on the sqldf library and which creates an temporal sqlite database in the R environment. 
 
-For this demonstration, we use a guide for sql queries published by Health Data Insigt: "Simulacrum Guidance: Getting started with extracting data", which can be found on: https://simulacrum.healthdatainsight.org.uk/wp/wp-content/uploads/2018/11/SQL-Query-Guide.pdf. 
+For this demonstration, we use a guide for sql query published by Health Data Insigt: "Simulacrum Guidance: Getting started with extracting data", which can be found on: https://simulacrum.healthdatainsight.org.uk/wp/wp-content/uploads/2018/11/SQL-Query-Guide.pdf. 
 
 
 
@@ -58,7 +58,7 @@ print(query_sql(query))
 
 # 1. SELECT FROM 
 ```{r}
-qeury <- "SELECT *
+query <- "SELECT *
 FROM SIM_AV_TUMOUR;"
 
 print(query_sql(query))
