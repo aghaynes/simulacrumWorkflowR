@@ -4,10 +4,10 @@ authors:
 - affiliation: "1, 2"
   name: Jakob Skelmose 
   orcid: 0009-0006-8967-9268
-- affiliation: "1"
+- affiliation: "1, 3"
   name: Rasmus Rask Kragh Jørgensen
   orcid: 0009-0000-7249-2196
-- affiliation: "2, 3"
+- affiliation: "2, 4"
   name: Jennifer Bartell 
   orcid: 0000-0003-2750-9678
 - affiliation: "1"
@@ -31,6 +31,8 @@ affiliations:
 - index: 2
   name: Health Data Science Sandbox, University of Copenhagen, Copenhagen, Denmark
 - index: 3
+  name: Department of Hematology, Aalborg University Hospital, Aalborg, Denmark
+- index: 4
   name: Center for Health Data Science, University of Copenhagen, Copenhagen, Denmark
 date: 16 January 2025
 bibliography: simulacrumrRef.bib
@@ -49,7 +51,7 @@ The advantages of utilizing Simulacrum can be summarized as follows:
 3.	Improving Privacy. 
 4.	Eliminating Data Dredging.
 
-However, due to Simulacrum prioritizing privacy over utility, the dataset is primarily suitable for designing and testing analysis pipelines for the CAS data, not generating actionable results (@bullward2023reseach). 
+However, due to Simulacrum prioritizing privacy over utility, the dataset is primarily suitable for designing and testing analysis pipelines for the CAS data, not generating actionable results (@bullward2023research). 
 The process of accessing the real data through Simulacrum requires users to download multiple CSV files, install a dedicated Oracle database system locally, configure ODBC connections, and construct SQL queries all within an R workflow (@national2022guide), see Figure 1. 
  
 ![](fig/figure1_the_process.drawio.png)
@@ -85,10 +87,10 @@ dependencies = TRUE))
 ### Loading data:
 ```{R}
 library(simulacrumR)
-#Set the path to the directory where the Simulacrum CSV files are located 
-Dir <- “/path/to/simulacrum/csv/files”
-#Import the Simulacrum data files 
-Data_frames <- read_simulacrum(Dir)
+#Set the path to the directory where the Simulacrum CSV files are located; 
+Dir <- “/path/to/simulacrum/csv/files”;
+#Import the Simulacrum data files; 
+Data_frames <- read_simulacrum(Dir);
 ```
 
 ### Quering data:
