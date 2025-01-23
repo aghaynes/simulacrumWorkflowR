@@ -38,7 +38,7 @@ av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_tumour){
 #' @examples 
 #' summary_df <- extended_summary(sim_av_patient)
 
-extended_summary <- function(df) { ######### Optimize -  add more to the columns 
+extended_summary <- function(df) {
   if (!is.data.frame(df)) {
     stop("`df` must be a data frame.")
   }
