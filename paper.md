@@ -20,8 +20,8 @@ authors:
   name: Martin Bøgsted
   orcid: 0000-0001-9192-1814
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 tags:
 - R
 - censored cost
@@ -78,14 +78,14 @@ Providing a streamlined setup for building the workflow in R. The package includ
 simulacrumR was developed with R version 4.3.3. Installation requires Devtools and relies on dependencies listed in the DESCRIPTION file on GitHub. These dependencies are automatically installed during package installation.
 
 ### Installation:
-```{R]
+```R
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("CLINDA-AAU/simulacrumR",
 dependencies = TRUE)) 
 ```
 
 ### Loading data:
-```{R}
+```R
 library(simulacrumR)
 #Set the path to the directory where the Simulacrum CSV files are located; 
 Dir <- “/path/to/simulacrum/csv/files”;
@@ -94,17 +94,19 @@ Data_frames <- read_simulacrum(Dir);
 ```
 
 ### Quering data:
-```{R}
-query <- “SELECT * FROM sim_av_patient INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid”
+```R
+query <- “SELECT * 
+          FROM sim_av_patient 
+          INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid”
 merged_data <- query_sql(query)
 ```
 
 ### Generating a Reproducible Workflow for NHS Submission 
-```
+```R
 create_workflow( 
 libraries = "library(dplyr)", 
 query = "select * from sim_av_patient where age > 50 limit 500;", 
-data_management = "cancer_grouping(sim_av_tumour)”,
+data_management = "cancer_grouping(sim_av_tumour)",
 analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
 model_results = "html_table_model(model)", 
 Logger_report=TRUE)
