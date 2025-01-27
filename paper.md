@@ -52,7 +52,7 @@ The advantages of utilizing Simulacrum can be summarized as follows:
 4.	Eliminating Data Dredging.
 
 However, due to Simulacrum prioritizing privacy over utility, the dataset is primarily suitable for designing and testing analysis pipelines for the CAS data, not generating actionable results (@bullward2023research). 
-The process of accessing the real data through Simulacrum requires users to download multiple CSV files, install a dedicated Oracle database system locally, configure ODBC connections, and construct SQL queries all within an R workflow (@national2022guide), see Figure 1. 
+The process of accessing the real data through Simulacrum requires users to download multiple CSV files, install a dedicated Oracle database system locally, configure ODBC connections, and construct SQL queries all within an R workflow (@national2022guide). 
 These technical hurdles limit the accessibility of Simulacrum and reduce the engagement of researchers who could potentially contribute to cancer research. Setting up the database, configuring the ODBC connection, and integrating the components into an R workflow has proven complex and time-consuming. To address these challenges and improve accessibility, we propose the simulacrumR package. Our workflow streamlines the testing of SQL queries by eliminating the need for setting up a dedicated Oracle database or configuring ODBC connections (Figure 1).
 
 ![](fig/figure1_modified.drawio.png)
