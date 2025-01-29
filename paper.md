@@ -127,4 +127,7 @@ The difference between the syntax is important to consider when writing the quer
 
 Compute: While the time management function can provide an indication of the analysis being able to pass the three-hour time limit on NHS servers (@national2022guide) , there will likely be a difference between the user's local machine and the servers of NHS in terms of the time for the computation. It Is advised to divide the analysis into parts, to make sure some of the analysis can be returned. An example of divided analyses can be found in @nielsen2024simulacrum.
 
+# Acknowledgements
+Jakob Skelmose and Jennifer Bartell acknowledge support from the Health Data Science Sandbox (https://hds-sandbox.github.io) funded by the Novo Nordisk Fonden (NNF20OC0063268). Martin Bøgsted and Rasmus Rask acknowledge support from the SE3D project (Synthetic health data: ethical deployment and dissemination via deep learning approaches) funded by the Novo Nordisk Fonden (NNF23OC0083510).
+
 # References 
