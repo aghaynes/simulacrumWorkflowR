@@ -114,6 +114,11 @@ The `sqlite2oracle` function ensures basic query translation for Oracle database
 In the event of an error on NHS servers while executing the analysis pipeline, the `time_management` function and the base R `sink` function will generate a comprehensive log to facilitate seamless debugging.
 
 # Limitations 
+Data Differences:
+-	Coverage: Simulacrum reflects diagnoses from 2016–2019, while CAS includes records dating back to 1971. These restrictions need to be added to code for running on CAS.
+- Structure: Simulacrum has a simplified structure for ease of use, but this differs from the evolving CAS database. Requires NDRS to make adjustments for running on CAS
+
+
 SQLite: The simulacrumR library leverages the sqldf package to provide users with a streamlined SQL interface for interacting with the Simulacrum dataset. However, the utilization of SQLite introduces a consideration: potential differences in SQL syntax compared to Oracle. While SQLite and Oracle share a common foundation in SQL, variations in certain queries exist. Table 1 highlights some key variations:  
 
 | Feature | SQLite | Oracle |
@@ -125,7 +130,7 @@ Table 1: An overview of the difference between basic SQL commands for SQLite and
 
 The difference between the syntax is important to consider when writing the queries to the SQLite database and submitting the queries for execution on an Oracle server. To ensure compatibility with the servers at NHS, it is highly recommended to minimize SQL queries. 
 
-Compute: While the time management function can provide an indication of the analysis being able to pass the three-hour time limit on NHS servers (@national2022guide) , there will likely be a difference between the user's local machine and the servers of NHS in terms of the time for the computation. It Is advised to divide the analysis into parts, to make sure some of the analysis can be returned. An example of divided analyses can be found in @nielsen2024simulacrum.
+Time Management: o	While Simulacrum facilitates SQL query testing, time estimates for queries may not align with CAS performance due to its larger dataset. Similarly, code adjustments will take time that is unaccounted for in this. However, the package remains beneficial for testing time for other aspects of R scripts and to understand which analysis are time consuming. Therefor It Is advised to divide the analysis into parts, to make sure some of the analysis can be returned. An example of divided analyses can be found in @nielsen2024simulacrum.
 
 # Acknowledgements
 Jakob Skelmose and Jennifer Bartell acknowledge support from the Health Data Science Sandbox (https://hds-sandbox.github.io) funded by the Novo Nordisk Fonden (NNF20OC0063268). Martin Bøgsted and Rasmus Rask acknowledge support from the SE3D project (Synthetic health data: ethical deployment and dissemination via deep learning approaches) funded by the Novo Nordisk Fonden (NNF23OC0083510).
