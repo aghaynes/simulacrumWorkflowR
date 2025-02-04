@@ -1,4 +1,4 @@
-Package: simulacrumR
+Package: simulacrumWorkflowR
 Type: Package
 Title: An R package for Streamlined Access and Analysis of the Simulacrum Cancer Dataset
 Version: 0.1.0

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(simulacrumR)
+library(simulacrumWorkflowR)
 library(survival)
 library(openxlsx)
 library(broom)
@@ -25,7 +25,7 @@ library(openxlsx)
 
 
 ```{r}
-dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
+dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 ```
 
@@ -133,6 +133,5 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ```{r}
 stop <- stop_time()
-compute_time_limit(start, stop)
-compute_time_limit
+#compute_time_limit(start, stop)
 ```

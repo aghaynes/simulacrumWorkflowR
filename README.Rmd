@@ -13,24 +13,24 @@ knitr::opts_chunk$set(
 library(knitr)
 ```
 
-# simulacrumR
+# simulacrumWorkflowR
 
 
-simulacrumR is a package developed to assist users of the Simulacrum dataset in better preparing to use the dataset as a precursor to accessing real patient data in the Cancer Administration System (CAS).
+simulacrumWorkflowR is a package developed to assist users of the Simulacrum dataset in better preparing to use the dataset as a precursor to accessing real patient data in the Cancer Administration System (CAS).
 
-The Simulacrum data is a synthetic version of the real patient data at CAS. It is publicly available and can be used to create and test analyses in R or STATA before executing them on the real data. However, setting up Simulacrum requires creating a local Oracle database, importing the data, and setting up an ODBC connection. To simplify this process, the simulacrumR package automates the setup of a database within R and provides various utility functions for preprocessing, query generation, and query testing.
+The Simulacrum data is a synthetic version of the real patient data at CAS. It is publicly available and can be used to create and test analyses in R or STATA before executing them on the real data. However, setting up Simulacrum requires creating a local Oracle database, importing the data, and setting up an ODBC connection. To simplify this process, the simulacrumWorkflowR package automates the setup of a database within R and provides various utility functions for preprocessing, query generation, and query testing.
 
 # Installation
-simulacrumR may be installed using the following command:
+simulacrumWorkflowR may be installed using the following command:
 ```{r, eval = FALSE}
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("CLINDA-AAU/simulacrumR",
+devtools::install_github("CLINDA-AAU/simulacrumWorkflowR",
 dependencies = TRUE, force = TRUE) 
 
 ```
 
 # Overview
-The main functions of simulacrumR is: 
+The main functions of simulacrumWorkflowR is: 
 
 - Integrated SQL Environment: Leverages the SQLdf (Grothendieck, 2017) package to enable SQL queries directly within R, eliminating the need for external database setup and ODBC connections by creating a local SQLite temporary database within the R environment.  
 
@@ -61,9 +61,9 @@ The workflow is built around the SQLdf package where the user are able to setup 
 The latest Simulacrum data is formatted identically to the real CAS data. Once downloaded, the read_simulacrum() function can automatically load the CSV files as data frames in R:
 
 ```{r}
-library(simulacrumR)
+library(simulacrumWorkflowR)
 
-dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
+dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 # Automated data loading 
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 ```
@@ -104,7 +104,7 @@ sqlite2oracle(query2)
 
 ## Preprocessing Functions
 
-simulacrumR includes functions to simplify data preprocessing:
+simulacrumWorkflowR includes functions to simplify data preprocessing:
 
 - 'cancer_grouping'()
 - 'group_ethnicity()'

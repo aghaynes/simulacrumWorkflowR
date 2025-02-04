@@ -1,5 +1,5 @@
 ---
-title: "Example: Testing Oracle compatible queries in the query_sql function"
+title: "Example Testing Oracle compatible queries in the query_sql function"
 author: "Jakob Skelmose, Rasmus Rask, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted"
 output: rmarkdown::html_vignette
 vignette: >
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(simulacrumR)
+library(simulacrumWorkflowR)
 ```
 
 In  this example notebook, we want to demonstrate the cababilities of the query_sql function in the package, which is based on the sqldf library and which creates an temporal sqlite database in the R environment. 
@@ -28,7 +28,7 @@ For this demonstration, we use a guide for sql query published by Health Data In
 # Setup the database: 
 
 ``` {r}
-dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
+dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 # Automated data loading 
 data_frames_lists <- read_simulacrum(dir) 
 
