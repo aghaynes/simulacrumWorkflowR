@@ -42,7 +42,7 @@ bibliography: simulacrumWorkflowrRef.bib
 # Summary
 The simulacrumWorkflowR package addresses the technical barriers associated with utilizing Simulacrum through a streamlined workflow for accessing, preprocessing, and validating statistical analyses on the Simulacrum dataset. Thus, making it more accessible to researchers and clinicians with limited database expertise. The main function of this package is the `create_workflow()` function which creates an R script, based on the user's input, that includes all the necessary code and is compatible with execution on the Cancer Analysis System (CAS) database servers.
 # Statement of need 
-The Simulacrum is a synthetic version of the CAS (Cancer Analysis System) database, enabling the development and testing of code for analysing CAS data which is held by the National Disease Registration Service (NDRS) (@national2022guide). The CAS data is stored in an Oracle database, requiring SQL queries for data extraction. A common analysis workflow involves querying the database directly from R, extracting data, and further processing it to produce analytical outputs (the R workflow). Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data. The latest version of Simulacrum contains information about patient characteristics, tumor diagnosis, systematic anti-cancer treatment, radiotherapy, and gene testing data (@frayling2023simulacrum). scripts developed on the Simulacrum can be sent to NDRS for execution on the CAS database.  This involves first making adjustments to the code (e.g., SQL queries need further processing by NDRS due to 1) structural differences between Simulacrum and CAS, 2) unknown details/specification of CAS database and 3) code alignment with NDRS best practices), executing the code, assessing outputs for privacy and releasing the data. This is done free of charge, if under 3 hours work. Providing easily adaptable and executable code is essential for this to be done in efficient and timely manner.The advantages of utilizing Simulacrum can be summarized as follows: 
+The Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data which is held by the National Disease Registration Service (NDRS) (@national2022guide). The CAS data is stored in an Oracle database, requiring SQL queries for data extraction. A common analysis workflow involves querying the database directly from R, extracting data, and further processing it to produce analytical outputs (the R workflow). Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data. The latest version of Simulacrum contains information about patient characteristics, tumor diagnosis, systematic anti-cancer treatment, radiotherapy, and gene testing data (@frayling2023simulacrum). scripts developed on the Simulacrum can be sent to NDRS for execution on the CAS database.  This involves first making adjustments to the code (e.g., SQL queries need further processing by NDRS due to 1) structural differences between Simulacrum and CAS, 2) unknown details/specification of CAS database and 3) code alignment with NDRS best practices), executing the code, assessing outputs for privacy and releasing the data. This is done free of charge, if under 3 hours of work. Providing easily adaptable and executable code is essential for this to be done in an efficient and timely manner. The advantages of utilizing Simulacrum can be summarized as follows: 
 
 1.	Accelerated research.
 2.	Democratization of data.
@@ -72,7 +72,7 @@ simulacrumWorkflowR was developed with R version 4.3.3. Installation requires De
 ### Installation:
 ```R
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("CLINDA-AAU/simulacrumWorflowR",
+devtools::install_github("CLINDA-AAU/simulacrumWorkflowR",
 dependencies = TRUE)) 
 ```
 
@@ -82,7 +82,7 @@ library(simulacrumWorkflowR)
 #Set the path to the directory where the Simulacrum CSV files are located; 
 Dir <- “/path/to/simulacrum/csv/files”;
 #Import the Simulacrum data files; 
-Simulacrum_list_df <- read_simulacrum(Dir);
+simulacrum_list_df <- read_simulacrum(Dir);
 ```
 
 ### Quering data:
@@ -120,3 +120,4 @@ Time Management: While Simulacrum facilitates SQL query testing, time estimates 
 Jakob Skelmose and Jennifer Bartell acknowledge support from the Health Data Science Sandbox (https://hds-sandbox.github.io) funded by the Novo Nordisk Fonden (NNF20OC0063268). Martin Bøgsted and Rasmus Rask Kragh Jørgensen acknowledge support from the SE3D project (Synthetic health data: ethical deployment and dissemination via deep learning approaches) funded by the Novo Nordisk Fonden (NNF23OC0083510).
 
 # References 
+
