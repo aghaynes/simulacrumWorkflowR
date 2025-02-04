@@ -1,34 +1,35 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# simulacrumR
+# simulacrumWorkflowR
 
-simulacrumR is a package developed to assist users of the Simulacrum
-dataset in better preparing to use the dataset as a precursor to
-accessing real patient data in the Cancer Administration System (CAS).
+simulacrumWorkflowR is a package developed to assist users of the
+Simulacrum dataset in better preparing to use the dataset as a precursor
+to accessing real patient data in the Cancer Administration System
+(CAS).
 
 The Simulacrum data is a synthetic version of the real patient data at
 CAS. It is publicly available and can be used to create and test
 analyses in R or STATA before executing them on the real data. However,
 setting up Simulacrum requires creating a local Oracle database,
 importing the data, and setting up an ODBC connection. To simplify this
-process, the simulacrumR package automates the setup of a database
-within R and provides various utility functions for preprocessing, query
-generation, and query testing.
+process, the simulacrumWorkflowR package automates the setup of a
+database within R and provides various utility functions for
+preprocessing, query generation, and query testing.
 
 # Installation
 
-simulacrumR may be installed using the following command:
+simulacrumWorkflowR may be installed using the following command:
 
 ``` r
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("CLINDA-AAU/simulacrumR",
+devtools::install_github("CLINDA-AAU/simulacrumWorkflowR",
 dependencies = TRUE, force = TRUE) 
 ```
 
 # Overview
 
-The main functions of simulacrumR is:
+The main functions of simulacrumWorkflowR is:
 
 - Integrated SQL Environment: Leverages the SQLdf (Grothendieck, 2017)
   package to enable SQL queries directly within R, eliminating the need
@@ -83,14 +84,17 @@ data. Once downloaded, the read_simulacrum() function can automatically
 load the CSV files as data frames in R:
 
 ``` r
-library(simulacrumR)
+library(simulacrumWorkflowR)
 
-dir <- "C:/Users/p90j/Desktop/Jakob/Data/Simulacrum/simulacrum_v2.1.0/Data/"
+dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 # Automated data loading 
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
 #> Reading: sim_av_patient
 #> Reading: sim_av_tumour
 #> Files successfully loaded!
+#> Warning in read_simulacrum(dir, selected_files = c("sim_av_patient",
+#> "sim_av_tumour")): Please refer to tables by their original names, capitalized
+#> as presented (e.g., SIM_AV_PATIENT)
 ```
 
 Access individual data frames as follows:
@@ -114,7 +118,7 @@ INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;"
 Execute queries with the sql_test() function:
 
 ``` r
-df1 <- sql_test(query)
+df1 <- query_sql(query)
 ```
 
 ## SQLite to Oracle Query Translation
@@ -135,7 +139,7 @@ sqlite2oracle(query2)
 
 ## Preprocessing Functions
 
-simulacrumR includes functions to simplify data preprocessing:
+simulacrumWorkflowR includes functions to simplify data preprocessing:
 
 - ‘cancer_grouping’()
 - ‘group_ethnicity()’
@@ -164,7 +168,7 @@ create_workflow(
                               ",
                              analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
                              model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20250117_0935.R
+#> Workflow script created at: workflow_20250204_0519.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
 ```
 

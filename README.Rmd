@@ -86,7 +86,7 @@ INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;"
 Execute queries with the sql_test() function:
 
 ```{r}
-df1 <- sql_test(query)
+df1 <- query_sql(query)
 ```
 ## SQLite to Oracle Query Translation
 
