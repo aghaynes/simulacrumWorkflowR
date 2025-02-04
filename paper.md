@@ -113,7 +113,7 @@ Data Differences:
 - Coverage: Simulacrum reflects diagnoses from 2016–2019, while CAS includes records dating back to 1971. These restrictions need to be added to the code for running on CAS.
 - Structure: Simulacrum has a simplified structure for ease of use, but this differs from the evolving CAS database. Requires NDRS to adjust for execution on CAS.
 
-SQLite: While SQL-based like Oracle, has some syntax differences.  For example, SQLite uses LIMIT while Oracle uses ROWNUM.  The sqldf package's implementation also restricts table creation capabilities within SQLite.
+SQLite: While both Oracle and SQLite use SQL syntax, there are notable differences between their syntaxes.  For example, SQLite uses LIMIT while Oracle uses ROWNUM.  The sqldf package's implementation also restricts table creation capabilities within SQLite.
 Time Management: While Simulacrum facilitates SQL query testing, time estimates for queries may not align with CAS performance due to its larger dataset. Similarly, code adjustments will take time that is unaccounted for in this. Despite this limitation, the package remains useful for benchmarking other components of the R script and identifying performance bottlenecks. 
 
 # Acknowledgements
