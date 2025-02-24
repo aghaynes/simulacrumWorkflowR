@@ -257,14 +257,14 @@ FROM SIM_AV_TUMOUR; "
 
 print(query_sql(query4))
 ```
-# 10. CREATE TABLE AS 
+# 10. CREATE TABLE AS (Prolly delete) 
 ```{R}
-query <- "CREATE TABLE table01 nologging AS
-(SELECT patientid 
-FROM SIMULACRUM.SIM_AV_PATIENT
-WHERE vitalstatusdate BETWEEN 2016 AND 2019);"
+#query <- "CREATE TABLE table01 nologging AS
+#(SELECT patientid 
+#FROM SIMULACRUM.SIM_AV_PATIENT
+#WHERE vitalstatusdate BETWEEN 2016 AND 2019);"
 
-print(query_sql(query))
+#print(query_sql(query))
 ```
 
 ```{R}

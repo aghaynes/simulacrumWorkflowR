@@ -7,6 +7,7 @@
 compute_time_limit(
   start_time,
   end_time,
+  time_limit_hours = 3,
   save_to_file = TRUE,
   file_path = "execution_time_log.txt"
 )
@@ -17,7 +18,7 @@ compute_time_limit(
 \item{end_time}{A `POSIXct` object representing the end time.}
 }
 \value{
-A character string containing the total execution time and the result (accepted or rejected).
+A character vector containing the total execution time and the result (accepted or rejected).
         If the time exceeds 3 hours, a warning is issued.
 }
 \description{
