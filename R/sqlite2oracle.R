@@ -41,6 +41,9 @@ sqlite2oracle <- function(query) {
       query <- gsub(keyword, toupper(keyword), query, ignore.case = TRUE)
     }
     
+    # Convert strftome to TO_CHAT 
+    query <- gsub("strftime\\('\%Y-\%m-\%d',\\s*([^\\)]+)\\)", "TO_CHAR(\\1, 'YYYY-MM-DD')", query, iqnore.case = TRUE)
+    
     chech_for_where <- grepl("\\bWHERE\\b", query, ignore.case = TRUE)
     
     if (chech_for_where) {

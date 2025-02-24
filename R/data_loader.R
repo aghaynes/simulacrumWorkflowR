@@ -86,4 +86,3 @@ read_simulacrum <- function(dir = "./simulacrum_v2.1.0/Data/", selected_files = 
 
 }
 
-

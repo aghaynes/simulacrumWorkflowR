@@ -24,3 +24,5 @@ query_sql <- function(query) {
     stop("The function must contain a string")
   sqldf(query, stringsAsFactors = FALSE)
 }
+
+
