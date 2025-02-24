@@ -54,7 +54,7 @@ The process of accessing the real data through Simulacrum requires users to cons
 The simulacrumWorkflowR Package simplifies testing by removing the need to set up an Oracle database or configure ODBC connections. This allows users to create and test the full R workflow, including SQL queries that demonstrate the exact specification and form of the data required from the CAS database and how they integrate into the rest of the R script. This means NDRS can easily make the required adjustments before they are run on the CAS database (Figure 1). 
 ![](fig/figure1_modified.drawio.png)
 
-Figure 1: Flowchart of the process of running an analysis on the CAS Database using an R workflow tested on Simulacrum and the process of running a similar analysis with the simulacrumWorkflowR package. 
+Figure 1: Flowchart comparing workflow development and testing for CAS Database analysis using a Oracle database with ODBC versus the SimulacrumWorkflowR package.
 
 The simulacrumWorkflowR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum datasets to facilitate access and execution of code for analysis on the CAS database.
 
