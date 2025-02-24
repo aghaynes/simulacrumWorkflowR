@@ -4,12 +4,12 @@ authors:
 - affiliation: "1, 2"
   name: Jakob Skelmose 
   orcid: 0009-0006-8967-9268
-- affiliation: "2, 4"
-  name: Jennifer Bartell 
-  orcid: 0000-0003-2750-9678
 - affiliation: "1"
   name: Lars Nielsen  
   orcid: 0000-0002-3715-8528
+- affiliation: "2, 4"
+  name: Jennifer Bartell 
+  orcid: 0000-0003-2750-9678
 - affiliation: "1"
   name: Charles Vesteghem  
   orcid: 0000-0003-2301-9081
@@ -41,22 +41,22 @@ bibliography: simulacrumWorkflowrRef.bib
 
 
 # Summary
-The simulacrumWorkflowR package addresses the technical barriers associated with utilizing the Simulacrum through a streamlined workflow for accessing, preprocessing, and validating statistical analyses on the Simulacrum dataset. Our aim is to improve accessibility for researchers and clinicians with limited database expertise. The main function of this package is the `create_workflow()` function, which creates an R script based on the user's input that includes all the necessary code and is compatible with execution on the Cancer Analysis System (CAS) database servers.
+The simulacrumWorkflowR package addresses the technical barriers associated with utilizing the Simulacrum through a streamlined workflow for accessing, preprocessing, and validating statistical analyses on the Simulacrum dataset. Our aim is to improve accessibility for researchers and clinicians with limited database expertise. The main function of this package is the `create_workflow()` function, which creates an R script based on the user's input that includes the necessary code for submission and execution on the Cancer Analysis System (CAS) database servers.
 # Statement of need 
-The   Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data which is held by the National Disease Registration Service (NDRS) (@national2022guide). CAS data is stored in an Oracle database, requiring SQL queries for data extraction. A common analysis workflow involves querying the database directly from R, extracting data, and further processing it to produce analytical outputs (the R workflow). Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data. The latest version of Simulacrum contains information about patient characteristics, tumor diagnosis, systematic anti-cancer treatment, radiotherapy, and genetic testing data (@frayling2023simulacrum). Scripts developed on the Simulacrum can be sent to NDRS for execution on the CAS database.  This involves first adjusting the code (e.g., SQL queries need further processing by NDRS due to 1) structural differences between Simulacrum and CAS, 2) non-public details/specifications of the CAS database and 3) code alignment with NDRS best practices), executing the code, assessing outputs with respect to patient privacy and releasing the data. If this process takes less than 3 hours, it’s free of charge . Thus, a streamlined process requires providing easily adaptable and executable code. The advantages of utilizing Simulacrum can be summarized as follows: 
+The    Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data which is held by the National Disease Registration Service (NDRS) (@national2023guide  ). CAS data is stored in an Oracle database, requiring SQL queries for data extraction. A common analysis workflow involves querying the database directly from R, extracting data, and further processing it to produce analytical outputs (the R workflow). Simulacrum is a synthetic version of the CAS database, enabling the development and testing of code for analysing CAS data. The latest version of Simulacrum contains information about patient characteristics, tumor diagnosis, systematic anti-cancer treatment, radiotherapy, and genetic testing data (@frayling2023simulacrum). Scripts developed on the Simulacrum can be sent to NDRS for execution on the CAS database.  This involves first adjusting the code (e.g., SQL queries need further processing by NDRS due to 1) structural differences between Simulacrum and CAS, 2) non-public details/specifications of the CAS database and 3) code alignment with NDRS best practices), executing the code, assessing outputs with respect to patient privacy and releasing the data. If this process takes less than 3 hours, it’s free of charge  . If the process is expected to take longer, the NDRS analyst may suggest simplifying the request or redirecting it to NHS England’s data release services (DARS). For complex or recurring requests involving bespoke analysis, one can contact HDI for further assistance. Thus, a streamlined process requires providing easily adaptable and executable code. The advantages of utilizing Simulacrum can be summarized as follows: 
 
 1.	Accelerated research.
 2.	Democratization of data.
 3.	Improving Privacy. 
 
-Due to Simulacrum prioritizing privacy over fidelity, the dataset is intended for planning, designing, and testing analysis pipelines prior to generating actionable results with CAS data (@bullward2023research). 
-The process of accessing the real data through Simulacrum requires users to download CSV files, install a local Oracle database, configure ODBC connections, and construct SQL queries and R scripts. Setting up a full Oracle database can be complex, particularly for new users. This presents a barrier to testing the full R workflow using Simulacrum and may discourage users from doing so (@national2022guide). 
-Providing the full R workflow with SQL queries for data extraction helps NDRS understand the exact form and specification of the data needed from the database, making it easier to make required adjustments to the code before executing on the CAS. The SimulacrumWorkflowR Package simplifies testing by removing the need to set up an Oracle database or configure ODBC connections. This allows users to create and test the full R workflow, including SQL queries that demonstrate the exact specification and form of the data required from the CAS database which NDRS can easily adapt to run on the CAS database (Figure 1).
+Due to Simulacrum prioritizing privacy over fidelity, only some of the statistical properties are preserved, thus results from the Simulacrum should not be used to inform real-world decisions. Instead, the dataset is intended for planning, designing, and testing analysis pipelines prior to generating actionable results with CAS data (@bullward2023research). 
+The process of accessing the real data through Simulacrum requires users to construct SQL queries for extracting data from the CAS database and R code for analysis. To write and test SQL queries using Simulacrum, users must download CSV files, install a local Oracle database and configure ODBC connections. SQL queries can then be executed from within an R script to extract data from the database for further analysis. Setting up a full Oracle database can be complex, particularly for new users. This presents a barrier to testing the full R workflow using Simulacrum and may discourage users from doing so (@national2022guide). 
+The simulacrumWorkflowR Package simplifies testing by removing the need to set up an Oracle database or configure ODBC connections. This allows users to create and test the full R workflow, including SQL queries that demonstrate the exact specification and form of the data required from the CAS database and how they integrate into the rest of the R script. This means NDRS can easily make the required adjustments before they are run on the CAS database (Figure 1). 
 ![](fig/figure1_modified.drawio.png)
 
 Figure 1: Flowchart of the process of running an analysis on the CAS Database using an R workflow tested on Simulacrum and the process of running a similar analysis with the simulacrumWorkflowR package. 
 
-The simulacrumWorflowR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum datasets to facilitate access and execution of code for analysis on the CAS database.
+The simulacrumWorkflowR package is, to our knowledge, the first package designed to enhance usability and provide a complete workflow for utilizing the Simulacrum datasets to facilitate access and execution of code for analysis on the CAS database.
 
 # Key functionalities 
 Providing a streamlined setup for building the workflow in R. The package includes:
@@ -64,7 +64,7 @@ Providing a streamlined setup for building the workflow in R. The package includ
 1.	\textbf{Integrated SQL Environment:} Leverages the SQLdf (@grothendieck2017sqldf) package to enable SQL queries directly within R, eliminating the need to set up an external database and ODBC connections by creating a local temporary SQLite database within the R environment. 
 2.	\textbf{Query Helper:} Offers a collection of queries custom-made for the Simulacrum database? for pulling and merging specific tables. Additionally, the `sqlite2oracle` function assists in translating queries to be compatible with the NHS servers.
 3.	\textbf{Helper Tools:} Offers a range of data preprocessing functions for cleaning and preparing the data for analysis, ensuring data quality, and consistency. Key functions include cancer type grouping, survival outcomes, and logging reports. 
-4.	\textbf{Workflow Generator:} Generates an R script with the complete workflow. This ensures correct layout and the ability to integrate the necessary code to obtain a workflow suitable for submission to  NDRS and execution on the CAS database. 
+4.	\textbf{Workflow Generator:} Generates an R script with the complete workflow. This ensures correct layout and the ability to integrate the necessary code to obtain a workflow suitable for submission to NDRS and execution on the CAS database. 
 
 # Workflow illustration
 simulacrumWorkflowR was developed with R version 4.3.3. Installation requires Devtools and relies on dependencies listed in the DESCRIPTION file in the GitHub repository. These dependencies are automatically installed during package installation.
