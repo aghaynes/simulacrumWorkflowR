@@ -35,28 +35,37 @@
 #' end <- end_time()
 #' compute_time_limit(start, end)
 
-compute_time_limit <- function(start_time, end_time, save_to_file = TRUE, file_path = "execution_time_log.txt") {
+compute_time_limit <- function(start_time, end_time, time_limit_hours = 3, save_to_file = TRUE, file_path = "execution_time_log.txt") {
   execution_time <- as.duration(end_time - start_time)
   
-  if (execution_time > hours(3)) {
-    message <- sprintf(
+  if (execution_time > hours(time_limit_hours)) {
+    message_text <- sprintf(
       "Total Execution Time: %s\nAnalysis rejected! Exceeds the three-hour threshold of NHS.",
       as.character(execution_time)
     )
-    warning(message)
+    
+    warning(message_text)
   } else {
-    message <- sprintf(
+    message_text <- sprintf(
       "Total Execution Time: %s\nAnalysis accepted! It is within the three-hour threshold set by the NHS.",
       as.character(execution_time)
     )
+    message(message_text)
     warning("Please note that the processing power of NHS servers and your local machine may vary significantly. As a result, the time required to run your analysis may differ. Please anticipate potential variations in runtime between the two environments.")
+    warning("Please also take the time into account which the NDRS analyst time to process the workflow request and to produce ananymous outputs")
   }
   
   if (save_to_file) {
     writeLines(message, con = file_path)
   }
   
-  return(message)
+  result <- list(
+    execution_time = execution_time,
+    time_limit_hours = time_limit_hours,
+    message = message_text
+  )
+  
+  return(result)
 }
 
 
