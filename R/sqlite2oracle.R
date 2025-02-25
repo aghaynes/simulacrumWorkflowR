@@ -54,6 +54,9 @@ sqlite2oracle <- function(query) {
       query <- gsub("LIMIT\\s+(\\d+)", "WHERE ROWNUM <= \\1", query, ignore.case = TRUE)
     }
     
+    query <- gsub("\\bTRUE\\b", "1", query, ignore.case = TRUE)
+    query <- gsub("\\bFALSE\\b", "0", query, ignore.case = TRUE)
+    
     query <- trimws(query)
     if (!grepl(";$", query)) {
       query <- paste0(query, ";")
