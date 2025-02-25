@@ -31,7 +31,6 @@
 #'   analysis = "model <- glm(Y ~ x1 + x2 + x3, data=df",
 #'   model_results = "write.csv(model, 'results.csv')"
 #' )
-#'
 
 
 create_workflow <- function(
