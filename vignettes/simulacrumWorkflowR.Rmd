@@ -129,7 +129,13 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ')
 ```
+```{r}
+start <- start_time()
+Sys.sleep(5) # Simulate some processing
+end <- stop_time()
+#compute_time_limit(start, end)
 
+```
 
 ```{r}
 stop <- stop_time()
