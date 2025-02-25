@@ -133,5 +133,5 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ```{r}
 stop <- stop_time()
-compute_time_limit(start, stop)
+#compute_time_limit(start, stop)
 ```
