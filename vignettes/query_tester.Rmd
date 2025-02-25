@@ -257,23 +257,6 @@ FROM SIM_AV_TUMOUR; "
 
 print(query_sql(query4))
 ```
-# 10. CREATE TABLE AS (Prolly delete) 
-```{R}
-#query <- "CREATE TABLE table01 nologging AS
-#(SELECT patientid 
-#FROM SIMULACRUM.SIM_AV_PATIENT
-#WHERE vitalstatusdate BETWEEN 2016 AND 2019);"
-
-#print(query_sql(query))
-```
-
-```{R}
-query <- "SELECT patientid
-          FROM SIM_AV_PATIENT
-          WHERE strftime('%Y', vitalstatusdate) BETWEEN '2019-08-01' AND '2022-12-23';"
-
-print(query_sql(query))
-```
 
 
 ## Conclusion
