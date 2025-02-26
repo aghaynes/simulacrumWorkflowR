@@ -3,6 +3,7 @@
 export(av_patient_tumour_merge)
 export(cancer_grouping)
 export(compute_time_limit)
+export(create_dir)
 export(create_workflow)
 export(extended_summary)
 export(group_ethnicity)

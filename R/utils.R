@@ -51,27 +51,42 @@ extended_summary <- function(df) {
   return(df_summary)
 }
 
-
-#'Create a new dir if not existing
+#' Create a new directory if it does not exist.
 #'
+#' This function creates a directory at the specified path if it does not already exist. The default name is "Outputs". To illustrate the folder is meant for various outputs of the package.
+#' There is also optional verbose output to inform the user about the action taken. 
+#'
+#' @param dir_path A character string defining a path of the directory to create. Defaults is "Outputs".
+#' @param verbose A logical value to decide if there should be a printed messages about the directory creation process. Defaults is TRUE.
+#'
+#' @return invisible return of the `dir_path`
+#'
+#' @export
 
-create_dir <- function(dir_path = "Outputs", verbose = TRUE) {
-  if (!is.character(dir_path)) {
-    stop("`dir_path` needs to be a string")
+create_dir <- function(dir_name = "Outputs", verbose = TRUE) {
+  if (!is.character(dir_name)) {
+    stop("`dir_name` needs to be a string")
   }
-  if (!is.logical(verbose)) { 
+  if (!is.logical(verbose)) {
     stop("`verbose` needs to be a logical value")
   }
   
-  if (!dir.exists(dir_path)) {
-    dir.create(dir_path, recursive = TRUE) 
+  package_root <- system.file(package = "simulacrumWorkflowR")
+  if (package_root == "") {
+    stop("Package 'simulacrumWorkflowR' not found.")
+  }
+  
+  full_path <- file.path(package_root, dir_name)
+  
+  if (!dir.exists(full_path)) {
+    dir.create(full_path, recursive = TRUE)
     if (verbose) {
-      message(paste0("Created path: ", dir_path))
+      message(paste0("Created path: ", full_path))
     }
   } else {
     if (verbose) {
-      message(paste0("Path "+ dir_path + " already exists")) 
+      message(paste0("Path ", full_path, " already exists"))
     }
   }
-  invisible(dir_path)
+  invisible(full_path)
 }

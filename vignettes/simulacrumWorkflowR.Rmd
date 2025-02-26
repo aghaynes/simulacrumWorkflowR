@@ -85,54 +85,15 @@ summary(log_model)
 # Save models as html tabels
 
 ```{r}
-# Convert output of models into tibble and Save model as Excel file 
-
-output_dir <- create_dir()
-
-cox_model_sum <- tidy(cox_model)
-write.xlsx(cox_model_sum, file.path(output_dir, "cox_model.xlsx"))
-
-log_model_sum <- tidy(log_model)
-write.xlsx(log_model_sum, file.path(output_dir, "log_model.xlsx"))
 
 ```
 
 
 ```{r}
-create_workflow(
-  libraries = '              
-library(survival)
-library(sjPlot)
-library(sjmisc)
-library(sjlabelled)
-',
-  query = "                  
-SELECT *
-FROM sim_av_patient
-INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid;",
-  data_management = '        
-df2 <- survival_days(df1)
 
-df21 <- df2
-
-df21$VITALSTATUS <- ifelse(df21$VITALSTATUS == "A", 1,
-                              ifelse(df21$VITALSTATUS == "D", 0, NA))
-',
-  analysis = '
-cox_model <- coxph(Surv(diff_date, VITALSTATUS) ~ AGE + factor(GENDER.x) + factor(PERFORMANCESTATUS), data=df21)
-log_model <- glm(VITALSTATUS ~ AGE + factor(GENDER.x) + factor(PERFORMANCESTATUS), data=df21, family = "binomial")
-',
-  model_results = '
-cox_model_sum <- tidy(cox_model)
-write.xlsx(cox_model_sum, "cox_model.xlsx")
-
-log_model_sum <- tidy(log_model) 
-write.xlsx(log_model_sum, "log_model.xlsx")
-
-')
 ```
 
 ```{r}
 stop <- stop_time()
-compute_time_limit(start, stop)
+#compute_time_limit(start, stop)
 ```

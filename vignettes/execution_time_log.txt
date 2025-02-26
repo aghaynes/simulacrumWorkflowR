@@ -1,2 +1,0 @@
-Total Execution Time: 16194.0797598362s (~4.5 hours)
-Analysis rejected! Exceeds the three-hour threshold of NHS.
