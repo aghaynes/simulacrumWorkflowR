@@ -62,24 +62,24 @@ INNER JOIN SIM_AV_TUMOUR
 # Additional preprocessing
 ```{r}
 
-df2 <- survival_days(df1)
-df2$VITALSTATUS <- ifelse(df2$VITALSTATUS == "A", 1,
-                              ifelse(df2$VITALSTATUS == "D", 0, NA))
+df_surv <- survival_days(df1)
+df_surv$VITALSTATUS <- ifelse(df_surv$VITALSTATUS == "A", 1,
+                              ifelse(df_surv$VITALSTATUS == "D", 0, NA))
 
-df21 <- cancer_grouping(df2)
-extended_summary(df21)
+df_complete <- cancer_grouping(df_surv)
+extended_summary(df_complete)
 ```
 
 
 # example of a Cox model of the synthetic data
 ```{r}
-cox_model <- coxph(Surv(diff_date, VITALSTATUS) ~ AGE + factor(GENDER) + factor(PERFORMANCESTATUS), data=df21)
+cox_model <- coxph(Surv(diff_date, VITALSTATUS) ~ AGE + factor(GENDER) + factor(PERFORMANCESTATUS), data=df_complete)
 summary(cox_model)
 ```
 
 # Example of a Logistic regression of the synthetic data
 ```{r}
-log_model <- glm(VITALSTATUS ~ AGE + factor(GENDER) + factor(PERFORMANCESTATUS), data=df21, family = "binomial")
+log_model <- glm(VITALSTATUS ~ AGE + factor(GENDER) + factor(PERFORMANCESTATUS), data=df_complete, family = "binomial")
 summary(log_model)
 ```
 # Save models as html tabels

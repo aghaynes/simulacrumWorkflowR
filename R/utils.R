@@ -51,3 +51,27 @@ extended_summary <- function(df) {
   return(df_summary)
 }
 
+
+#'Create a new dir if not existing
+#'
+
+create_dir <- function(dir_path = "", verbose = TRUE) {
+  if (!is.character(dir_path)) {
+    stop("`dir_path` needs to be a string")
+  }
+  if (!is.logical(verbose)) { 
+    stop("`verbose` needs to be a logical value")
+  }
+  
+  if (!dir.exists(dir_path)) {
+    dir.create(dir_path, recursive = TRUE) 
+    if (verbose) {
+      message(paste0("Created path: ", dir_path))
+    }
+  } else {
+    if (verbose) {
+      message(paste0("Path "+ dir_path + " already exists")) 
+    }
+  }
+  invisible(dir_path)
+}

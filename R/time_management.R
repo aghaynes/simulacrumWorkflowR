@@ -23,6 +23,8 @@
 #'
 #' @importFrom lubridate as.duration 
 #' @importFrom lubridate duration
+#' @importFrom simulacrumWorkflowR utils 
+
 #'
 #' @return A character vector containing the total execution time and the result (accepted or rejected).
 #'         If the time exceeds 3 hours, a warning is issued.
@@ -59,6 +61,8 @@ compute_time_limit <- function(start_time, end_time, time_limit_hours = 3, save_
   }
   
   if (save_to_file) {
+    log_dir <- dirname(file_path) 
+    create_dir(log_dir)
     writeLines(message_text, con = file_path)
   }
   
