@@ -63,7 +63,7 @@ extended_summary <- function(df) {
 #'
 #' @export
 
-create_dir <- function(dir_name = "Outputs", verbose = TRUE) {
+create_dir <- function(dir_name = "./Outputs", verbose = TRUE) {
   if (!is.character(dir_name)) {
     stop("`dir_name` needs to be a string")
   }
@@ -71,22 +71,16 @@ create_dir <- function(dir_name = "Outputs", verbose = TRUE) {
     stop("`verbose` needs to be a logical value")
   }
   
-  package_root <- system.file(package = "simulacrumWorkflowR")
-  if (package_root == "") {
-    stop("Package 'simulacrumWorkflowR' not found.")
+  if (!dir.exists(dir_name)) {
+    dir.create(dir_name, recursive = TRUE)
   }
-  
-  full_path <- file.path(package_root, dir_name)
-  
-  if (!dir.exists(full_path)) {
-    dir.create(full_path, recursive = TRUE)
-    if (verbose) {
-      message(paste0("Created path: ", full_path))
-    }
-  } else {
-    if (verbose) {
-      message(paste0("Path ", full_path, " already exists"))
-    }
+  if (verbose) {
+    message(paste0("Created path", dir_name))
   }
-  invisible(full_path)
+  else {
+  if (verbose) {
+    message(paste0("path ", dir_name, "already exists"))
+  }
+}
+invisible(dir_name)
 }

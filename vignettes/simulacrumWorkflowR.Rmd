@@ -84,14 +84,6 @@ summary(log_model)
 ```
 # Save models as html tabels
 
-```{r}
-
-```
-
-
-```{r}
-
-```
 
 ```{r}
 stop <- stop_time()
