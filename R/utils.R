@@ -55,7 +55,7 @@ extended_summary <- function(df) {
 #'Create a new dir if not existing
 #'
 
-create_dir <- function(dir_path = "", verbose = TRUE) {
+create_dir <- function(dir_path = "Outputs", verbose = TRUE) {
   if (!is.character(dir_path)) {
     stop("`dir_path` needs to be a string")
   }

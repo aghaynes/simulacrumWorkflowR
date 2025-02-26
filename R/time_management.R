@@ -24,7 +24,6 @@
 #' @importFrom lubridate as.duration 
 #' @importFrom lubridate duration
 #' @importFrom simulacrumWorkflowR utils 
-
 #'
 #' @return A character vector containing the total execution time and the result (accepted or rejected).
 #'         If the time exceeds 3 hours, a warning is issued.

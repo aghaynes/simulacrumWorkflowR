@@ -87,11 +87,13 @@ summary(log_model)
 ```{r}
 # Convert output of models into tibble and Save model as Excel file 
 
-cox_model_sum <- tidy(cox_model)
-write.xlsx(cox_model_sum, "cox_model.xlsx")
+output_dir <- create_dir()
 
-log_model_sum <- tidy(log_model) 
-write.xlsx(log_model_sum, "log_model.xlsx")
+cox_model_sum <- tidy(cox_model)
+write.xlsx(cox_model_sum, file.path(output_dir, "cox_model.xlsx"))
+
+log_model_sum <- tidy(log_model)
+write.xlsx(log_model_sum, file.path(output_dir, "log_model.xlsx"))
 
 ```
 
