@@ -117,20 +117,20 @@ When data management and analysis are complete, use the workflow generator funct
 
 ```{r}
 create_workflow(
-                             libraries = "library(dplyr)",
-                             query = "select * 
-                             from SIM_AV_PATIENT
-                             where age > 50
-                             limit 500;",
-                             data_management = "
-                             # Run query on SQLite database
-                              cancer_grouping(sim_av_tumour)
+                         libraries = "library(dplyr)",
+                         query = "select * 
+                         from SIM_AV_PATIENT
+                         where age > 50
+                         limit 500;",
+                         data_management = "
+                         # Run query on SQLite database
+                          cancer_grouping(sim_av_tumour)
 
-                              # Additional preprocessing
-                              #df2 <- survival_days(df1)
-                              ",
-                             analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
-                             model_results = "html_table_model(model)")
+                          # Additional preprocessing
+                          #df2 <- survival_days(df1)
+                          ",
+                         analysis = "model = glm(AGE ~ STAGE_BEST + GRADE,  data=data)",
+                         model_results = "html_table_model(model)")
 ```
 
 This workflow automates the process, ensuring easy integration and preparation of your Simulacrum data.
