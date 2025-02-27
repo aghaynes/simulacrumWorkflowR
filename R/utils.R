@@ -73,14 +73,14 @@ create_dir <- function(dir_name = "./Outputs", verbose = TRUE) {
   
   if (!dir.exists(dir_name)) {
     dir.create(dir_name, recursive = TRUE)
+    if (verbose) {
+      message(paste0("Created path ", dir_name))
+    }
+  } else if (verbose) {
+    message(paste0("Path ", dir_name, " already exists"))
   }
-  if (verbose) {
-    message(paste0("Created path", dir_name))
-  }
-  else {
-  if (verbose) {
-    message(paste0("path ", dir_name, "already exists"))
-  }
+  
+  invisible(dir_name)
 }
-invisible(dir_name)
-}
+
+create_dir()

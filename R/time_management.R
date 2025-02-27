@@ -37,7 +37,8 @@
 #' end <- end_time()
 #' compute_time_limit(start, end)
 
-compute_time_limit <- function(start_time, end_time, time_limit_hours = 3, save_to_file = TRUE, file_path = "execution_time_log.txt") {
+compute_time_limit <- function(start_time, end_time, time_limit_hours = 3, save_to_file = TRUE, 
+                               file_path = "execution_time_log.txt", output_dir = "./Outputs") {
   execution_time <- as.duration(as.numeric(difftime(end_time, start_time, units = "secs")))
   
   time_limit <- duration(hours = time_limit_hours)
@@ -60,9 +61,16 @@ compute_time_limit <- function(start_time, end_time, time_limit_hours = 3, save_
   }
   
   if (save_to_file) {
-    log_dir <- dirname(file_path) 
-    create_dir(log_dir)
-    writeLines(message_text, con = file_path)
+    create_dir(output_dir)
+    
+    full_file_path <- file.path(output_dir, file_path)
+    
+    tryCatch({
+      writeLines(message_text, con = full_file_path)
+      message(paste("Log saved to:", full_file_path))
+    }, error = function(e) {
+      warning(paste("Failed to write log file:", e$message))
+    })
   }
   
   result <- list(
@@ -73,7 +81,6 @@ compute_time_limit <- function(start_time, end_time, time_limit_hours = 3, save_
   
   return(result)
 }
-
 
 #' Record the Current Start Time
 #'
