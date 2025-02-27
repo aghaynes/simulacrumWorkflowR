@@ -1,6 +1,6 @@
 ---
 title: "Example: Running the whole workflow"
-author: "Jakob Skelmose, Rasmus Rask, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted"
+author: "Jakob Skelmose, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted, Rasmus Rask"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Example Running the whole workflow}
@@ -36,7 +36,7 @@ data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "
 ```
 
 
-#dfs
+# dfs
 ```{r}
 SIM_AV_PATIENT <- data_frames_lists$sim_av_patient
 SIM_AV_TUMOUR <- data_frames_lists$sim_av_tumour
