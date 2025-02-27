@@ -15,6 +15,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r starting time for logging }
+start <- start_time()
+```
+
+
 ```{r setup}
 library(simulacrumWorkflowR)
 library(survival)
@@ -132,5 +137,5 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ```{r}
 stop <- stop_time()
-#compute_time_limit(start, stop)
+compute_time_limit(start, stop)
 ```
