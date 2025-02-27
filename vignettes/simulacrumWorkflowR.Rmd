@@ -36,7 +36,7 @@ data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "
 ```
 
 
-#dfs
+# dfs
 ```{r}
 SIM_AV_PATIENT <- data_frames_lists$sim_av_patient
 SIM_AV_TUMOUR <- data_frames_lists$sim_av_tumour
@@ -140,6 +140,7 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 ')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
 =======
 ```
@@ -150,3 +151,6 @@ stop <- stop_time()
 compute_time_limit(start, stop)
 ```
 >>>>>>> c6bd3de4bf413534b3d06807ebb1507beb2aaaea
+=======
+```
+>>>>>>> 644db2b8e1b02f507beba7423218a4fb0b72a43f
