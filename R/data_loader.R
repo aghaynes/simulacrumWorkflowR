@@ -30,9 +30,6 @@
 #' @export
 #' @importFrom pbapply pblapply
 
-
-# Make a error of suggesting to input a dir 
-
 read_simulacrum <- function(dir = "./simulacrum_v2.1.0/Data/", selected_files = NULL) {
   
   required_files <- c(

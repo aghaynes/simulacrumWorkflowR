@@ -1,23 +1,3 @@
-#' Random Sample of a Data Frame
-#'
-#' @description
-#' Takes a random sample of rows from a data frame.
-#'
-#' @param df A data frame to sample from.
-#' @param n An integer specifying the number of rows to sample. Default is 1000.
-#'
-#' @return A data frame containing the sampled rows.
-#' @export
-#' 
-#' @examples 
-#' sample_df <- table_sample(sim_av_patient, 500)
-
-table_sample <- function(df, n = 1000) {
-  df[sample(nrow(df), size = n, replace = FALSE), ]
-}
-
-
-
 #' Group Cancer Diagnoses by ICD-10 Codes
 #'
 #' @description

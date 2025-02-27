@@ -1,6 +1,6 @@
 ---
 title: "Example: Running the whole workflow"
-author: "Jakob Skelmose, Rasmus Rask, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted"
+author: "Jakob Skelmose, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted, Rasmus Rask"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Example Running the whole workflow}
@@ -139,4 +139,14 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ')
 
+<<<<<<< HEAD
 ```
+=======
+```
+
+
+```{r}
+stop <- stop_time()
+compute_time_limit(start, stop)
+```
+>>>>>>> c6bd3de4bf413534b3d06807ebb1507beb2aaaea
