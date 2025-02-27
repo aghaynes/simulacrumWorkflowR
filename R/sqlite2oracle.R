@@ -14,6 +14,8 @@
 #' There is added a if statement which will add `WHERE` in front of `ROWNUM` is there is no where in the query input.
 #' If there is a `WHERE` in the input query, `AND` will be incerted in front of `ROWNUM`
 #' 
+#' 3) Change the boolean literals to be "TRUE/FALSE" instead of "1/2" 
+#'
 #' Please note that there are a more two simple and common query corrections in the code. 
 #' There are a lot more differencies between the queries of SQLite and Oracle. 
 #' However, the purpose of this package is merely to write as little sql as possible and keep the data management in R.
