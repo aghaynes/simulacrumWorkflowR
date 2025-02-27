@@ -4,12 +4,12 @@
 \alias{create_dir}
 \title{Create a new directory if it does not exist.}
 \usage{
-create_dir(dir_path = "Outputs", verbose = TRUE)
+create_dir(dir_name = "./Outputs", verbose = TRUE)
 }
 \arguments{
-\item{dir_path}{A character string defining a path of the directory to create. Defaults is "Outputs".}
-
 \item{verbose}{A logical value to decide if there should be a printed messages about the directory creation process. Defaults is TRUE.}
+
+\item{dir_path}{A character string defining a path of the directory to create. Defaults is "Outputs".}
 }
 \value{
 invisible return of the `dir_path`

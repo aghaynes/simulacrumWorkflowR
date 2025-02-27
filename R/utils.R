@@ -82,5 +82,3 @@ create_dir <- function(dir_name = "./Outputs", verbose = TRUE) {
   
   invisible(dir_name)
 }
-
-create_dir()

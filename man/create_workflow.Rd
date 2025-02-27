@@ -6,6 +6,7 @@
 \usage{
 create_workflow(
   file_path = paste0("workflow_", format(Sys.time(), "\%Y\%m\%d_\%H\%M"), ".R"),
+  output_dir = "./Outputs",
   libraries = "",
   query = "",
   data_management = "",

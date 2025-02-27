@@ -28,6 +28,7 @@ Imports: pbapply,
         lubridate,
         dplyr,
         logger,
+        utils,
         odbc, 
         DBI,
         Rdpack

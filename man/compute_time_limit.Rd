@@ -9,7 +9,8 @@ compute_time_limit(
   end_time,
   time_limit_hours = 3,
   save_to_file = TRUE,
-  file_path = "execution_time_log.txt"
+  file_path = "execution_time_log.txt",
+  output_dir = "./Outputs"
 )
 }
 \arguments{
