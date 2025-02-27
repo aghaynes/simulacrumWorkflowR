@@ -1,0 +1,18 @@
+name: PDF Generation
+
+on:
+  push: 
+    branches:
+      - main 
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 
+      - name: Generate PDF
+        uses: openjournals/pdf-generator@v1
+        with:
+          paper_markdown: paper.md # Path to your paper.md file
+          paper_outfile: paper.pdf # Name of the output PDF file
+          latex_template: openjournals/joss-latex@v1
