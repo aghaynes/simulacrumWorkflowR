@@ -15,11 +15,12 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Start measuring the time of the analysis
 ```{r starting time for logging }
 start <- start_time()
 ```
 
-
+# Load the libraries 
 ```{r setup}
 library(simulacrumWorkflowR)
 library(survival)
@@ -28,7 +29,7 @@ library(broom)
 library(openxlsx)
 ```
 
-
+# Read the dataset
 ```{r}
 dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
@@ -53,7 +54,6 @@ print(sqlite2oracle(query2))
 ```
 
 # Run query on SQLite database
-#### Select the variables of interest
 ```{r}
 df1 <- query_sql("SELECT 
 SIM_AV_PATIENT.PATIENTID, SIM_AV_PATIENT.GENDER, SIM_AV_PATIENT.VITALSTATUS, SIM_AV_PATIENT.VITALSTATUSDATE, SIM_AV_TUMOUR.DIAGNOSISDATEBEST, SIM_AV_TUMOUR.AGE, SIM_AV_TUMOUR.PERFORMANCESTATUS, SIM_AV_TUMOUR.SITE_ICD10_O2_3CHAR
@@ -99,6 +99,13 @@ log_model_sum <- tidy(log_model)
 write.xlsx(log_model_sum, file.path(output_dir, "log_model.xlsx"))
 ```
 
+# Measure the time it takes to run the analysis to see if the time are within the 3 hours threshold
+```{r}
+stop <- stop_time()
+compute_time_limit(start, stop)
+```
+
+# create a full workflow with the analysis code
 ```{r}
 create_workflow(
   libraries = '              
@@ -132,10 +139,4 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ')
 
-```
-
-
-```{r}
-stop <- stop_time()
-compute_time_limit(start, stop)
 ```
