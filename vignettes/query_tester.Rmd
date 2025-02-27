@@ -1,6 +1,6 @@
 ---
 title: "Example Testing Oracle compatible queries in the query_sql function"
-author: "Jakob Skelmose, Rasmus Rask, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted"
+author: "Jakob Skelmose, Lars Nielsen, Charles Vesteghem, Jennifer Bartell, Martin Bøgsted, Rasmus Rask"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Example Testing Oracle compatible query in the sql_test function}
