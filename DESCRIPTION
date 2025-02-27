@@ -10,6 +10,10 @@ Authors@R: c(
     person("Charles ", "Vesteghem", email = "charles.vesteghem@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2301-9081")),
     person("Martin", "Boegsted", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
     person("Center for Clinical Data Science - Aalborg"))
+    person("Health Data Science Sandbox, University of Copenhagen, Copenhagen, Denmark"))
+    person("Center for Health Data Science, University of Copenhagen, Copenhagen, Denmark"))
+    person("Department of Hematology, Aalborg University Hospital, Aalborg, Denmark"))
+
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
 Maintainer: Jakob Skelmose <j.skelmose@rn.dk>
 License: MIT + file LICENSE
