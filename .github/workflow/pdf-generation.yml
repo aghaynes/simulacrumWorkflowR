@@ -3,16 +3,16 @@ name: PDF Generation
 on:
   push: 
     branches:
-      - main 
+      - main
 
 jobs:
   generate-pdf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  
+      - uses: actions/checkout@v3 
       - name: Generate PDF
-        uses: openjournals/pdf-generator@v1 
+        uses: openjournals/pdf-generator@v1
         with:
-          paper_markdown: paper.md
-          paper_outfile: paper.pdf
+          paper_markdown: paper.md 
+          paper_outfile: paper.pdf 
           latex_template: openjournals/joss-latex@v1 
