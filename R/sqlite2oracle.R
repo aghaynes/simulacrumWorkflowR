@@ -14,8 +14,6 @@
 #' There is added a if statement which will add `WHERE` in front of `ROWNUM` is there is no where in the query input.
 #' If there is a `WHERE` in the input query, `AND` will be incerted in front of `ROWNUM`
 #' 
-#' 3) Transform the boolean literals to be "TRUE"/"FALSE" instead of "1"/"2"
-=======
 #' 3) Change the boolean literals to be "TRUE/FALSE" instead of "1/2" 
 #'
 #' Please note that there are a more two simple and common query corrections in the code. 
