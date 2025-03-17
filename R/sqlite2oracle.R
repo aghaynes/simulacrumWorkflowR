@@ -14,11 +14,9 @@
 #' There is added a if statement which will add `WHERE` in front of `ROWNUM` is there is no where in the query input.
 #' If there is a `WHERE` in the input query, `AND` will be incerted in front of `ROWNUM`
 #' 
-<<<<<<< HEAD
 #' 3) Transform the boolean literals to be "TRUE"/"FALSE" instead of "1"/"2"
 =======
 #' 3) Change the boolean literals to be "TRUE/FALSE" instead of "1/2" 
->>>>>>> 644db2b8e1b02f507beba7423218a4fb0b72a43f
 #'
 #' Please note that there are a more two simple and common query corrections in the code. 
 #' There are a lot more differencies between the queries of SQLite and Oracle. 
