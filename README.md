@@ -70,7 +70,7 @@ through Simulacrum is as following:
 
 6)  Send the Workflow to NHS and wait for the results
 
-## Explanation of the workflow
+# Explanation of the workflow
 
 The workflow is built around the SQLdf package where the user are able
 to setup a invisible database in the span of seconds and fully
@@ -154,21 +154,22 @@ NHS:
 
 ``` r
 create_workflow(
-                             libraries = "library(dplyr)",
-                             query = "select * 
-                             from SIM_AV_PATIENT
-                             where age > 50
-                             limit 500;",
-                             data_management = "
-                             # Run query on SQLite database
-                              cancer_grouping(sim_av_tumour)
+                         libraries = "library(dplyr)",
+                         query = "select * 
+                         from SIM_AV_PATIENT
+                         where age > 50
+                         limit 500;",
+                         data_management = "
+                         # Run query on SQLite database
+                          cancer_grouping(sim_av_tumour)
 
-                              # Additional preprocessing
-                              #df2 <- survival_days(df1)
-                              ",
-                             analysis = "model = glm(Y ~ x1 + x2 + x3, data=data)",
-                             model_results = "html_table_model(model)")
-#> Workflow script created at: workflow_20250204_0519.R
+                          # Additional preprocessing
+                          #df2 <- survival_days(df1)
+                          ",
+                         analysis = "model = glm(AGE ~ STAGE_BEST + GRADE,  data=data)",
+                         model_results = "html_table_model(model)")
+#> Created path ./Outputs
+#> Workflow script created at: ./Outputs/workflow_20250423_1032.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
 ```
 
@@ -179,7 +180,7 @@ In the event of an error on NHS servers while executing the analysis
 pipeline, the `time_management` function and the base R `sink` will
 generate a comprehensive log to facilitate seamless debugging.
 
-## References
+# References
 
 - Grothendieck G, (2017). Sqldf: Manipulate R Data Frames Using SQL.
   Link: ggrothendieck/sqldf: Perform SQL  
