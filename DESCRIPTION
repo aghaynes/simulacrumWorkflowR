@@ -12,7 +12,6 @@ Authors@R: c(
     person("Center for Clinical Data Science, Aalborg Universitym, Aalborg, Denmark")),
     person("Health Data Science Sandbox, University of Copenhagen, Copenhagen, Denmark")),
     person("Center for Health Data Science, University of Copenhagen, Copenhagen, Denmark")),
-    person("Department of Hematology, Aalborg University Hospital, Aalborg, Denmark"))
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
 Maintainer: Jakob Skelmose <j.skelmose@rn.dk>
 License: MIT + file LICENSE

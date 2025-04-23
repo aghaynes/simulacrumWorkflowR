@@ -55,7 +55,7 @@ The process of using this package for getting access to the data at CAS through 
 
 6) Send the Workflow to NHS and wait for the results
 
-## Explanation of the workflow
+# Explanation of the workflow
 The workflow is built around the SQLdf package where the user are able to setup a invisible database in the span of seconds and fully automated. Before the database is intialised, the user is required to download the latest version of the Simulacrum (v2.1.0) data: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/ .
 
 The latest Simulacrum data is formatted identically to the real CAS data. Once downloaded, the read_simulacrum() function can automatically load the CSV files as data frames in R:
@@ -137,7 +137,7 @@ This workflow automates the process, ensuring easy integration and preparation o
 
 In the event of an error on NHS servers while executing the analysis pipeline, the `time_management` function and the base R `sink` will generate a comprehensive log to facilitate seamless debugging.
 
-## References
+# References
 
 - Grothendieck G, (2017). Sqldf: Manipulate R Data Frames Using SQL. Link:  ggrothendieck/sqldf: Perform SQL      
   Selects on R Data Frames 
