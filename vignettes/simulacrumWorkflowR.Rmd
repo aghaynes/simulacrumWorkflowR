@@ -139,10 +139,6 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 
 ')
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-```
-=======
 ```
 
 
@@ -150,7 +146,3 @@ write.xlsx(log_model_sum, "log_model.xlsx")
 stop <- stop_time()
 compute_time_limit(start, stop)
 ```
->>>>>>> c6bd3de4bf413534b3d06807ebb1507beb2aaaea
-=======
-```
->>>>>>> 644db2b8e1b02f507beba7423218a4fb0b72a43f
