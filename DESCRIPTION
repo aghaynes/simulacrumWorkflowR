@@ -1,35 +1,36 @@
 Package: simulacrumWorkflowR
 Type: Package
-Title: An R package for Streamlined Access and Analysis of the Simulacrum Cancer Dataset
+Title: Streamlined Access and Analysis of the Simulacrum Cancer Dataset
 Version: 0.1.0
 Authors@R: c(
     person("Jakob", "Skelmose", email = "j.skelmose@rn.dk", role = c("aut", "cre"), comment = c(ORCID = "0009-0006-8967-9268")),
     person("Lars", "Nielsen", email = "l.boerty@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0002-3715-8528")),
     person("Jennifer", "Bartell", email = "bartell@sund.ku.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2750-9678")),
     person("Charles", "Vesteghem", email = "charles.vesteghem@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2301-9081")),
-    person("Martin", "Boegsted", email = "martin.boegsted@rn.dk", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
+    person("Martin", "Boegsted", email = "martin.boegsted@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0001-9192-1814")),
     person("Rasmus", "Rask", email = "rasmus.rask@rn.dk", role = c("aut"), comment = c(ORCID = "0009-0000-7249-2196"))
-Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
+    )
+Description: Provides a set of helper functions designed to simplify common workflows when working with the Simulacrum synthetic cancer dataset. Facilitates easier data access, manipulation, and potentially common analysis steps, aiming to accelerate research using this resource.
 Maintainer: Jakob Skelmose <j.skelmose@rn.dk>
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
-Suggests:
+Suggests: 
     rmarkdown,
+    knitr, 
     parallel
-VignetteBuilder: knitr 
-Imports: pbapply,
-        knitr,
-        data.table,
-        sqldf,
-        tictoc,
-        lubridate,
-        dplyr,
-        logger,
-        utils,
-        odbc, 
-        DBI,
-        Rdpack
+VignetteBuilder: knitr
+Imports: 
+    pbapply,
+    data.table,
+    sqldf,
+    tictoc,
+    lubridate,
+    dplyr,
+    logger,
+    odbc,
+    DBI,
+    Rdpack
 Depends: R (>= 4.3.3)
 RdMacros: Rdpack
