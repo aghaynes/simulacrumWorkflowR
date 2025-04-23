@@ -4,14 +4,15 @@ Title: An R package for Streamlined Access and Analysis of the Simulacrum Cancer
 Version: 0.1.0
 Authors@R: c(
     person("Jakob", "Skelmose", email = "j.skelmose@rn.dk", role = c("aut", "cre"), comment = c(ORCID = "0009-0006-8967-9268")),
-    person("Lars ", "Nielsen", email = "l.boerty@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0002-3715-8528")),
-    person("Jennifer ", "Bartell", email = "bartell@sund.ku.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2750-9678")),
-    person("Charles ", "Vesteghem", email = "charles.vesteghem@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2301-9081")),
+    person("Lars", "Nielsen", email = "l.boerty@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0002-3715-8528")),
+    person("Jennifer", "Bartell", email = "bartell@sund.ku.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2750-9678")),
+    person("Charles", "Vesteghem", email = "charles.vesteghem@rn.dk", role = c("aut"), comment = c(ORCID = "0000-0003-2301-9081")),
     person("Martin", "Boegsted", email = "martin.boegsted@rn.dk", role = "aut", comment = c(ORCID = "0000-0001-9192-1814")),
     person("Rasmus", "Rask", email = "rasmus.rask@rn.dk", role = c("aut"), comment = c(ORCID = "0009-0000-7249-2196")),
-    person("Center for Clinical Data Science, Aalborg Universitym, Aalborg, Denmark")),
-    person("Health Data Science Sandbox, University of Copenhagen, Copenhagen, Denmark")),
-    person("Center for Health Data Science, University of Copenhagen, Copenhagen, Denmark")),
+    person("Center for Clinical Data Science", role = "cph", comment = "Aalborg University, Aalborg, Denmark"),
+    person("Health Data Science Sandbox", role = "cph", comment = "University of Copenhagen, Copenhagen, Denmark"),
+    person("Center for Health Data Science", role = "cph", comment = "University of Copenhagen, Copenhagen, Denmark")
+)
 Description: Implementation of helper functions to ease the process of using the Simulacrum dataset. 
 Maintainer: Jakob Skelmose <j.skelmose@rn.dk>
 License: MIT + file LICENSE
