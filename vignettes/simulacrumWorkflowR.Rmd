@@ -26,7 +26,6 @@ library(simulacrumWorkflowR)
 library(survival)
 library(openxlsx)
 library(broom)
-library(openxlsx)
 ```
 
 # Read the dataset
