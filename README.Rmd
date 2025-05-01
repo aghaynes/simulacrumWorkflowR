@@ -43,8 +43,10 @@ The main functions of simulacrumWorkflowR is:
 # The process 
 The process of using this package for getting access to the data at CAS through Simulacrum is as following: 
 
-1) Download the latest version of Simulacrum at: https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/
-
+1) Download the latest version of Simulacrum at: 
+```{r}
+open_simulacrum_request()
+```
 2) Copy the directory path of the Simulacrum files on your local machine
 
 3) Use the package's data loader function to load the files into R 
@@ -101,6 +103,7 @@ limit 500;"
 
 sqlite2oracle(query2)
 ```
+Note: This function is built in `create_workflow()` 
 
 ## Preprocessing Functions
 

@@ -82,3 +82,34 @@ create_dir <- function(dir_name = "./Outputs", verbose = TRUE) {
   
   invisible(dir_name)
 }
+
+
+#' Open Simulacrum Data Request Page
+#' 
+#' @description Opens the Simulacrum data download webpage, checks if it can be reached and prints instructions.
+#' @examples
+#' open_simulacrum_request()
+#' @export
+#' 
+#' @importFrom RCurl url.exists
+open_simulacrum_request <- function() {
+  simulacrum_url <- "https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/"
+  
+  message("Checking if the Simulacrum download page can be reached ...")
+  
+  if (url.exists(simulacrum_url)) {
+    
+    message("URL seems reachable. Opening in browser ...")
+    
+    browseURL(simulacrum_url)
+    
+    message("Complete the form for Simulacrum 2.1.0 and await the data retrieval to the email address used in the form.")
+    
+  } else {
+    warning("Warning: Could not confirm existence of URL '", simulacrum_url,
+            "'. The page may not exist, there might be a network issue, or the simple check failed.")
+  }
+}
+
+open_simulacrum_request()
+

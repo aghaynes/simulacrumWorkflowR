@@ -31,6 +31,7 @@ Imports:
     logger,
     odbc,
     DBI,
+    RCurl,
     Rdpack
 Depends: R (>= 4.3.3)
 RdMacros: Rdpack

@@ -75,25 +75,38 @@ simulacrumWorkflowR was developed with R version 4.3.3. Installation requires De
 ### Installation:
 ```R
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("CLINDA-AAU/simulacrumWorkflowR"),
-dependencies = TRUE)) 
+devtools::install_github("CLINDA-AAU/simulacrumWorkflowR",
+dependencies = TRUE, force = TRUE) 
+```
+
+### Request to Download data: 
+```R
+open_simulacrum_request()
 ```
 
 ### Loading data:
 ```R
 library(simulacrumWorkflowR)
-#Set the path to the directory where the Simulacrum CSV files are located; 
-Dir <- “/path/to/simulacrum/csv/files”;
-#Import the Simulacrum data files; 
-simulacrum_list_df <- read_simulacrum(Dir);
+
+dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
+# Automated data loading 
+data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
+```
+
+### Access dataframes individually
+```R
+SIM_AV_PATIENT <- data_frames_lists$sim_av_patient
+SIM_AV_TUMOUR <- data_frames_lists$sim_av_tumour
 ```
 
 ### Querying data:
 ```R
-query <- “SELECT * 
-          FROM sim_av_patient 
-          INNER JOIN sim_av_tumour ON sim_av_patient.patientid = sim_av_tumour.patientid”
-merged_data <- query_sql(query)
+query <- "SELECT *
+FROM SIM_AV_PATIENT
+INNER JOIN SIM_AV_TUMOUR ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;"
+
+# Execute queries with the sql_test() function:
+df1 <- query_sql(query)
 ```
 
 ### Generating a reproducible workflow for submission to NHS 
@@ -103,8 +116,8 @@ libraries = "library(dplyr)",
 query = "select * from sim_av_tumour where age > 50 limit 500;", 
 data_management = "cancer_grouping(sim_av_tumour)",
 analysis = "model = glm(AGE ~ STAGE_BEST + GRADE, data=data)", 
-model_results = "html_table_model(model)", 
-Logger_report=TRUE)
+model_results = "html_table_model(model)"
+)
 ```
 
 ### Oracle compatibility: 
@@ -117,7 +130,7 @@ Data Differences:
 - Coverage: Simulacrum reflects diagnoses from 2016–2019, while CAS includes records dating back to 1971. The 2016-2019 restriction needs to be added to the code for running on CAS.
 - Structure: Simulacrum has a simplified structure for ease of use, but this differs from the evolving CAS database. Adjustment by NDRS is likely before execution on CAS.
 
-SQLite: While both Oracle and SQLite use SQL syntax, there are notable differences between their syntaxes.  For example, SQLite uses ‘LIMIT’ while Oracle uses ‘ROWNUM’.  The sqldf package's implementation also restricts table creation capabilities within SQLite. Adjustment by NDRS is likely before execution on CAS. Time Management: While Simulacrum facilitates SQL query testing, time estimates for queries may not align with CAS performance due to its larger dataset. Similarly, code adjustments will take time that is unaccounted for in this. Despite this limitation, the package remains useful for benchmarking other components of the R script and identifying performance bottlenecks. 
+SQLite: While both Oracle and SQLite use SQL syntax, there are notable differences between their syntaxes. For example, SQLite uses ‘LIMIT’ while Oracle uses ‘ROWNUM’.  The sqldf package's implementation also restricts table creation capabilities within SQLite. Adjustment by NDRS is likely before execution on CAS. Time Management: While Simulacrum facilitates SQL query testing, time estimates for queries may not align with CAS performance due to its larger dataset. Similarly, code adjustments will take time that is unaccounted for in this. Despite this limitation, the package remains useful for benchmarking other components of the R script and identifying performance bottlenecks. 
 
 # Acknowledgements
 Jakob Skelmose and Jennifer Bartell acknowledge funding by the Novo Nordisk Fonden (NNF20OC0063268) via the Health Data Science Sandbox (https://hds-sandbox.github.io). Martin Bøgsted and Rasmus Rask Kragh Jørgensen acknowledge funding by the Novo Nordisk Fonden (NNF23OC0083510) via the SE3D project (Synthetic health data: ethical deployment and dissemination via deep learning approaches). We greatly appreciate the feedback we received from Lora Frayling at Health Data Insight.
