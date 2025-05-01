@@ -53,7 +53,7 @@ The    Simulacrum is a synthetic version of the CAS database, enabling the devel
 3.	Improving Privacy. 
 
 Due to Simulacrum prioritizing privacy over fidelity, only some of the statistical properties are preserved, thus results from the Simulacrum should not be used to create real-world evidence. Instead, the dataset is intended for planning, designing, and testing analysis pipelines prior to generating actionable results with CAS data (@bullward2023research). 
-The process of accessing the real data through Simulacrum requires users to construct SQL queries for extracting data from the CAS database and R code for analysis. To write and test SQL queries using Simulacrum, users must download CSV files, install a local Oracle database and configure ODBC connections. SQL queries can then be executed from within an R script to extract data from the database for further analysis. Setting up a full Oracle database can be complex, particularly for new users. This presents a barrier to testing the full R workflow using Simulacrum and may discourage users from doing so (@national2022guide). 
+The process of accessing the real data through Simulacrum requires users to construct SQL queries for extracting data from the CAS database and R code for analysis. To write and test SQL queries using Simulacrum, users must download CSV files, install a local Oracle database and configure ODBC connections. SQL queries can then be executed from within an R script to extract data from the database for further analysis. Setting up a full Oracle database can be complex, particularly for new users. This presents a barrier to testing the full R workflow using Simulacrum and may discourage users from doing so (@national2023guide). 
 The simulacrumWorkflowR package simplifies testing by removing the need to set up an Oracle database or configure ODBC connections. This allows users to create and test the full R workflow, including SQL queries that demonstrate the exact specification and form of the data required from the CAS database and how they integrate into the rest of the R script. This means NDRS can easily make the required adjustments before they are executed on the CAS database (Figure 1). 
 ![](fig/figure1_modified.drawio.png)
 
@@ -75,7 +75,7 @@ simulacrumWorkflowR was developed with R version 4.3.3. Installation requires De
 ### Installation:
 ```R
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("CLINDA-AAU/simulacrumWorkflowR",
+devtools::install_github("CLINDA-AAU/simulacrumWorkflowR"),
 dependencies = TRUE)) 
 ```
 
@@ -113,6 +113,7 @@ The `sqlite2oracle` function ensures basic query translation for Oracle database
 
 # Limitations 
 Data Differences:
+
 - Coverage: Simulacrum reflects diagnoses from 2016–2019, while CAS includes records dating back to 1971. The 2016-2019 restriction needs to be added to the code for running on CAS.
 - Structure: Simulacrum has a simplified structure for ease of use, but this differs from the evolving CAS database. Adjustment by NDRS is likely before execution on CAS.
 
