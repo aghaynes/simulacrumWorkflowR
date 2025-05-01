@@ -111,5 +111,3 @@ open_simulacrum_request <- function() {
   }
 }
 
-open_simulacrum_request()
-
