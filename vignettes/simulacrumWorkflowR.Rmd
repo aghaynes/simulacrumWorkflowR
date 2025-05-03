@@ -83,19 +83,16 @@ con <- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 copy_to(con, SIM_AV_PATIENT, "SIM_AV_PATIENT", temporary = TRUE, overwrite = TRUE)
 copy_to(con, SIM_AV_TUMOUR, "SIM_AV_TUMOUR", temporary = TRUE, overwrite = TRUE)
 
-
 patient_db <- tbl(con, "SIM_AV_PATIENT")
 tumour_db <- tbl(con, "SIM_AV_TUMOUR")
 
 joined_data <- patient_db %>%
     inner_join(tumour_db, by = "PATIENTID")
 
-show_query(query_plan_join_select)
-
 query_plan_join_select <- joined_data %>%
   select(
       PATIENTID,
-      GENDER.x,
+      GENDER.x,   
       VITALSTATUS,
       VITALSTATUSDATE,
       DIAGNOSISDATEBEST,
@@ -103,6 +100,8 @@ query_plan_join_select <- joined_data %>%
       PERFORMANCESTATUS,
       SITE_ICD10_O2_3CHAR
   )
+
+show_query(query_plan_join_select)
 
 show_query(query_plan_join_select)
 
