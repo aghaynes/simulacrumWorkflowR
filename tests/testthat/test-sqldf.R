@@ -3,8 +3,12 @@ library(sqldf)
 
 test_that("query_sql correctly joins patient and tumour data and limits results", {
   
-  patient_data_dir <- "inst/extdata/minisimulacrum/random_patient_data.rda"
-  tumour_data_dir <- "inst/extdata/minisimulacrum/random_tumour_data.rda"
+  tumour_data_dir <- system.file("extdata", "minisimulacrum", "random_tumour_data.csv", package = "simulacrumWorkflowR")
+  random_tumour_data <- read.csv(tumour_data_dir, stringsAsFactors = FALSE) 
+  
+  patient_data_dir <- system.file("extdata", "minisimulacrum", "random_patient_data.csv", package = "simulacrumWorkflowR")
+  random_patient_data <- read.csv(patient_data_dir, stringsAsFactors = FALSE) 
+  
   
   if (!file.exists(patient_data_dir)) {
     stop("Patient data file not found at: ", patient_data_dir)
@@ -13,8 +17,6 @@ test_that("query_sql correctly joins patient and tumour data and limits results"
     stop("Tumour data file not found at: ", tumour_data_dir)
   }
   
-  load(patient_data_dir)
-  load(tumour_data_dir)
   
   SIM_AV_PATIENT <- random_patient_data
   SIM_AV_TUMOUR <- random_tumour_data

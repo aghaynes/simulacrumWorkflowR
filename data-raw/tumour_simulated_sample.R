@@ -1,6 +1,6 @@
-# Generates simulated patient data (random_patient_data) for package examples.
+# Generates simulated tumour data (random_tumour_data) for package examples.
 # Data is based on Simulacrum's structure but is entirely random.
-# Saves output to inst/extdata/minisimulacrum/random_patient_data.rda
+# Saves output to inst/extdata/minisimulacrum/random_tumour_data.csv 
 
 set.seed(2025)
 
@@ -8,7 +8,7 @@ num_rows <- 10
 
 generated_patientid <- 1:num_rows
 generated_tumourid <- 1:num_rows
-generated_er_status <- 1:num_rows
+generated_er_status <- 1:num_rows 
 
 generated_diagnosisdatebest <- rep(as.Date("2014-12-12"), num_rows)
 
@@ -39,9 +39,13 @@ random_tumour_data <- data.frame(
   GENDER = generated_gender,
   TUMOURID = generated_tumourid,
   ER_STATUS = generated_er_status,
-  LATERALITY = generated_laterality
+  LATERALITY = generated_laterality, 
+  stringsAsFactors = FALSE
 )
 
-sim_data_dir <- "C:/Users/p90j/Documents/simulacrumWorkflowR/inst/extdata/minisimulacrum/random_tumour_data.Rda"
 
-save(random_tumour_data, file = sim_data_dir)
+output_csv_path <- "C:/Users/p90j/Documents/simulacrumWorkflowR/inst/extdata/minisimulacrum/random_tumour_data.csv" 
+
+
+write.csv(random_tumour_data, file = output_csv_path, row.names = FALSE)
+

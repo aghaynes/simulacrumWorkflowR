@@ -2,13 +2,11 @@ library(testthat)
 library(simulacrumWorkflowR)
 library(dplyr)
 
-patient_data_dir <- "inst/extdata/minisimulacrum/random_patient_data.rda"
-load(patient_data_dir)
-print(random_patient_data)
-tumour_data_dir <- "inst/extdata/minisimulacrum/random_tumour_data.rda"
-load(tumour_data_dir)
-print(random_tumour_data)
+tumour_data_dir <- system.file("extdata", "minisimulacrum", "random_tumour_data.csv", package = "simulacrumWorkflowR")
+random_tumour_data <- read.csv(tumour_data_dir, stringsAsFactors = FALSE) 
 
+patient_data_dir <- system.file("extdata", "minisimulacrum", "random_patient_data.csv", package = "simulacrumWorkflowR")
+random_patient_data <- read.csv(patient_data_dir, stringsAsFactors = FALSE) 
 
 
 ####################################
@@ -70,11 +68,13 @@ av_patient_tumour_merge(random_patient_data, random_tumour_data)
 
 expected_output <- data.frame(
   PATIENTID = 1:10,
-  VITALSTATUSDATE = as.Date("2022-12-12"),
+  VITALSTATUSDATE = c("2022-12-12", "2022-12-12", "2022-12-12", "2022-12-12", "2022-12-12", "2022-12-12", 
+                      "2022-12-12", "2022-12-12", "2022-12-12", "2022-12-12"),
   DEATHCAUSECODE_1A = "c50",
   VITALSTATUS = "A",
   ETHNICITY = "D",
-  DIAGNOSISDATEBEST = as.Date("2014-12-12"),
+  DIAGNOSISDATEBEST = c("2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12",
+                        "2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12"),
   SITE_ICD10_O2 = c("C50", "C53", "C54", "C55", "C56", "C50", "C53", "C54", "C55", "C56"),
   AGE = c(60, 43, 66, 61, 58, 62, 89, 54, 83, 34),
   SITE_ICD10_O2_3CHAR = c("C50", "C53", "C54", "C55", "C56", "C50", "C53", "C54", "C55", "C56"),
@@ -82,7 +82,7 @@ expected_output <- data.frame(
   GENDER = c(2, 1, 1, 2, 2, 1, 2, 2, 1, 2),
   TUMOURID = 1:10,
   ER_STATUS = 1:10,
-  LATERALITY = as.character(9), 
+  LATERALITY = rep(9, 10), 
   stringsAsFactors = FALSE 
 )
 

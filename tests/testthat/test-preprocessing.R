@@ -2,12 +2,13 @@ library(testthat)
 library(simulacrumWorkflowR)
 library(dplyr)
 
-patient_data_dir <- "inst/extdata/minisimulacrum/random_patient_data.rda"
-load(patient_data_dir)
-print(random_patient_data)
-tumour_data_dir <- "inst/extdata/minisimulacrum/random_tumour_data.rda"
-load(tumour_data_dir)
-print(random_tumour_data)
+
+tumour_data_dir <- system.file("extdata", "minisimulacrum", "random_tumour_data.csv", package = "simulacrumWorkflowR")
+random_tumour_data <- read.csv(tumour_data_dir, stringsAsFactors = FALSE) 
+
+patient_data_dir <- system.file("extdata", "minisimulacrum", "random_patient_data.csv", package = "simulacrumWorkflowR")
+random_patient_data <- read.csv(patient_data_dir, stringsAsFactors = FALSE) 
+
 
 
 ####################################
@@ -45,7 +46,8 @@ cancer_grouping <- function(df) {
 
 expected_output_data <- data.frame(
   PATIENTID = 1:10,
-  DIAGNOSISDATEBEST = as.Date("2014-12-12"),
+  DIAGNOSISDATEBEST = c("2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12",
+                       "2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12", "2014-12-12"),
   SITE_ICD10_O2 = c("C50", "C53", "C54", "C55", "C56", "C50", "C53", "C54", "C55", "C56"),
   AGE = c(60, 43, 66, 61, 58, 62, 89, 54, 83, 34),
   SITE_ICD10_O2_3CHAR = c("C50", "C53", "C54", "C55", "C56", "C50", "C53", "C54", "C55", "C56"),
@@ -53,7 +55,7 @@ expected_output_data <- data.frame(
   GENDER = c(2, 1, 1, 2, 2, 1, 2, 2, 1, 2),
   TUMOURID = 1:10,
   ER_STATUS = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
-  LATERALITY = rep("9", 10), 
+  LATERALITY = rep(9, 10), 
   diag_group = c(
     "Breast",
     "Gynaecological",
@@ -71,13 +73,10 @@ expected_output_data <- data.frame(
 
 test_that("cancer_grouping function correctly assigns diagnosis groups for random_tumour_data", {
   
-  # The actual output comes from applying the function to the loaded data
   actual_output_data <- cancer_grouping(random_tumour_data)
   
-  # Compare the actual output to the expected output based on that data
   expect_equal(actual_output_data, expected_output_data)
   
-  # Test non-data frame input remains valid
   expect_error(cancer_grouping("not a data frame"), "`df` must be a data frame.")
   
 })

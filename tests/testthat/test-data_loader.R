@@ -5,21 +5,25 @@ options(warn=-1)
 
 
 
-test_read_simulacrum <- function(dir = "inst/extdata/minisimulacrum/", selected_files = NULL) {
-  
+test_read_simulacrum <- function(dir = NULL, package = NULL, selected_files = NULL) {
   required_files <- c(
-    "random_patient_data.Rda",
-    "random_tumour_data.Rda"
+    "random_patient_data.csv",
+    "random_tumour_data.csv"
   )
   
-  if (!is.character(dir)) stop("Please make sure the input dir is a string.")
-  if (!dir.exists(dir)) stop("Directory does not exist. Please check the path.")
-  
-  if (!is.null(selected_files) && !is.character(selected_files)) {
-    stop("Error: 'selected_files' must be NULL or a charactor vector")
+  data_dir <- if (!is.null(dir)) {
+    dir
+  } else if (!is.null(package)) {
+    system.file("extdata", "minisimulacrum", package = package)
+  } else {
+    "inst/extdata/minisimulacrum/"
   }
   
-  all_csv_files <- list.files(dir, pattern = "\\.Rda$", full.names = TRUE)
+  
+  if (!is.character(data_dir)) stop("Please make sure the input dir is a string or the package and path are correct.")
+  if (!dir.exists(data_dir)) stop(sprintf("Directory does not exist: %s. Please check the path or package name.", data_dir))
+  
+  all_csv_files <- list.files(data_dir, pattern = "\\.csv$", full.names = TRUE)
   available_files <- basename(all_csv_files)
   
   missing_files <- setdiff(required_files, available_files)
@@ -28,10 +32,11 @@ test_read_simulacrum <- function(dir = "inst/extdata/minisimulacrum/", selected_
   }
   
   files_to_read <- if (is.null(selected_files)) {
-    all_csv_files[basename(all_csv_files) %in% required_files]
+    file.path(data_dir, required_files) # Construct full paths for required files
   } else {
     matched_files <- paste0(selected_files, ".csv")
-    files <- all_csv_files[basename(all_csv_files) %in% matched_files]
+    full_matched_files <- file.path(data_dir, matched_files)
+    files <- all_csv_files[all_csv_files %in% full_matched_files]
     if (length(files) == 0) stop("No matching files found for selected files.")
     files
   }
@@ -50,8 +55,11 @@ test_read_simulacrum <- function(dir = "inst/extdata/minisimulacrum/", selected_
 }
 
 test_that("test_read_simulacrum function works correctly", {
-
-  expect_no_error(result <- test_read_simulacrum())
+  package_name <- "simulacrumWorkflowR" # Replace with your actual package name
+  data_dir_in_package <- system.file("extdata", "minisimulacrum", package = package_name)
+  
+  
+  expect_no_error(result <- test_read_simulacrum(package = package_name))
   
   expect_is(result, "list")
   
@@ -60,5 +68,5 @@ test_that("test_read_simulacrum function works correctly", {
   
   expect_is(result$random_patient_data, "data.frame")
   expect_is(result$random_tumour_data, "data.frame")
-  
 })
+  
