@@ -57,7 +57,14 @@ The process of using this package for getting access to the data at CAS
 through Simulacrum is as following:
 
 1)  Download the latest version of Simulacrum at:
-    <https://simulacrum.healthdatainsight.org.uk/using-the-simulacrum/requesting-data/>
+
+``` r
+library(simulacrumWorkflowR)
+open_simulacrum_request()
+#> Checking if the Simulacrum download page can be reached ...
+#> URL seems reachable. Opening in browser ...
+#> Complete the form for Simulacrum 2.1.0 and await the data retrieval to the email address used in the form.
+```
 
 2)  Copy the directory path of the Simulacrum files on your local
     machine
@@ -84,8 +91,6 @@ data. Once downloaded, the read_simulacrum() function can automatically
 load the CSV files as data frames in R:
 
 ``` r
-library(simulacrumWorkflowR)
-
 dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 # Automated data loading 
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
@@ -137,6 +142,8 @@ sqlite2oracle(query2)
 #> [1] "SELECT *\nFROM SIM_AV_PATIENT\nWHERE age > 50\nAND ROWNUM <= 500;"
 ```
 
+Note: This function is built in `create_workflow()`
+
 ## Preprocessing Functions
 
 simulacrumWorkflowR includes functions to simplify data preprocessing:
@@ -169,7 +176,7 @@ create_workflow(
                          analysis = "model = glm(AGE ~ STAGE_BEST + GRADE,  data=data)",
                          model_results = "html_table_model(model)")
 #> Created path ./Outputs
-#> Workflow script created at: ./Outputs/workflow_20250423_1032.R
+#> Workflow script created at: ./Outputs/workflow_20250503_2142.R
 #> The workflow script is designed for execution on National Health Service (NHS). Local execution of this script is likely to fail due to its dependency on a database connection. The goal of this package is to generate a workflow file compatible with the NHS server environment, which eliminates the need for local database configuration. Assuming successful execution of all local operations, including library imports, data queries, data management procedures, analyses, and file saving, the generated workflow is expected to function correctly within the NHS server environment.
 ```
 

@@ -45,6 +45,7 @@ The process of using this package for getting access to the data at CAS through 
 
 1) Download the latest version of Simulacrum at: 
 ```{r}
+library(simulacrumWorkflowR)
 open_simulacrum_request()
 ```
 2) Copy the directory path of the Simulacrum files on your local machine
@@ -63,8 +64,6 @@ The workflow is built around the SQLdf package where the user are able to setup 
 The latest Simulacrum data is formatted identically to the real CAS data. Once downloaded, the read_simulacrum() function can automatically load the CSV files as data frames in R:
 
 ```{r}
-library(simulacrumWorkflowR)
-
 dir <- "C:/Users/p90j/Documents/simulacrum_v2.1.0/Data"
 # Automated data loading 
 data_frames_lists <- read_simulacrum(dir, selected_files = c("sim_av_patient", "sim_av_tumour")) 
