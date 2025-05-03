@@ -50,7 +50,7 @@ read_simulacrum <- function(dir = "./simulacrum_v2.1.0/Data/", selected_files = 
   if (!dir.exists(dir)) stop("Directory does not exist. Please check the path.")
   
   if (!is.null(selected_files) && !is.character(selected_files)) {
-    stop("Error: 'selected_files' must be NULL or a charactor vector")
+    stop("Error: 'selected_files' must be NULL or a character vector")
   }
   
   all_csv_files <- list.files(dir, pattern = "\\.csv$", full.names = TRUE)

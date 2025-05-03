@@ -1,0 +1,95 @@
+library(testthat)
+library(simulacrumWorkflowR)
+library(dplyr)
+
+patient_data_dir <- "inst/extdata/minisimulacrum/random_patient_data.rda"
+load(patient_data_dir)
+print(random_patient_data)
+tumour_data_dir <- "inst/extdata/minisimulacrum/random_tumour_data.rda"
+load(tumour_data_dir)
+print(random_tumour_data)
+
+
+
+####################################
+######## test-create_dir ###########
+####################################
+
+create_dir <- function(dir_name = "./Outputs", verbose = TRUE) {
+  if (!is.character(dir_name)) {
+    stop("`dir_name` needs to be a string")
+  }
+  if (!is.logical(verbose)) {
+    stop("`verbose` needs to be a logical value")
+  }
+  
+  if (!dir.exists(dir_name)) {
+    dir.create(dir_name, recursive = TRUE)
+    if (verbose) {
+      message(paste0("Created path ", dir_name))
+    }
+  } else if (verbose) {
+    message(paste0("Path ", dir_name, " already exists"))
+  }
+  
+  invisible(dir_name)
+}
+
+test_that("create_dir creates a new directory and shows message by default", {
+  test_dir <- fs::path(tempdir(), "test_create_dir_new")
+  
+  if (fs::dir_exists(test_dir)) {
+    fs::dir_delete(test_dir)
+  }
+  
+  expect_message(
+    create_dir(test_dir),
+    paste0("Created path ", test_dir)
+  )
+  expect_true(fs::dir_exists(test_dir))
+  
+  if (fs::dir_exists(test_dir)) {
+    fs::dir_delete(test_dir)
+  }
+})
+
+
+
+#################################################
+######## test-av_patient_tumour_merge ###########
+#################################################
+
+
+av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_tumour){
+  message("Merging `sim_av_patient` and `sim_av_tumour`...")
+  merged_df <- merge(df1, df2, by = "PATIENTID", all = TRUE) 
+  return(merged_df)
+}
+
+av_patient_tumour_merge(random_patient_data, random_tumour_data)
+
+expected_output <- data.frame(
+  PATIENTID = 1:10,
+  VITALSTATUSDATE = as.Date("2022-12-12"),
+  DEATHCAUSECODE_1A = "c50",
+  VITALSTATUS = "A",
+  ETHNICITY = "D",
+  DIAGNOSISDATEBEST = as.Date("2014-12-12"),
+  SITE_ICD10_O2 = c("C50", "C53", "C54", "C55", "C56", "C50", "C53", "C54", "C55", "C56"),
+  AGE = c(60, 43, 66, 61, 58, 62, 89, 54, 83, 34),
+  SITE_ICD10_O2_3CHAR = c("C50", "C53", "C54", "C55", "C56", "C50", "C53", "C54", "C55", "C56"),
+  PERFORMANCESTATUS = c(0, 3, 3, 1, 0, 2, 1, 2, 1, 0),
+  GENDER = c(2, 1, 1, 2, 2, 1, 2, 2, 1, 2),
+  TUMOURID = 1:10,
+  ER_STATUS = 1:10,
+  LATERALITY = as.character(9), 
+  stringsAsFactors = FALSE 
+)
+
+test_that("av_patient_tumour_merge correctly merges patient and tumour data", {
+  
+  actual_output <- av_patient_tumour_merge(random_patient_data, random_tumour_data)
+  
+
+  expect_equal(actual_output, expected_output)
+})

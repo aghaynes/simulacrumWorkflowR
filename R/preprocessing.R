@@ -77,22 +77,24 @@ group_ethnicity <- function(df) {
   }
   
   ethnicity_mapping <- list(
-    White = c("A", "B", "C", "C2", "C3", "CA", "CB", "CC", "CD", "CE", "CF", 
-              "CG", "CH", "CJ", "CK", "CL", "CM", "CN", "CP", "CQ", "CR", 
+    White = c("A", "B", "C", "C2", "C3", "CA", "CB", "CC", "CD", "CE", "CF",
+              "CG", "CH", "CJ", "CK", "CL", "CM", "CN", "CP", "CQ", "CR",
               "CS", "CT", "CU", "CV", "CW", "CX", "CY"),
     Mixed = c("D", "E", "F", "G", "GA", "GB", "GC", "GD", "GE", "GF"),
-    Asian = c("H", "J", "K", "L", "LA", "LB", "LC", "LD", "LE", "LF", "LG", 
+    Asian = c("H", "J", "K", "L", "LA", "LB", "LC", "LD", "LE", "LF", "LG",
               "LH", "LJ", "LK", "R"),
     Black = c("M", "N", "P", "PA", "PB", "PC", "PD", "PE"),
     Other = c("S", "SA", "SB", "SC", "SD", "SE")
   )
   
-  ethnicity_vector <- unlist(ethnicity_mapping)
-  names(ethnicity_vector) <- rep(names(ethnicity_mapping), lengths(ethnicity_mapping))
+  code_to_group_map <- setNames(
+    rep(names(ethnicity_mapping), lengths(ethnicity_mapping)),
+    unlist(ethnicity_mapping)
+  )
   
   df$ETHNICITY <- as.character(df$ETHNICITY)
   
-  df$Grouped_Ethnicity <- ethnicity_vector[df$ETHNICITY]
+  df$Grouped_Ethnicity <- code_to_group_map[df$ETHNICITY]
   
   return(df)
 }
@@ -137,7 +139,7 @@ survival_days <- function(df) {
   }
   
   df$diff_date <- as.numeric(as.Date(df$VITALSTATUSDATE) - as.Date(df$DIAGNOSISDATEBEST))
-  df$time_to_death <- ifelse(df$VITALSTATUS == "D", df$diff_date, NA)
+  df$time_to_death <- ifelse(df$VITALSTATUS == "D", df$diff_date, NA_real_)
   df$status_OS <- ifelse(df$VITALSTATUS == "D",yes=1,no=0)
   df$Time_OS <- df$diff_date
   

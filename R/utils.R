@@ -110,4 +110,3 @@ open_simulacrum_request <- function() {
             "'. The page may not exist, there might be a network issue, or the simple check failed.")
   }
 }
-

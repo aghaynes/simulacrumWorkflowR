@@ -26,6 +26,8 @@ library(simulacrumWorkflowR)
 library(survival)
 library(openxlsx)
 library(broom)
+library(dplyr)
+library(dbplyr)
 ```
 
 # Read the dataset
@@ -48,9 +50,21 @@ from SIM_AV_PATIENT
 limit 500;"
 ```
 
+# Alternatively, make your data management which dplyr, if preferred and then use the dbplyr "show_query()" to show the query needed for the workflow: 
 ```{r}
-print(sqlite2oracle(query2))
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+copy_to(con, SIM_AV_PATIENT, "patients",
+  )
+
+patient_db <- tbl(con, "patients")
+
+query_plan_limit <- patient_db %>%
+  head(n = 500)
+  
+show_query(query_plan_limit)
+DBI::dbDisconnect(con)
 ```
+# To figure our what queries to include for the workflow are dbplyr a great resource to write R code directly to the sqlite database. After the data mangement code have been written, it can be transformed into a sql query with the `show_query()`. The query can be tested in the query_sql function, or be directly incerted into the `create_workflow()`
 
 # Run query on SQLite database
 ```{r}
@@ -62,6 +76,39 @@ INNER JOIN SIM_AV_TUMOUR
     ON SIM_AV_PATIENT.patientid = SIM_AV_TUMOUR.patientid;
 ")
 ```
+
+# Another case of dbplyr for data management to produce the necessary queries for the workflow
+```{r}
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+copy_to(con, SIM_AV_PATIENT, "SIM_AV_PATIENT", temporary = TRUE, overwrite = TRUE)
+copy_to(con, SIM_AV_TUMOUR, "SIM_AV_TUMOUR", temporary = TRUE, overwrite = TRUE)
+
+
+patient_db <- tbl(con, "SIM_AV_PATIENT")
+tumour_db <- tbl(con, "SIM_AV_TUMOUR")
+
+joined_data <- patient_db %>%
+    inner_join(tumour_db, by = "PATIENTID")
+
+show_query(query_plan_join_select)
+
+query_plan_join_select <- joined_data %>%
+  select(
+      PATIENTID,
+      GENDER.x,
+      VITALSTATUS,
+      VITALSTATUSDATE,
+      DIAGNOSISDATEBEST,
+      AGE,
+      PERFORMANCESTATUS,
+      SITE_ICD10_O2_3CHAR
+  )
+
+show_query(query_plan_join_select)
+
+DBI::dbDisconnect(con)
+```
+
 
 # Additional preprocessing
 ```{r}

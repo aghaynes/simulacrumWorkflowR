@@ -20,6 +20,7 @@
 #'
 #' @importFrom simulacrumWorkflowR sqlite2oracle 
 #' @importFrom simulacrumWorkflowR create_dir
+#' @importFrom DBI dbConnect dbWriteTable dbDisconnect dbIsValid
 #' 
 #' @export
 #'

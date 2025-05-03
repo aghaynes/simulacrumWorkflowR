@@ -29,10 +29,10 @@ Imports:
     sqldf,
     tictoc,
     lubridate,
-    dplyr,
     logger,
     odbc,
     DBI,
+    RSQLite,
     RCurl,
     Rdpack
 Depends: R (>= 4.3.3)
