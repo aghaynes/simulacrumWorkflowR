@@ -81,8 +81,6 @@ test_that("cancer_grouping function correctly assigns diagnosis groups for rando
   
 })
 
-####################################################################
-
 ####################################
 ##### Test group_ethnicity #########
 ####################################
