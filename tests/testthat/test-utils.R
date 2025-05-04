@@ -9,9 +9,6 @@ patient_data_dir <- system.file("extdata", "minisimulacrum", "random_patient_dat
 random_patient_data <- read.csv(patient_data_dir, stringsAsFactors = FALSE) 
 
 
-####################################
-######## test-create_dir ###########
-####################################
 
 create_dir <- function(dir_name = "./Outputs", verbose = TRUE) {
   if (!is.character(dir_name)) {
@@ -50,12 +47,6 @@ test_that("create_dir creates a new directory and shows message by default", {
     fs::dir_delete(test_dir)
   }
 })
-
-
-
-#################################################
-######## test-av_patient_tumour_merge ###########
-#################################################
 
 
 av_patient_tumour_merge <- function(df1 = sim_av_patient, df2 = sim_av_tumour){
