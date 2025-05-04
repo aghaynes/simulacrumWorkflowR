@@ -143,9 +143,6 @@ test_that("group_ethnicity correctly maps ETHNICITY code 'D' to 'Mixed'", {
   expect_equal(actual_output, expected_output)
 })
 
-####################################
-##### Test survival_days ###########
-####################################
 
 df_merged <- av_patient_tumour_merge(random_patient_data, random_tumour_data)
 df_merged
