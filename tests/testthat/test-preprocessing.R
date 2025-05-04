@@ -11,9 +11,6 @@ random_patient_data <- read.csv(patient_data_dir, stringsAsFactors = FALSE)
 
 
 
-####################################
-##### Test cancer_grouping #########
-####################################
 
 cancer_grouping <- function(df) {
   if (!is.data.frame(df)) {
@@ -81,9 +78,6 @@ test_that("cancer_grouping function correctly assigns diagnosis groups for rando
   
 })
 
-####################################
-##### Test group_ethnicity #########
-####################################
 
 
 random_patient_data <- structure(list(
