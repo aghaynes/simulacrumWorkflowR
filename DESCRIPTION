@@ -29,6 +29,7 @@ Imports:
     sqldf,
     tictoc,
     lubridate,
+    dplyr,
     logger,
     odbc,
     DBI,
