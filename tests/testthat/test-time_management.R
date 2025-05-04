@@ -59,9 +59,6 @@ stop_time <- function() {
 }
 
 
-##################################################################
-############## Test if the print and time log works ##############
-##################################################################
 test_that("compute_time_limit correctly identifies time within limit and produces expected output", {
   start_t <- ymd_hms("2023-01-01 10:00:00")
   end_t <- ymd_hms("2023-01-01 10:15:00")
@@ -80,9 +77,7 @@ test_that("compute_time_limit correctly identifies time within limit and produce
   expect_true(grepl(expected_message_part, result$message))
 })
 
-##################################################################
-############## Test if the time measure works  ###################
-##################################################################
+
 test_that("start_time and stop_time accurately capture time difference", {
   sleep_duration_secs <- 2 
   
