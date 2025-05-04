@@ -55,7 +55,7 @@ test_read_simulacrum <- function(dir = NULL, package = NULL, selected_files = NU
 }
 
 test_that("test_read_simulacrum function works correctly", {
-  package_name <- "simulacrumWorkflowR" # Replace with your actual package name
+  package_name <- "simulacrumWorkflowR" 
   data_dir_in_package <- system.file("extdata", "minisimulacrum", package = package_name)
   
   
