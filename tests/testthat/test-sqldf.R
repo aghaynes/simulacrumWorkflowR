@@ -44,7 +44,7 @@ test_that("query_sql correctly joins patient and tumour data and limits results"
   
 })
 
-test_that("query_sql throws error for non-character input", {
+test_that("query_sql provides error for non-character input", {
   
   query_sql <- function(query) {
     if(!is.character(query))
