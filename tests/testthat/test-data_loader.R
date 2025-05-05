@@ -20,8 +20,8 @@ test_read_simulacrum <- function(dir = NULL, package = NULL, selected_files = NU
   }
   
   
-  if (!is.character(dir)) stop("Please make sure the input dir is a string.")
-  if (!dir.exists(dir)) stop("Directory does not exist. Please check the path.")
+  if (!is.character(data_dir)) stop("Please make sure the input dir is a string.")
+  if (!dir.exists(data_dir)) stop("Directory does not exist. Please check the path.")
   
   all_csv_files <- list.files(data_dir, pattern = "\\.csv$", full.names = TRUE)
   available_files <- basename(all_csv_files)
